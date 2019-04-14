@@ -1,0 +1,97 @@
+    %%
+%% This is file `D6graphicx.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./D6graphicx.doc  (with options: `D6graphicx-code')
+%% Dennou6 スタイルファイル.
+%%
+%%       D6graphicx.doc      ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6graphicx.doc,v 1.10 2002/09/06 13:04:24 mym Exp $
+%%
+%%   D6graphicx.sty で定義している環境, コマンド, カウンタは以下の通り.
+%%
+%%  <コマンド>
+%%
+%%  \Depssetkeys[]
+%%  \Depsfdrafttrue
+%%  \Depsf[width][height][key_val_list]{filename}
+%%
+%%  <環境>
+%%
+%%   \begin{Depspic}(width,height)(xorg,yorg)[key_val_list]{filename}
+%%   \end{Depspic}
+%%
+%%    -Depspic 環境内で使用できるコマンド
+%%
+%%    \Deput(x,y)[angle]{body}
+%%    \Deputc(x,y)[angle]{body}
+%%    \Deputl(x,y)[angle]{body}
+%%    \Deputr(x,y)[angle]{body}
+%%
+%%  xdvi を使用してプリントアウトする場合のデバイス指定は
+%% debian (potato) の場合 /usr/bin/xdviprint 中の使用フィルタの指定
+%% (XDVIPRINTCMD) を変更すればよい.
+%%
+
+\ifx\CurrentOption\@empty  \def\CurrentOption{dvips}\fi
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{graphicx}}
+\ProcessOptions\relax
+\RequirePackage{graphicx}
+
+
+\newcommand{\Depssetkeys}[1]{\setkeys{Gin}{#1}}
+\newcommand{\Depsfdrafttrue}{\setkeys{Gin}{draft}}
+
+\def\Depsf{\@ifnextchar[{\D@epsf}{\D@epsf[]}}
+\def\D@epsf[#1]{\@ifnextchar[{\D@@epsf[#1]}{\D@@epsf[#1][]}}
+\gdef\D@@epsf[#1][#2]{\@ifnextchar[{\D@@@epsf[#1][#2]}{\D@@@epsf[#1][#2][]}}
+\gdef\D@@@epsf[#1][#2][#3]#4{
+\def\Depsf@width@val{#1}
+\def\Depsf@height@val{#2}
+\ifx\Depsf@width@val\@empty  \def\D@width{\@empty}
+              \else  \def\D@width{width=#1,}\fi
+\ifx\Depsf@height@val\@empty \def\D@height{\@empty}
+               \else \def\D@height{height=#2,}\fi
+\edef\D@key_val_list{[#3,\D@width \D@height clip]}
+  \expandafter\includegraphics\D@key_val_list{#4}
+}
+
+\def\Depspic(#1,#2){\@ifnextchar({\@Depspic(#1,#2)}{\@Depspic(#1,#2)(0,0)}}
+\def\endDepspic{\end{picture}}
+\def\@Depspic(#1,#2)(#3,#4){\@ifnextchar[%
+{\@@Depspic(#1,#2)(#3,#4)}
+{\@@Depspic(#1,#2)(#3,#4)[]}
+}
+
+\def\@@Depspic(#1,#2)(#3,#4)[#5]#6{
+\def\Depspic@width@val{#1}
+\def\Depspic@height@val{#2}
+\ifx\Depspic@width@val\@empty  \def\D@width{\@empty}
+              \else  \def\D@width{width=#1pt,}\fi
+\ifx\Depspic@height@val\@empty \def\D@height{\@empty}
+               \else \def\D@height{height=#2pt,}\fi
+\edef\D@key_val_list{[#5,\D@width \D@height clip]}
+\begin{picture}(#1,#2)(#3,#4)
+ \put(0,0){\expandafter\includegraphics\D@key_val_list{#6}}
+}
+
+\def\Deput(#1,#2){\@ifnextchar[{\D@eput(#1,#2)}{\D@eput(#1,#2)[0]}}
+\def\D@eput(#1,#2)[#3]#4{\put(#1,#2){\rotatebox{#3}{#4}}}
+
+\def\Deputc(#1,#2){\@ifnextchar[{\D@eput(#1,#2)}{\D@eput(#1,#2)[0]}}
+\def\D@eputc(#1,#2)[#3]#4{\put(#1,#2){\rotatebox{#3}{\makebox(0,0){#4}}}}
+
+\def\Deputl(#1,#2){\@ifnextchar[{\D@eput(#1,#2)}{\D@eput(#1,#2)[0]}}
+\def\D@eputl(#1,#2)[#3]#4{\put(#1,#2){\rotatebox{#3}{\makebox(0,0)[l]{#4}}}}
+
+\def\Deputr(#1,#2){\@ifnextchar[{\D@eput(#1,#2)}{\D@eput(#1,#2)[0]}}
+\def\D@eputr(#1,#2)[#3]#4{\put(#1,#2){\rotatebox{#3}{\makebox(0,0)[r]{#4}}}}
+
+\endinput
+%%
+%% End of file `D6graphicx.sty'.

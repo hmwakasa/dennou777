@@ -1,0 +1,43 @@
+%%
+%% This is file `Dennou6.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./Dennou6.doc  (with options: `Dennou6-code')
+%% Dennou6 スタイルファイル.
+%%       Dennou6.doc
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: Dennou6.doc,v 1.14 2001/04/03 09:50:31 mym Exp $
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Dennou6}[2001/04/03 地球流体電脳倶楽部 LaTeX2e 用マクロ集 var.6]
+
+\usepackage{D6style}
+\usepackage{D6misc}
+\usepackage{D6version}
+\usepackage{D6math}
+\usepackage{D6float}
+\usepackage{D6prog}
+\usepackage{D6select}
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{D6graphicx}}
+\ProcessOptions\relax
+\usepackage{D6graphicx}
+ %\input{Depspic.sty} % not implemented in standard
+ %\input{Dwrite.sty}
+ %\input{Dfigs.sty}
+\pagestyle{DAheadings}
+\Dnoparindent
+\Dnewselect{J}
+
+
+\@ifundefined{西暦}{\DoffJ}{\DonJ}
+
+\endinput
+%%
+%% End of file `Dennou6.sty'.

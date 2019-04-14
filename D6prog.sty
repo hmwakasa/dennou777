@@ -1,0 +1,76 @@
+%%
+%% This is file `D6prog.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./D6prog.doc  (with options: `D6prog-code')
+%% Dennou6 スタイルファイル.
+%%
+%%       D6prog.doc      ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6prog.doc,v 1.1.1.1 2001/03/13 19:10:07 mym Exp $
+%%
+%%   D6prog.sty で定義している環境, コマンド, カウンタは以下の通り.
+%%
+%%  <環境>
+%%  \begin{Dprogram}  \end{Dprogram}
+%%  \begin{Dprogram*}  \end{Dprogram*}
+%%
+%%  <コマンド>
+%%
+%%  \Dproginput{file_name}
+%%  \Dproginput*{file_name}
+%%  \Dproglineoff
+%%  \Dproglineon
+%%  \Dproglinestart
+%%
+%%  <カウンタ>
+%%
+%%  \Dprogsize
+%%  \Dprogskip
+%%  \Dprogline#1
+%%  \Dproglinewidth
+%%  \Dproglinesep
+%%
+%%
+\newcommand{\Dprogsize}{\small}                  % font size
+\newcommand{\Dprogskip}{2ex}                     % vertical skip
+\newcommand{\Dprogline}[1]{\scriptsize\it #1}     % line number font
+\newcommand{\Dproglinewidth}{3em}
+\newcommand{\Dproglinesep}{1em}
+\newcommand{\Dproginput}{\@ifstar{\D@@proginput}{\D@proginput}}
+\newcommand{\D@proginput}[1]{\begingroup\D@progset\@vobeyspaces\input#1\endgroup}
+\newcommand{\D@@proginput}[1]{\begingroup\D@progset\input#1\endgroup}
+\def\Dprogram{\D@progset\@vobeyspaces\@xDprogram}
+\@namedef{Dprogram*}{\D@progset\@xxDprogram}
+\def\D@progset{
+  \par\bigskip\noindent\endgraf
+  \Dprogsize \baselineskip=\Dprogskip
+  \setcounter{D@proglineno}{\D@proglinestart}
+  \frenchspacing \ttfamily \obeylines
+  \uncatcodespecials
+  \def\par{\leavevmode\endgraf}
+  \everypar{\Dproglinebox\stepcounter{D@proglineno}}
+}
+\def\Dproglineon{\let\D@progline\Dprogline}
+\def\Dproglineoff{\def\D@progline##1{}}
+\def\Dproglinestart#1{\def\D@proglinestart{#1}}
+\newcounter{D@proglineno}
+\def\Dproglinebox{%
+   \makebox[\Dproglinewidth][r]{\D@progline{\theD@proglineno}}
+   \hskip\Dproglinesep}
+\Dproglineon \Dproglinestart{1}
+\begingroup
+  \catcode `|=0 \catcode `[= 1 \catcode`]=2
+  \catcode `\{=12 \catcode `\}=12  \catcode`\\=12
+  |gdef|@xDprogram#1\end{Dprogram}[|@gobble#1|end[Dprogram]]
+  |gdef|@xxDprogram#1\end{Dprogram*}[|@gobble#1|end[Dprogram*]]
+|endgroup
+\def\uncatcodespecials{\def\do##1{\catcode`##1=12 }\dospecials}
+
+\endinput
+%%
+%% End of file `D6prog.sty'.

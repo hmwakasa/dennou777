@@ -1,0 +1,75 @@
+%%
+%% This is file `D6math.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./D6math.doc  (with options: `D6math-code')
+%% Dennou6 スタイルファイル.
+%%
+%% D6math.doc ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6math.doc,v 1.4 2004/12/07 20:58:33 mym Exp $
+%%
+%%   D2math.sty で定義している数式マクロは以下の通り.
+%%
+%%      \DD[n]{A}{x}
+%%      \DP[n][y]{A}{x}
+%%      \Dvect{v}
+%%      \Dinv{A}
+%%      \Dgrad{A}
+%%      \Ddiv{A}
+%%      \Drot{A}
+%%      \Dboldvect
+%%      \Darrowvect
+%%      \Dnablagrad
+%%      \Dchargrad
+%%      \Dinv
+%%      \Dd
+%%      \Ddint
+%%      \Dtint
+%%      \Dsqrt
+%%      \Ddsty
+%% 
+\newcommand{\DD}{\@ifnextchar [{\def\D@space{\!}\D@D}{\def\D@space{}\D@D[]}}
+\def\D@D[#1]#2#3{\frac{d^{#1}\D@space #2}{d #3{}^{#1}}}
+\newcommand{\DP}{\@ifnextchar [{\def\D@space{\!}\D@P}{\def\D@space{}\D@P[]}}
+\def\D@P[#1]{\@ifnextchar [{\D@Pi[#1]}{\D@PD[#1]}}
+\def\D@PD[#1]#2#3{\frac{\partial^{#1}\D@space #2}{\partial #3{}^{#1}}}
+\def\D@Pi[#1][#2]#3#4{\left(
+                            \frac{\partial^{#1}\D@space #3}{\partial #4{}^{#1}}
+                      \right)_{#2}}
+\newcommand{\Dboldvect}{\let\Dvect\D@bvect}   % 95/12/15 (takepiro)
+\newcommand{\D@bvect}[1]{%
+\ensuremath{\mathchoice%
+{\mbox{\boldmath${#1}$}}%
+{\mbox{\boldmath${#1}$}}%
+{\mbox{\boldmath$\scriptstyle{#1}$}}%
+{\mbox{\boldmath$\scriptscriptstyle{#1}$}}%
+}}
+\newcommand{\Darrowvect}{\let\Dvect\D@avect}            % 95/12/15 (takepiro)
+\newcommand{\D@avect}[1]{\mbox{$\vec{#1}$}}
+\newcommand{\Dlapla}{\@ifnextchar [{\D@lapla}{\D@lapla[2]}}
+\def\D@lapla[#1]{\nabla^{#1}}
+\newcommand{\Dnablagrad}{\let\Dgrad\D@ngrad \let\Ddiv\D@ndiv \let\Drot\D@nrot}
+\newcommand{\D@ngrad}{\mbox{$\nabla$}}
+\newcommand{\D@ndiv}{\mbox{$\nabla \cdot$}}
+\newcommand{\D@nrot}{\mbox{$\nabla \times$}}
+\newcommand{\Dchargrad}{\let\Dgrad\D@cgrad \let\Ddiv\D@cdiv \let\Drot\D@crot}
+\newcommand{\D@cgrad}{\mbox{$\mathrm{grad}$}}
+\newcommand{\D@cdiv}{\mbox{$\mathrm{div}$}}
+\newcommand{\D@crot}{\mbox{$\mathrm{rot}$}}
+\newcommand{\Dintkern}{\mathchoice{\!\!\!}{\!\!}{\!\!}{\!\!}}
+\newcommand{\Ddint}{\int\Dintkern\int}
+\newcommand{\Dtint}{\int\Dintkern\int\Dintkern\int}
+\newcommand{\Dinv}[1]{\frac{1}{#1}}
+\newcommand{\Dd}{\,d}
+\newcommand{\Dsqrt}[1]{\sqrt{\mathstrut #1}}
+\newcommand{\Ddsty}{\displaystyle}
+\Dboldvect
+\Dnablagrad
+\endinput
+%%
+%% End of file `D6math.sty'.

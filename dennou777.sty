@@ -1,0 +1,33 @@
+%%
+%% This is file `dennou777.sty'
+%% previous version is `D6style.sty'
+%%
+%%       Auther: Hitomi-san (a.k.a. Carele Smith)
+%%       Original Auther is Manabu YAMADA
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dennou777}[2019/04/xx 地球流体電脳倶楽部 LaTeX2e 用マクロ集 version 7.0.0 (Nicole)]
+
+\usepackage{D6style}
+\usepackage{D6misc}
+\usepackage{D6version}
+\usepackage{D6math}
+\usepackage{D6float}
+\usepackage{D6prog}
+\usepackage{D6select}
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{D6graphicx}}
+\ProcessOptions\relax
+\usepackage{D6graphicx}
+ %\input{Depspic.sty} % not implemented in standard
+ %\input{Dwrite.sty}
+ %\input{Dfigs.sty}
+\pagestyle{DAheadings}
+\Dnoparindent
+\Dnewselect{J}
+
+
+\@ifundefined{西暦}{\DoffJ}{\DonJ}
+
+%% End of file `dennou777.sty'.

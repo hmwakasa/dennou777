@@ -1,0 +1,38 @@
+%%
+%% This is file `D6version.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./D6version.doc  (with options: `D6version-code')
+%% Dennou6 スタイルファイル.
+%%
+%%       D6version.doc     ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6version.doc,v 1.1.1.1 2001/03/13 19:10:07 mym Exp $
+%%
+%%   D6version.doc で定義しているマクロは以下の通り.
+%%
+%% \Dver
+%% \Dmodify
+%% \Dmoddate
+%% \DmoddateJ
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Dver}[1]{
+                     \newcommand{\Dversion}{#1}
+                     }
+\newcommand{\Dmodify}[3]{
+            \newcommand{\Dmodyear}{#1}
+            \newcommand{\Dmodmonth}{#2}
+            \newcommand{\Dmodday}{#3}
+}
+\def\Dmoddate{\Dmodyear%
+              /\ifnum\Dmodmonth<10 0\fi\Dmodmonth%
+              /\ifnum\Dmodday<10 0\fi\Dmodday}
+\def\DmoddateJ{\ifnum\Dmodyear<1900 19\fi\Dmodyear 年\Dmodmonth 月\Dmodday 日}
+\endinput
+%%
+%% End of file `D6version.sty'.

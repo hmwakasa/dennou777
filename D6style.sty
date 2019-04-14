@@ -1,0 +1,202 @@
+%%
+%% This is file `D6style.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./D6style.doc  (with options: `D6style-code')
+%% Dennou6 スタイルファイル.
+%%
+%% $Id: D6style.doc,v 1.8 2001/05/22 16:12:44 odakker Exp $
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%%
+%%   D6prog.sty で定義しているコマンド, パラメタは以下の通り.
+%%
+%%
+%%      dstyle.sty
+%%
+%% <コマンド>
+%%   \pagestyle{Dheadings}
+%%  \pagestyle{DAheadings}
+%%  \pagestyle{Dmyheadings}
+%%  \pagestyle{DAmyheadings}
+%%  \pagestyle{Dtop}
+%%  \Dchapter[index-name]{chapter-name}
+%%  \Dchapter*[index-name]{chapter-name}
+%%  \Dchapterhead
+%%  \Dinclude{file-name}
+%%  \Dinput{file-name}
+%%  \Dtitle[header-title]{title}
+%%  \Dauthor[footer-author]{author}
+%%  \Ddate[footer-date]{date}
+%%  \Dpath{path-name}
+%%  \Dfile{file-name}
+%%  \Dfinp{input-file-name}
+%%
+%%  <パラメタ>
+%%
+%%  \Dtitlesty
+%%  \Dauthorsty
+%%  \Ddatesty
+%%
+%%  \pagestyle{Dheadings}    \pagestyle{DAheadings}
+%%  \pagestyle{Dmyheadings}  \pagestyle{DAmyheadings}
+%%
+\newdimen\Dheadrulewidth
+\newdimen\Dfootrulewidth
+\newdimen\Dheadwidth
+\newif\ifDfoot \Dfoottrue
+\def\Dnofoot{\Dfootfalse}
+\def\Dfoot{\Dfoottrue}
+\def\@Dfhead#1#2#3#4#5{
+\hbox{#1}\hbox to\Dheadwidth{\vbox{
+\hbox{\rlap{\makebox[\Dheadwidth][l]{\hbox{#2}\strut}}\hfill
+\makebox[\Dheadwidth]{\hbox{#3}\strut}\hfill
+\llap{\makebox[\Dheadwidth][r]{\hbox{#4}\strut}}}\Dheadrule}}\hbox{#5}}%
+\def\@Dffoot#1#2#3#4#5{\ifDfoot
+\hbox{#1}\hbox to\Dheadwidth{\vbox{\Dfootrule
+\hbox{\rlap{\makebox[\Dheadwidth][l]{\hbox{#2}\strut}}\hfill
+\makebox[\Dheadwidth]{\hbox{#3}\strut}\hfill
+\llap{\makebox[\Dheadwidth][r]{\hbox{#4}\strut}}}}}\hbox{#5}
+\fi}
+\def\Dheadrule{\hrule\@height\Dheadrulewidth\@width\Dheadwidth
+\vskip-\Dheadrulewidth}
+\def\Dfootrule{\vskip-\Dfootrulewidth
+\hrule\@width\Dheadwidth\@height\Dfootrulewidth}
+\def\ps@Dheadings{\ps@Dhead  \let\@mkboth\markboth}
+\def\ps@DAheadings{\ps@Dhead \let\ps@jpl@in\ps@Dhead
+                             \let\@mkboth\markboth}
+\def\ps@Dhead{\ps@Dmyhead %
+  \@ifundefined{chapter}%
+  {\def\sectionmark##1{%
+       \markboth{\ifnum \c@secnumdepth >\@ne
+                 \thesection\hskip 1em \fi##1}
+                {\ifnum \c@secnumdepth >\@ne
+                 \thesection\hskip 1em \fi##1}}
+  \let\firstmark\botmark}
+  {\if@twoside
+   \def\chaptermark##1{%
+        {\markboth{\ifnum \c@secnumdepth >\m@ne
+                \@chapapp\thechapter{} \hskip 1em \fi##1}{}}}
+   \def\sectionmark##1{%
+   \markright{\ifnum \c@secnumdepth >\@ne
+               \thesection\hskip 1em \fi##1}}
+   \else
+   \def\chaptermark##1{%
+        \markright{\ifnum \c@secnumdepth >\m@ne
+                \@chapapp\thechapter{} \hskip 1em \fi##1}{}}
+   \fi
+   \let\firstmark\botmark}}
+\def\ps@Dmyheadings{\ps@Dmyhead  \let\@mkboth\@gobbletwo}
+\def\ps@DAmyheadings{\ps@Dmyhead \let\ps@jpl@in\ps@Dmyhead
+                                 \let\@mkboth\@gobbletwo}
+\def\ps@Dmyhead{%
+   \def\@oddhead{\@Dfhead{\relax}{\bf\D@title}{}
+                         {\bf\rightmark\hskip 2em \hfill\thepage}{\hss}}
+   \def\@oddfoot{\@Dffoot{\relax}{\footnotesize\D@path\D@file%
+                          \ifx\D@finp\@empty\else (\D@finp)\fi}{}
+                         {\footnotesize\D@date
+                          \ifx\D@author\@empty\else (\D@author)\fi}{\hss}}
+   \def\@evenhead{\@Dfhead{\hss}{\bf\thepage \hskip 2em \D@title}{}
+                          {\bf\leftmark}{\relax}}
+   \def\@evenfoot{\@Dffoot{\hss}{\footnotesize\D@date
+                          \ifx\D@author\@empty\else (\D@author)\fi}{}
+                          {\footnotesize\D@path\D@file%
+                          \ifx\D@finp\@empty\else (\D@finp)\fi}{\relax}}
+   \def\sectionmark##1{}
+   \def\chaptermark##1{}}
+\def\ps@Dtop{\let\@mkboth\@gobbletwo%
+     \def\@oddhead{\rm\hfil--\ \thepage\ --\hfil}\def\@oddfoot{}%
+     \let\@evenhead\@oddhead\def\@evenfoot{}}
+\def\section{\@startsection {section}{1}{\z@}
+  {3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}{\Large\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}
+  {3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}{\large\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}
+  {3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+\def\DchapterS#1{\chapter*{#1}\@mkboth{#1}{#1}%
+                 \addcontentsline{toc}{chapter}{#1}}
+\newif\ifD@chapnum
+\def\Dchapter{%
+ \clearpage \thispagestyle{plain} \global\@topnum\z@
+ \@afterindenttrue
+ \@ifstar{\@dblarg{\D@schapter}}{\@dblarg{\D@hchapter}}}
+\def\D@hchapter[#1]#2{%
+\ifnum \c@secnumdepth >\m@ne
+  \refstepcounter{chapter}
+  \typeout{\@chapapp\thechapter{}.}
+\fi
+\D@chapnumtrue\chaptermark{#1}
+\def\D@chapterltitle{#1}\def\D@chaptertitle{#2}}
+\def\D@schapter[#1]#2{%
+\D@chapnumfalse\@mkboth{#1}{#1}
+\def\D@chapterltitle{#1}\def\D@chaptertitle{#2}}
+\def\D@chaptertitle{}
+\def\D@chapterltitle{}
+\def\Dchapterhead{
+\@ifundefined{chapter}
+{\typeout{Sorry, you cannot use 'Dchapterhead in article style'}}
+{\ifD@chapnum\D@hchapterhead\else\D@schapterhead\fi}}
+\def\D@hchapterhead{%
+\ifnum \c@secnumdepth >\m@ne
+  \addcontentsline{toc}{chapter}
+    {\protect\numberline{\thechapter}\D@chapterltitle}
+\else \addcontentsline{toc}{chapter}{\D@chapterltitle} \fi
+\addtocontents{lof}{\protect\addvspace{10pt}}
+\addtocontents{lot}{\protect\addvspace{10pt}}
+\if@twocolumn
+  \@topnewpage[\@makechapterhead{\D@chaptertitle}]
+\else \D@makechapterhead{\D@chaptertitle}
+  \@afterheading
+\fi}
+\def\D@schapterhead{%
+ \addcontentsline{toc}{chapter}{\D@chapterltitle}
+ \if@twocolumn \@topnewpage[\@makeschapterhead{\D@chaptertitle}]
+ \else \@makeschapterhead{\D@chaptertitle}
+ \@afterheading\fi}
+\newcommand{\D@chapapp}{\prechaptername}
+\newcommand{\D@chappos}{\postchaptername}
+\def\D@makechapterhead#1{\hbox{}%
+  \vskip2\Cvs
+  {\parindent\z@
+   \raggedright
+   \reset@font\huge\bfseries
+   \ifnum \c@secnumdepth >\m@ne
+     \setlength\@tempdima{\linewidth}%
+     \setbox\z@\hbox{\D@chapapp\thechapter\D@chappos\hskip1zw}%
+     \addtolength\@tempdima{-\wd\z@}%
+     \unhbox\z@\nobreak
+     \vtop{\hsize\@tempdima#1}%
+   \fi}\vskip3\Cvs}
+\def\Dinclude#1{\gdef\D@file{#1.tex} \gdef\D@finp{} \include{#1}}
+\def\Dinput#1{\gdef\D@finp{#1.tex} \input{#1}}
+\def\Dtitlesty{\Huge\bf}
+\def\Dauthorsty{\Large\bf}
+\def\Ddatesty{\LARGE\bf}
+\def\Dtitle{\@dblarg{\@Dtitle}}
+\def\Dauthor{\@dblarg{\@Dauthor}}
+\def\Ddate{\@dblarg{\@Ddate}}
+\def\@Dtitle[#1]#2{\gdef\D@title{#1}\gdef\@title{\Dtitlesty #2}}
+\def\@Dauthor[#1]#2{\gdef\D@author{#1}\gdef\@author{\Dauthorsty #2}}
+\def\@Ddate[#1]#2{\gdef\D@date{#1}\gdef\@date{\Ddatesty #2}}
+\def\Dpath#1{\gdef\D@path{#1}}
+\def\Dfile#1{\gdef\D@file{#1}}
+\def\Dfinp#1{\gdef\D@finp{#1}}
+\def\D@title{}
+\def\D@author{}
+\@ifundefined{Dtoday}{\def\Dtoday{\today}}{}
+\def\D@date{\Dtoday}
+\def\D@path{}
+\def\D@file{\jobname .tex}
+\def\D@finp{}
+\setlength{\Dheadrulewidth}{0.4pt}
+\setlength{\Dfootrulewidth}{0.4pt}
+\setlength{\Dheadwidth}{\textwidth}
+\addtolength{\Dheadwidth}{-3pt}
+\addtolength{\headheight}{1ex}
+\addtolength{\topmargin}{-1ex}
+\endinput
+%%
+%% End of file `D6style.sty'.

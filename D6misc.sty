@@ -1,0 +1,116 @@
+%%
+%% This is file `D6misc.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./D6misc.doc  (with options: `D6misc-code')
+%% Dennou6 スタイルファイル.
+%%
+%%       D6misc.sty     ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6misc.doc,v 1.7 2003/06/04 11:39:43 mym Exp $
+%%
+%%   D6misc.sty で定義している環境, コマンド, カウンタは以下の通り.
+%%
+%%  <環境>
+%%  \begin{Dreference}    \end{Dreference}
+%%  \begin{Dsmallquote}   \end{Dsmallquote}
+%%  \begin{Dnitemize}     \end{Dnitemize}
+%%  \begin{Dlist}         \end{Dlist}
+%%
+%%  <コマンド>
+%%
+%%  \Dparindent
+%%  \Dnoparindent
+%%  \Dparskip
+%%  \Dnoparskip
+%%  \Dsethead
+%%  \Dtoday
+%%  \Dentry
+%%  \Deqlab    \Deqref
+%%  \Dfiglab   \Dfigref \DFigref
+%%  \Dtablab   \Dtabref
+%%  \Dseclab   \Dsecref
+%%  \Dchaplab  \Dchapref
+%%  \Dappendix                      modified by S.Takehiro
+%%  \Dsidenote
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\D@parindent}
+\setlength{\D@parindent}{\parindent}
+\def\Dparindent{\setlength{\parindent}{\D@parindent}}
+\def\Dnoparindent{\setlength{\parindent}{0pt}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Dparskip{\setlength{\parskip}{3ex}}
+\def\Dnoparskip{\setlength{\parskip}{0ex}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Dsethead{\let\firstmark\botmark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\@ifundefined{DselJ}{\gdef\DselJ#1#2{#1}}{}
+\def\@chapapp#1#2{\DselJ{第#1章}{Chapter#1#2}}
+\def\fnum@figure{\DselJ{図}{Figure} \thefigure}
+\def\fnum@table{\DselJ{表}{Table} \thetable}  % modified by S.Takehiro
+\def\D@refapp{\DselJ{文献}{References}}
+\def\Dreference{\@ifundefined{chapter}%
+                {\section*{\D@refapp\@mkboth{\D@refapp}{\D@refapp}}}
+                {\chapter*{\D@refapp\@mkboth{\D@refapp}{\D@refapp}}}
+                \list{}{\labelwidth\z@ \itemindent-\leftmargin
+                \let\makelabel\descriptionlabel}}
+\let\endDreference\endlist
+\newcount\D@year
+\def\Dtoday{\D@year=\year\advance\D@year -0  %
+            \ \number\D@year /\nobreak%
+            \ifnum\month<10 0\fi%
+            \number\month /\nobreak%
+            \ifnum\day<10 0\fi%
+            \number\day}
+\def\Dentry#1{\label{#1}\index{#1}}
+%%\@ifundefined{Dlabel}{\let\Dlabel\label}{}
+\@ifundefined{Dlabel}{\def\Dlabel#1{\label{#1}}}{}
+\def\Deqlab#1{\Dlabel{eq:#1}}
+\def\Dfiglab#1{\Dlabel{fig:#1}}
+\def\Dtablab#1{\Dlabel{tab:#1}}
+\def\Dseclab#1{\Dlabel{sec:#1}}
+\def\Dchaplab#1{\Dlabel{chap:#1}}
+\def\Deqref#1{(\ref{eq:#1})}
+\def\Dfigref#1{\DselJ{図}{Fig.}\ref{fig:#1}}
+\def\DFigref#1{\DselJ{図}{Figure }\ref{fig:#1}}
+\def\Dtabref#1{\DselJ{表}{Table }\ref{tab:#1}}
+\def\Dsecref#1{\DselJ{第\ref{sec:#1}節}{Section \ref{sec:#1}}}
+\def\Dchapref#1{\DselJ{第\ref{chap:#1}章}{Chapter \ref{chap:#1}}}
+\def\Dappendix{\par
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{\DselJ{補遺}{Appendix}}
+ \def\thechapter{\Alph{chapter}}}      % modified by S.Takehiro
+\def\Dsmallquote{\begingroup\small\quote}
+\def\endDsmallquote{\endquote\endgroup}
+\def\Dnitemize{\vskip -1ex
+   \list{$\bullet$}{\itemsep=0.0pt \parsep=0.0pt}}
+\def\endDnitemize{\endlist\vskip -1ex}
+\def\Dsidenote#1{\marginpar{\scriptsize #1}}
+\def\Dlistlabel#1{\mbox{\bf #1}\hfil}
+\def\Dlistlabelsep{1em}
+\def\Dlisttemplate{XXXXXXXX}
+\def\Dlist{\@ifnextchar[{\D@list} %]
+                {\D@list[\Dlisttemplate]}}
+\def\D@list[#1]{%
+  \list{}{\let\makelabel\Dlistlabel
+  \settowidth{\labelwidth}{#1}
+  \leftmargin=\labelwidth
+  \addtolength{\leftmargin}{\Dlistlabelsep}}}
+\let\endDlist\endlist
+\def\listoffigures{\section*{\DselJ{図 目 次}{List of Figures}}\markboth
+ {\DselJ{図 目 次}{List of Figures}}
+ {\DselJ{図 目 次}{List of Figures}}\@starttoc{lof}}
+\let\l@table\l@figure
+\def\listoftables{\section*{\DselJ{表 目 次}{List of Tables}}\markboth
+ {\DselJ{表 目 次}{List of Tables}}
+ {\DselJ{表 目 次}{List of Tables}}\@starttoc{lot}}
+\let\l@table\l@figure
+\endinput
+%%
+%% End of file `D6misc.sty'.

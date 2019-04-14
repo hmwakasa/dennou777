@@ -1,0 +1,36 @@
+%%
+%% This is file `D6select.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ./D6select.doc  (with options: `D6select-code')
+%% Dennou6 スタイルファイル.
+%%
+%%       D6select.doc     ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%%  $Id: D6select.doc,v 1.2 2001/10/24 22:22:57 mym Exp $
+%%
+%%   D6select.doc で定義しているマクロは以下の通り.
+%%
+%%  \Dnewselect{select-name}
+%%
+%%      \newselect{J} -> \DonJ \DoffJ \DselJ{text-a}{text-b}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Dnewselect}[1]{
+     \@namedef{Don#1}{\@namedef{D@sel#1}{\iftrue}}
+     \@namedef{Doff#1}{\@namedef{D@sel#1}{\iffalse}}
+     \global\long\expandafter\def\csname Dsel#1\endcsname##1##2{%
+                                \@nameuse{D@sel#1}##1\else##2\fi}
+     \@namedef{D@sel#1}{\iftrue}
+}
+\Dnewselect{J}
+\@ifundefined{西暦}{\DoffJ}{\DonJ}
+\def\abstractname{\DselJ{要旨}{Abstract}}
+
+\endinput
+%%
+%% End of file `D6select.sty'.
