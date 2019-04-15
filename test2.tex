@@ -1,0 +1,142 @@
+\documentclass[report,]{dennou777}
+%\documentclass[report,]{jlreq}
+
+%%% テスト文書で使うパッケージ
+
+% Option clash チャレンジ
+%\usepackage[x11names]{xcolor}
+
+\usepackage{amsmath,tikz,tcolorbox}
+\usetikzlibrary{plotmarks}
+
+
+%%% ドキュメントクラスを切り替えながらデバクするために
+\makeatletter
+\ifx t\dsss@dsss@loaded
+	\Dtitle{ワークノート}{}
+	\Dauthor{ひとみ}{}
+	\Ddate{\today}
+	\markright{ベンフォードの法則}
+\fi
+\makeatother
+
+%%% 以下テスト文書本体
+\begin{document}
+
+この文書は、dennou777.cls のテスト文書である。
+
+\chapter{ベンフォードの法則}
+
+\section{はじめに}
+等比数列$\{2^n\}$や、フィボナッチ数列$\{F_n\}$の、「一番上の桁」に
+出現しやすい数字は何でしょうか。
+
+例: $2^5=32$なら$3$、$F_7=12$なら$1$。
+
+\section{証明}
+
+\subsection{$\{2^n\}$の場合}
+
+$2^k$の最上位の数字を$d$、$m$を整数とすると、
+\begin{gather*}
+d\times10^m\leq2^k<(d+1)\times10^m
+\intertext{常用対数を取ると、}
+m+\log[d]\leq k\log[2]<m+\log[d+1] \\
+\frac{m+\log[d]}{\log[2]}\leq k<\frac{m+\log[d+1]}{\log[2]}
+\end{gather*}
+$d=d_n$のとき、不等式を満たす$k$の幅$x_n$を求める。
+\begin{align*}
+x_n&=\frac{m+\log[d_n]}{\log[2]}-\frac{m+\log[d_n+1]}{\log[2]} \\
+&=\frac{1}{\log[2]}\cdot\log\left[\frac{d_n+1}{d_n}\right]
+\end{align*}
+これより、$x_n$は$m$（桁数）によらない事がわかる。
+
+後のために$\sum^9_{i=1}[x_i]$を求めておく。
+\begin{align*}
+\sum^9_{i=1}[x_i]&=\frac{1}{\log[2]}\sum^9_{i=1}\log\left[\frac{d_i+1}{d_i}\right] \\
+&=\frac{1}{\log[2]}\cdot\log\left[\frac{2}{1}\cdot\frac{3}{2}\cdot\cdots\cdot\frac{10}{9}\right] \\
+&=\frac{1}{\log[2]}\cdot\log[10]=\frac{1}{\log[2]}
+\end{align*}
+$k$は一様分布なので、$d=n$となる確率$\Pr[d=n]$は、
+\begin{align*}
+\Pr[d=n]&=\frac{x_n}{\sum^9_{i=1}[x_i]} \\
+&=\left.\frac{1}{\log[2]}\cdot\log\left[\frac{n+1}{n}\right]\middle/\frac{1}{\log[2]}\right. \\
+&=\log\left[\frac{d+1}{d}\right]
+\end{align*}
+
+\subsection{$\{F_n\}$の場合}
+
+\begin{align*}
+\begin{cases}
+	F_1&=1\\
+	F_2&=1\\
+	F_{n+2}&=F_{n+1}+F_n
+\end{cases}
+\end{align*}
+
+フィボナッチ数列の漸化式から一般項を求めると、
+\[F_n=\frac{1}{\sqrt{5}}\left(\left(\frac{1+\sqrt{5}}{2}\right)^n-\left(\frac{1-\sqrt{5}}{2}\right)^n\right)\]
+である。
+
+ここで、$(1-\sqrt{5})/2 < 1$であるから、$n$が大きいときには
+\[F_n\approx \frac{\phi^n}{\sqrt{5}}, \qquad \phi=\frac{1+\sqrt{5}}{2}\,\text{（黄金比）}\]
+となり、$2^k$のときと同様の議論によって、同じ確率が導かれる。
+
+\section{導いた式との比較}
+
+$n\leq100$の範囲で、導かれた式と、実際の頻度とを比較する
+（表\ref{table}と図\ref{fig}）。
+
+\begin{table}
+\caption{最上位の数字の頻度\label{table}}
+\centering
+\begin{tabular}{c|rr}
+\hline
+数字&$2^n$&$F_n$\\
+\hline\hline
+$1$&$30$&$30$\\
+$2$&$17$&$18$\\
+$3$&$13$&$13$\\
+$4$&$10$&$9$\\
+$5$&$7$&$8$\\
+$6$&$7$&$6$\\
+$7$&$6$&$5$\\
+$8$&$5$&$7$\\
+$9$&$5$&$4$\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[x=.08\textwidth,y=.05\textwidth,yscale=20,domain=0:10]
+\draw[->](-1,0)--(10,0)node[right]{$x$};\draw(5,-0.05)node[below]{最上位に出現する数字};
+\foreach\x in {1,...,9} \draw(\x,0.01)--(\x,-0.01)node[below]{\small$\x$};
+\draw[->](0,-0.05)--(0,0.55)node[above]{$y$};\draw(-1,0.25)node[left]{\hbox{\tate 割合}};
+\foreach\x in {0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5} \draw(0.2,\x)--(-0.2,\x);
+\foreach\x in {0.1,0.2,0.3,0.4} \draw(-0.2,\x)node[left]{\small$\x$};
+\draw(0,0) node[below left]{$\mathrm{O}$};
+\draw(0.5,0.4) node[above right]{$\displaystyle y=\log_{10}\left[\frac{x+1}{x}\right]$};
+\draw [domain=0.4:10,samples=100,smooth] plot(\x,{ln((\x+1)/\x)/ln(10)});
+\draw[color=red,thick,mark=text,text mark={\tiny\scalebox{1}[0.05]{●}}] plot file{./test/2pown.tbl};
+\draw[color=red](3,0.3)node[above]{$2^n$};
+\draw[color=blue,thick,mark=text,text mark={\tiny\scalebox{1}[0.05]{◆}}] plot file{./test/fn.tbl};
+\draw[color=blue](3,0.3)node[below]{$F_n$};
+\end{tikzpicture}
+\caption{最上位の数字の頻度\label{fig}}
+\end{figure}
+
+\section{Benford's law}
+今までの議論は自然界に出現する数値でも、経験則的に成り立つ。
+\begin{tcolorbox}[title={Benfordの法則}]
+自然界に出現する数値で、最上位に$n$が現れる確率は
+\[\log_{10}\left[\frac{n+1}{n}\right]\]
+\end{tcolorbox}
+
+\begin{itemize}
+\item $n$進法表記の数値に拡張可能。
+\item 会計の分野で、不正を見つけるために使われる。
+\end{itemize}
+
+
+\end{document}

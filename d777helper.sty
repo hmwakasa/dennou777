@@ -1,0 +1,40 @@
+%%  地球流体電脳倶楽部 LaTeX2e 用クラス version 7 (dennou777) %%
+%%
+%% This is file `d777helper.sty'
+%%
+%%       Auther: Hitomi-san (a.k.a. Carele Smith)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ドライバ非依存のマクロ集
+ 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{d777helper}[2019-04-15 v7]
+\RequirePackage{xkeyval,etoolbox}
+
+%: jlreq-helpers.sty 由来のエンジン自動判定機
+% \jlreq@ifprimitive#1#2#3: #1がprimitiveならば#2を，そうでなければ#3を実行する
+% （\if(pdf)primitiveを避けるようにしている．）
+\newcommand*{\dsss@ifprimitive}[1]{%
+  \begingroup
+    \edef\@tempa{\string#1}%
+    \edef\@tempb{\meaning#1}%
+  \expandafter\endgroup
+  \ifx\@tempa\@tempb\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
+}
+
+\newcommand*{\dsss@helper@guessengine}{%
+  \dsss@ifprimitive\directlua{%
+    \let\jlreq@result=l%
+  }{%
+    \dsss@ifprimitive\ucs{%
+      \let\jlreq@result=u%
+    }{%
+      \let\jlreq@result=p%
+    }%
+  }%
+}
+
+
+%: 暗黙の空白トークン
+\def\={\let\dsss@space= }\= 
+\let\=\@undefined

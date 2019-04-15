@@ -7,9 +7,9 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dennou777}[2019/04/xx 地球流体電脳倶楽部 LaTeX2e 用マクロ集 version 7.0.0 (Nicole)]
+\ProvidesPackage{dennou777}[2019-04-00 version 7.0.0 (Nicole)]
 
-\usepackage{D6style}
+\usepackage{D6style} % 副作用が多いので、jlreq の設定で実現を試みる
 \usepackage{D6misc}
 \usepackage{D6version}
 \usepackage{D6math}
@@ -17,12 +17,8 @@
 \usepackage{D6prog}
 \usepackage{D6select}
 
-\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{D6graphicx}}
-\ProcessOptions\relax
-\usepackage{D6graphicx}
- %\input{Depspic.sty} % not implemented in standard
- %\input{Dwrite.sty}
- %\input{Dfigs.sty}
+% \usepackage{D6graphicx} % PS なんぞ使わないだろうから、削除します。
+
 \pagestyle{DAheadings}
 \Dnoparindent
 \Dnewselect{J}
