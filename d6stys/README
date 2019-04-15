@@ -1,0 +1,87 @@
+%
+% 	$Id: README,v 1.8 2001/03/16 00:53:24 mym Exp $
+%	Dennou style  REDME file
+%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%
+%
+
+
+<ファイル一覧>
+含まれるファイルは以下に上げる全 18 ファイルである.
+
+・README	: 本ファイル.
+
+・Makefile	:
+	下記ファイルをつかって sty ファイル, ドキュメントを生成するのに必要な
+	一連の手順が記述されている.
+
+・WHATS_NEW_and_TODO
+	dennou スタイル 6 の新機能, TODO 覚書ファイル.
+
+・Dennou6.ins	: 電脳スタイルファイルインストールファイル
+		このファイルに各 doc ファイルから sty ファイルを
+		生成する規則が記述されている.
+
+・Dennou スタイル本体 doc ファイル (11個)
+	
+	1)  Dennou-drv.doc  : 以下の drv ファイルを生成するための doc ファイル.
+		- Dennou.drv	: 一般ユーザ用ドキュメント生成 drv ファイル
+		- Dennou-dev.drv: メンテナンス用ドキュメント生成 drv ファイル
+	2)  Dennou6.doc	: 各種 Dennou スタイルファイルを取り込むためのマクロ
+	3)  D6comment.doc	: ファイルの一部をコメントとして扱うためのマクロ
+	4)  D6graphicx.doc: 図を取り込むためのマクロ
+	5)  D6misc.doc	: ラベル, 日付参照等のマクロ
+	6)  D6select.doc	: ファイルの一部を選択して出力するためのマクロ
+	7)  D6version.doc	: バージョン番号の参照を行うマクロ
+	8)  D6float.doc	: フロート制御のためのマクロ
+	9)  D6math.doc	: 数式出力用マクロ
+	10) D6prog.doc	: プログラムリスト出力マクロ
+	11) D6style.doc	: 
+
+ 	: 1) dennou.ins ファイルによって sty ファイルを生成
+ 	: 2) Dennou.drv ファイルにより一般ユーザ用ドキュメント生成
+ 	: 3) Dennou-dev.drv ファイルによりメンテナンス用ドキュメント生成
+
+・COPYRIGHT  	
+・CREDITS.tex 
+・REFERENCE.tex
+
+
+<イストール手順>
+	1) ファイルの展開と必要なファイルの生成.	
+
+	 $ tar zxvf  dennou_sty_6.tar.gz  
+ 	 $ cd dennou_sty_6
+	 $ make
+	
+	この手続きで以下のファイルが生成される.
+		- スタイルファイル (*.sty × 10個)
+		- スタイルファイル使用方法ドキュメントドライバファイル
+					 		(Dennou.drv)
+		- スタイルファイル管理/開発用ドキュメントドライバファイル
+							(Dennou-dev.drv)
+	
+	2) スタイルファイルを TeX 用のディレクトリにインストールする.
+	インストール先は Makefile の TEXMF_DIR で指定する.
+	デフォルト値は /usr/share/texmf/tex/generic/dennou_6 である.
+	
+	# make install
+
+	(なお上記コマンドで TeX ハッシュも行っている)
+
+
+	3) ドキュメントの生成.
+	ドキュメントは普通に利用するためのドキュメントと,
+	スタイルファイル管理/開発用のドキュメントがある.
+	後者はスタイルファイル内のソースコードの解説が付け加わる.
+
+ 	3-1) スタイルファイル使用方法ドキュメント生成	
+	$ make doc	
+
+ 	3-1) スタイルファイル管理/開発用ドキュメント生成
+	$ make doc-dev	
+
+
+	4) 不要ファイルの消去
+	$ make clean
+

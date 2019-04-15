@@ -1,0 +1,162 @@
+% \iffalse
+%%
+%%       D2float.doc	ver 0.0     
+%%	Doc-Source file to use with LaTeX2e
+%%	Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6float.doc,v 1.1.1.1 2001/03/13 19:10:07 mym Exp $
+%%
+%%	以下のフロート制御カウンター・パラメータを変更している.
+%%		topnumber
+%%		bottomnumber
+%%		totalnumber
+%%		dbltopnumber
+%%		\topfraction
+%%		\bottomfraction
+%%		\textfraction
+%%		\floatpagefraction
+%%		\dbltopfraction
+%%		\dblfloatpagefraction
+%%
+% \fi
+%
+% \changes{dennou6 v0.0}{2001/01/20}{Documentation added for doc by Manabu YAMADA}
+%
+%
+% \section{D2float.sty}
+%
+% \subsection{概要}
+% \DescribeMacro{\D2float.sty} 
+% 	{\tt D2float.sty} はフロート制御カウンター・パラメータを変更することで
+%	文中のフロート
+%	\footnote{フロートとは図表類の総称. 
+%	文章中の適切な位置に"浮かべ"る必要がある要素であるという意味.
+%	図表だけのページを"フロートページ"という.}
+%	をできるだけソースコードで指定した位置に出力できるよう
+%	フロートパラメータを変更している.
+%	ユーザが呼び出して使うコマンドはない.
+%	このファイルの中で指定しているパラメータの値は
+%	必ずしも最良なものではないことに注意されたい.
+%
+%
+%	\MakeShortVerb{\|}
+%
+% \subsection{変更しているカウンター一覧}
+%	
+%	\begin{itemize}
+%		\item |topnumber|
+%		\item |bottomnumber|
+%		\item |totalnumber|
+%		\item |dbltopnumber|
+%		\item |\topfraction|
+%		\item |\bottomfraction|
+%		\item |\textfraction|
+%		\item |\floatpagefraction|
+%		\item |\dbltopfraction|
+%		\item |\dblfloatpagefraction|
+%	\end{itemize}
+%
+%
+% \StopEventually{}
+%
+% \iffalse
+%<*D6float-code>
+% \fi
+%
+% \subsection{コード}
+%
+% \begin{macro}{topnumber}
+%			ページ上端に出力を許可するフロートの限度数を 
+%			5 に設定する (デフォルト値 2).
+%    \begin{macrocode}
+\setcounter{topnumber}{5}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{bottomnumber}
+%		 	ページ下端に出力を許可するフロートの限度数を
+%			5 に設定する (デフォルト値 1).
+%    \begin{macrocode}
+\setcounter{bottomnumber}{5}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{totalnumber}
+%			単一のページに出力を許可するフローとの限度数を
+%			10 に設定する (デフォルト値 3) .
+%			この値は topnumbet + bottomnumber でなくてはならない.
+%    \begin{macrocode}
+\setcounter{totalnumber}{10}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{dbltopnumber}
+%			二段組スタイルでの二段組幅のフロート用の topnumber.
+%			5 に設定する (デフォルト値 2).
+%    \begin{macrocode}
+\setcounter{dbltopnumber}{5}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\topfraction}
+%			ページ上端に出力するフロートが占有しても構わない
+%			ページ上の最大領域を 0.9 (90％) に設定する
+%			(デフォルト値 0.7).
+%    \begin{macrocode}
+\renewcommand{\topfraction}{.9}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\bottomfraction}
+%			ページ下端に出力するフロートが占有しても構わない
+%			ページ上の最大領域を 0.9 (90％) に設定する
+%			(デフォルト値 0.3).
+%    \begin{macrocode}
+\renewcommand{\bottomfraction}{.9}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\textfraction}
+%			テキストで占有しなければならない通常のページの
+%			最小領域を 0.1 (10％) に設定する (デフォルト値は 0.2).
+%    \begin{macrocode}
+\renewcommand{\textfraction}{.1}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\floatpagefraction}
+%			フロートが占有するフロートページ上の最小領域,
+%			つまりフロートページ上の空白の領域を制限.
+%			この値を 0.4 (40 ％)とする(デフォルト値 0.5).
+%    \begin{macrocode}
+\renewcommand{\floatpagefraction}{.4}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\dbltopfraction}
+%			二段組ページ上の二段組幅のフロート用 \topfraction.
+%			0.9 (90％)に設定する (デフォルト値 0.7).
+%    \begin{macrocode}
+\renewcommand{\dbltopfraction}{.9}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dblfloatpagefraction}
+%			二段組幅のフロート用のフロートページの 
+%			\floatpagefraction .
+%			0.1 (10％)に設定する (デフォルト値 0.5).
+%    \begin{macrocode}
+\renewcommand{\dblfloatpagefraction}{.1}
+%    \end{macrocode}
+% \end{macro}
+% \iffalse
+%</D6float-code>
+% \fi

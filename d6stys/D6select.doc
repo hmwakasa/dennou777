@@ -1,0 +1,157 @@
+%\iffalse
+%%
+%%       D6select.doc     ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%%  $Id: D6select.doc,v 1.2 2001/10/24 22:22:57 mym Exp $
+%%
+%%   D6select.doc で定義しているマクロは以下の通り.
+%%
+%%  \Dnewselect{select-name}   
+%%
+%%      \newselect{J} -> \DonJ \DoffJ \DselJ{text-a}{text-b}
+%%
+%\fi
+%  
+% \changes{dennou6 v0.0}{2001/02/11}{D6select: 可能な限り \LaTeX 形式に修正. doc 化}
+% \MakeShortVerb{\|}
+%
+% \section{D6select.sty}
+% \label{texsty.Dselect}
+%
+% \subsection{概要}
+% \DescribeMacro{D6select.sty} 
+% {\tt Dselect.sty}は,
+% ファイルの一部を選択して出力する機能を設定する.
+% 日本語版と英語版を同じファイルに入れておき,
+% 選択して出力する場合などに便利である.
+% 
+% \subsection{マクロの説明}
+%
+% \subsubsection{Dnewselect}
+% \label{texsty.Dselect.Dnewselect}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     選択出力コマンドを定義する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%      \verb!\Dnewselect{!{\em select-name\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em select-name\/}  & 選択条件の名前
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item 例えば, \verb!\Dnewselect{J}!とすると,
+%
+%           \begin{quote}
+%           \verb!\DonJ! \\
+%           \verb!\DoffJ! \\
+%           \verb!\DselJ{!{\em text1\/}\verb!}{!{\em text2\/}\verb!}!
+%           \end{quote}
+%
+%           の3つのコマンドが定義される.
+%           \verb!\DonJ! の指定後は,
+%           \verb!\DselJ{!{\em text1\/}\verb!}{!{\em text2\/}\verb!}!
+%           によって{\em text1\/}の内容が出力され,
+%           {\em text2\/}の内容は出力されない.
+%           また\verb!\DoffJ! の指定後は
+%           {\em text2\/}の内容が出力され,
+%           {\em text1\/}の内容は出力されない.
+%           定義直後の規定値は
+%           \verb!\DonJ! の指定後と同じ状態である.
+%
+%     \item なおD6selectスタイルにおいて
+%	    |\Dnewselect{J}| をデフォルトで定義している.
+%	    "j" の付くクラス
+%	    \footnote{正確には"西暦"マクロが定義されているクラス}
+%	    を使用している場合|\DonJ|が,
+%	    その他の場合|\DoffJ|がデフォルトで採用される.
+%	
+%
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+%
+%
+% \StopEventually{}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \iffalse
+%<*D6select-code>
+% \fi
+%
+% \subsection{D6select.sty コード}
+%
+% \begin{macro}{D6select.sty}
+% 本節では {\tt D6select.sty} に含まれるマクロのコードを解説する.
+% \end{macro}
+%
+% \begin{macro}{\Dnewselect}
+%	引数(|#1|)を名前に持つマクロを定義せよ(|\Don#1|, |Doff#1|, |Dsel#1|).	
+% \end{macro}
+%    \begin{macrocode} 
+\newcommand{\Dnewselect}[1]{
+%    \end{macrocode} 
+%
+% \begin{macro}{\Don}
+%	|\Don#1| が指定された場合 |\D@sel#1| を |\iftrue| とせよ.
+% \end{macro}
+%    \begin{macrocode} 
+     \@namedef{Don#1}{\@namedef{D@sel#1}{\iftrue}}                    
+%    \end{macrocode} 
+%
+% \begin{macro}{\Doff}
+%	|\Doff#1| が指定された場合 |\D@sel#1| を |\iffalse| とせよ.
+% \end{macro}
+%    \begin{macrocode} 
+     \@namedef{Doff#1}{\@namedef{D@sel#1}{\iffalse}}  
+%    \end{macrocode} 
+%
+% \begin{macro}{\Dsel}
+%	引数を2つとれ.
+%	|\D@sel#1| が |\iftrue| である場合, 第1引数を表示せよ.
+%	|\D@sel#1| が |\iffalse| である場合, 第2引数を表示せよ.
+% \end{macro}
+%    \begin{macrocode} 
+     \global\long\expandafter\def\csname Dsel#1\endcsname##1##2{% 
+                                \@nameuse{D@sel#1}##1\else##2\fi} 
+%    \end{macrocode} 
+%
+% \begin{macro}{\D@sel}
+%	デフォルト値として |\D@sel#1| を |\ifturue| とせよ.
+% \end{macro}
+%    \begin{macrocode} 
+     \@namedef{D@sel#1}{\iftrue}
+}       
+%    \end{macrocode} 
+%
+%
+% \begin{macro}{\Dselect{J}}
+%	デフォルトで日本語/英語切替え選択出力用コマンドを定義する
+%	(|\Dselect{J}|).
+%	もし|\西暦|マクロが定義されている場合|\DonJ|をデフォルト値とし,
+%	定義されていない場合|\DoffJ|をデフォルト値ととする.
+%	p\LaTeX2e の日本語環境における見出しコマンドが
+%	|\DonJ|, |\DoffJ| によって変更されるよう変更.
+%
+% \end{macro}
+%
+%    \begin{macrocode} 
+\Dnewselect{J}
+\@ifundefined{西暦}{\DoffJ}{\DonJ}
+\def\abstractname{\DselJ{要旨}{Abstract}}
+%    \end{macrocode} 
+%
+% \iffalse
+%</D6select-code>
+% \fi
+

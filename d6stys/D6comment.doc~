@@ -1,0 +1,74 @@
+% \iffalse
+%       D2comment.doc      ver 0.0
+%       Doc-Source file to use with LaTeX2e
+%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%
+% $Id: D6comment.doc,v 1.2 2001/03/16 00:39:45 mym Exp $
+%
+% \fi
+%
+% \changes{v0.0}{2001/01/20}{Documentation added for doc by Manabu YAMADA}
+%
+% \MakeShortVerb{\|}
+%
+%
+% \section{Dcomment.sty}
+% \label{texsty.Dcomment}
+%
+%\subsection{概要}
+%
+%	{\tt Dcomment.sty}は,
+%	ファイルの一部をコメントとして扱うコマンドを定義する.
+%
+%
+% \DescribeEnv{Dcomment}
+% \subsection{Dcomment環境}
+%% \label{texsty.Dcomment.Dnewselect}
+%\begin{enumerate}
+%  \item 機能
+%  \begin{quote}
+%    環境の中のテキストは全てコメントとして扱う
+%  \end{quote}
+%  \item 使用方法
+%   \begin{quote}
+%     \verb!\begin{Dcomment}! \ \ldots \ \verb!\end{Dcomment}!
+%   \end{quote}
+%  \item 引数
+%  \begin{quote}
+%    なし
+%  \end{quote}
+%  \item 備考
+%  \begin{enumerate}
+%    \item ネスティングはできない.
+%    \item {\tt Dcomment.sty}のかわりに{\tt DNcomment.sty}を読み込むと
+%          コメント指定が無視される.
+%    \end{enumerate}
+%\end{enumerate}
+%
+%
+% \StopEventually{}
+%
+% \iffalse
+%<*D2comment-code>
+%
+% \begin{environment}{\Dcomment}
+% \end{environment}
+% \fi
+%
+%    \begin{macrocode}
+\begingroup \catcode `|=0 \catcode `[=1
+\catcode`]=2 \catcode `\{=12 \catcode `\}=12 \catcode`\\=12
+|long|gdef|D@xcomment#1\end{Dcomment}[|end[Dcomment]]
+|endgroup
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\D@comment{\begingroup \let\do\@makeother \dospecials}
+\def\Dcomment{\D@comment \D@xcomment}
+\def\endDcomment{\endgroup}
+%    \end{macrocode}
+%
+%
+% \iffalse
+%</D2comment-code>
+% \fi

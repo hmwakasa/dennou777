@@ -1,0 +1,232 @@
+%\iffalse
+%%
+%%       D6version.doc     ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%%	$Id: D6version.doc,v 1.1.1.1 2001/03/13 19:10:07 mym Exp $
+%%
+%%   D6version.doc で定義しているマクロは以下の通り.
+%%
+%%	\Dver
+%%	\Dmodify
+%%	\Dmoddate
+%%	\DmoddateJ
+%%
+%\fi
+%  
+% \changes{v0.0}{2001/02/10}{Dversion.sty を doc ファイルに修正}
+% \MakeShortVerb{\|}
+%
+% \section{D6version.sty}
+%
+% \subsection{概要}
+% \DescribeMacro{D6version.sty} 
+% {\tt Dversion.sty}は, 
+% 電脳ライブラリマニュアルバージョン管理用に作られた
+% マクロを提供する.
+%
+% \subsection{マクロの説明}
+%
+% \subsubsection{Dver}
+%  \label{texsty.Dver}
+%
+% \begin{enumerate}
+%  \item 機能
+%   \DescribeMacro{\Dver} 
+%  \begin{quote}
+%    バージョン番号を記憶させておき, \verb!Dversion!
+%    で参照できるようにする.
+%  \end{quote}
+%
+%  \item 使用方法
+%   \begin{quote}
+%       \verb!\Dver{4.1.1}!
+%   \end{quote}
+%
+%  \item 引数
+%  \begin{quote}
+%     バージョン番号.
+%  \end{quote}
+%
+%  \item 備考
+%  \begin{enumerate}
+%    \item HISTORY.tex などの別ファイルに書き込んでおき, バージョンの統
+%          合管理をするのに用いる.
+%  \end{enumerate}
+%\end{enumerate}
+%
+% \subsubsection{Dversion}
+%   \label{texsty.Dversion}
+%
+% \begin{enumerate}
+%   \item 機能
+%   \DescribeMacro{\Dversion} 
+%    \begin{quote}
+%       \verb!Dver! で記憶したバージョン番号を参照する.
+%    \end{quote}
+%
+%   \item 使用方法
+%    \begin{quote}
+%       \verb!\Dversion!
+%    \end{quote}
+%
+%   \item 引数
+%    \begin{quote}
+%       なし.
+%    \end{quote}
+%
+%   \item 備考
+%    \begin{enumerate}
+%       \item HISTORY.tex などの別ファイルに \verb!Dver! で書き込まれてい
+%           るバージョン番号を参照するのに用いる.
+%    \end{enumerate}
+% \end{enumerate}
+%
+% \subsubsection{Dmodify}
+%   \label{texsty.Dmodify}
+%
+% \begin{enumerate}
+%   \item 機能
+%   \DescribeMacro{\Dmodify} 
+%   \begin{quote}
+%     日付を記憶させておき, \verb!Dmoddate!, \verb!DmoddateJ!
+%     で参照できるようにする.
+%   \end{quote}
+%
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dmodify{92}{6}{2}!
+%    \end{quote}
+%
+%   \item 引数
+%   \begin{quote}
+%      年月日.
+%   \end{quote}
+%
+%   \item 備考
+%   \begin{enumerate}
+%     \item HISTORY.tex などの別ファイルに書き込んでおき, バージョンの統
+%           合管理をするのに用いる.
+%
+%   \end{enumerate}
+% \end{enumerate}
+%
+% \subsubsection{Dmoddate, DmoddateJ}
+%   \label{texsty.Dmoddate}
+% \begin{enumerate}
+%
+%   \item 機能
+%   \DescribeMacro{\Dmoddate} 
+%   \DescribeMacro{\DmoddateJ} 
+%   \begin{quote}
+%      \verb!Dmodify! で記憶した日付を参照する.
+%   \end{quote}
+%
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dmoddate! \\
+%        \verb!\DmoddateJ!
+%    \end{quote}
+%
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+%
+%   \item 備考
+%   \begin{enumerate}
+%     \item HISTORY.tex などの別ファイルに \verb!Dmodify! で書き込まれてい
+%           る日付を参照するのに用いる.
+%            \verb!\Dmoddate! は 92/06/02 という形式で,
+%            \verb!\DmoddateJ! は 1992 年 6 月 2 日 という形式で出力する.
+%
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+%
+%
+%
+% \StopEventually{}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \iffalse
+%<*D6version-code>
+% \fi
+%
+% \subsection{D6version.sty コード}
+%
+% \begin{macro}{D6version.sty}
+% 本節では {\tt D6version.sty} に含まれるマクロのコードを解説する.
+%
+% \end{macro}
+%
+% \begin{macro}{\Dver}
+% 引数をバージョン番号として |\Dversion| を定義せよ.
+% \end{macro}
+% \begin{macro}{\Dversion}
+% |\Dversion| は |\Dver| に与えられた引数を表示せよ.
+% \end{macro}
+%
+% \iffalse
+% \def\Dver#1{\def\Dversion{#1}}
+% \fi
+%    \begin{macrocode} 
+\newcommand{\Dver}[1]{
+                     \newcommand{\Dversion}{#1}
+                     }
+%    \end{macrocode}
+%
+% \begin{macro}{\Dmodify}
+% 3つの引数を順に, 「年」, 「月」, 「日」 として
+% |\Dmodyear|,|\Dmodmonth| , |\Dmodday| を定義せよ.
+% \end{macro}
+% \begin{macro}{\Dmodyear}
+% |\Dmodify| の第1引数を表示せよ.
+% \end{macro}
+% \begin{macro}{\Dmodmonth}
+% |\Dmodify| の第2引数を表示せよ.
+% \end{macro}
+% \begin{macro}{\Dmodday}
+% |\Dmodify| の第3引数を表示せよ.
+% \end{macro}
+%
+%
+% \iffalse
+% \def\Dmodify#1#2#3{\def\Dmodyear{#1}\def\Dmodmonth{#2}\def\Dmodday{#3}}
+% \fi
+%    \begin{macrocode} 
+\newcommand{\Dmodify}[3]{
+            \newcommand{\Dmodyear}{#1}
+            \newcommand{\Dmodmonth}{#2}
+            \newcommand{\Dmodday}{#3}
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\Dmoddate}
+%  |\Dmodyear|, |\Dmodmonth|, |\Dmodday| の値を用い,
+%  日付を「YYYY/MM/DD」の形式で表示せよ.
+%  ただし, |\Dmodmonth| と |\Dmodday| の値が1桁の場合,
+%  ゼロを付加し表示せよ.
+%  
+% \end{macro}
+%    \begin{macrocode} 
+\def\Dmoddate{\Dmodyear%
+              /\ifnum\Dmodmonth<10 0\fi\Dmodmonth%
+              /\ifnum\Dmodday<10 0\fi\Dmodday}
+%    \end{macrocode}
+%
+% \begin{macro}{\DmoddateJ}
+%  |\Dmodyear|, |\Dmodmonth|, |\Dmodday| の値を用い,
+%  日付を「YYYY年MM月DD日」の形式で表示せよ.
+%  ただし, |\Dmodyear| が 1900 未満の場合
+%  19 を付加し表示せよ.
+% \end{macro}
+%    \begin{macrocode} 
+\def\DmoddateJ{\ifnum\Dmodyear<1900 19\fi\Dmodyear 年\Dmodmonth 月\Dmodday 日}
+%    \end{macrocode}
+%
+% \iffalse
+%</D6version-code>
+% \fi

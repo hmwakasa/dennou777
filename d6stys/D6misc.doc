@@ -1,0 +1,461 @@
+%\iffalse
+%%
+%%       D6misc.sty     ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6misc.doc,v 1.7 2003/06/04 11:39:43 mym Exp $
+%%
+%%   D6misc.sty で定義している環境, コマンド, カウンタは以下の通り.
+%%
+%%  <環境>
+%%  \begin{Dreference}    \end{Dreference}
+%%  \begin{Dsmallquote}   \end{Dsmallquote}
+%%  \begin{Dnitemize}     \end{Dnitemize}
+%%  \begin{Dlist}         \end{Dlist}
+%%
+%%  <コマンド>
+%%
+%%  \Dparindent
+%%  \Dnoparindent
+%%  \Dparskip
+%%  \Dnoparskip
+%%  \Dsethead
+%%  \Dtoday
+%%  \Dentry
+%%  \Deqlab    \Deqref
+%%  \Dfiglab   \Dfigref \DFigref
+%%  \Dtablab   \Dtabref
+%%  \Dseclab   \Dsecref
+%%  \Dchaplab  \Dchapref
+%%  \Dappendix                      modified by S.Takehiro
+%%  \Dsidenote
+%%
+% \fi
+%
+% \changes{dennou5 v1.0}{1992/03/24}{Dmisc}
+% \changes{dennou5 v1.1}{1996/05/17}{Dmisc modified by S. Takehiro}
+% \changes{dennou6 v0.0}{2001/02/14}{modified for doc M. Yamada}
+%
+% \section{D6misc.sty}
+% \label{texsty.D6misc}
+%
+% \subsection{概要}
+%
+% {\tt Dmisc.sty}は, ラベルの参照, 日付等のマクロ,
+% いくつかの便利な環境を提供する.
+%
+% \subsection{マクロの説明}
+%
+% \subsubsection{Dreference環境}
+%  \label{texsty.Dmisc.Dreference}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%    参考文献リストを出力する環境
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\begin{Dreference}! \\
+%        \verb!\end{Dreference}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item 基本的には{\tt description}環境と同様である.
+%           タイトルを英語にするには,
+%           {\tt Dselect.sty}を使用し,
+%           \verb!\Dnewselect{J}!, \verb!\DoffJ!,
+%           とする必要がある.
+%           ({\tt dennou.sty}では,
+%            {\tt jarticle}等を用いたときには日本語に,
+%            {\tt article}等を用いたときには
+% 			英語に自動的に設定される.)
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsubsection{Dnitemize環境}
+% % \label{texsty.Dmisc.Dnitemize}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     行間の狭い{\tt itemize}環境
+%   \end{quote}
+%   \item 使用方法
+%   \begin{quote}
+%        \verb!\begin{Dnitemize}! \ \ldots \
+%        \verb!\end{Dnitemize}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+% \end{enumerate}
+%
+%
+%
+% \subsubsection{Dlist環境}
+% % \label{texsty.Dmisc.Dlist}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     桁の揃った{\tt description}環境
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\begin{Dlist}[!{\em template\/}\verb!]! \ \ldots \
+%        \verb!\end{Dreference}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em template\/} & ラベルの幅を決める文字列
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item {\em template\/}には,
+%           環境の中のラベルのうち最長の文字列を指定する.
+%     \item ラベルのboxの幅は,
+%           {\em template\/}の文字列の幅に
+%           \verb!\Dlistlabalsep!で指定する長さを足したものとなる.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsubsection{Dparskip, Dnoparskip}
+% % \label{texsty.Dmisc.Dparskip}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     段落間に空白を入れる機能をオン・オフする
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dparskip! \\
+%        \verb!\Dnoparskip!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item 段落間の空白は{\tt 3ex}である.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsubsection{Dparindent, Dnoparindent}
+% % \label{texsty.Dmisc.Dparindent}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     段落開始時のインデントをオン・オフする
+%   \end{quote}
+%   \item 使用方法
+%   \begin{quote}
+%        \verb!\Dparskip! \\
+%        \verb!\Dnoparskip!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%    \item インデント量はデフォルト値が使用される.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+%
+% \subsubsection{Dtoday}
+% % \label{texsty.Dmisc.Dtoday}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     \LaTeX のフォーマット時の日付を{\tt yy/mm/dd}の形式で出力する
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dtoday!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item fragileであるので,
+%            動く引数で使う場合には\verb!\protect!が必要.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+%
+% \subsubsection{Dentry}
+% % \label{texsty.Dmisc.Dentry}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     ラベルをつけ, 同じ名前の索引エントリを作る.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dentry{!{\em entry-name\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%      {\em entry-name\/} & ラベル, 索引エントリ名となる文字列
+%     \end{tabular}
+%   \end{quote}
+% \end{enumerate}
+%
+%
+%
+% \subsubsection{Dsidenote}
+% % \label{texsty.Dmisc.Dsidenote}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     右マージン(左ページの場合は左マージン)に
+%     文字列を出力する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dsidenote{!{\em string\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%      {\em string\/} & 出力する文字列
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item 文字のサイズは{\tt scriptsize}がデフォルトである.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+%
+% \subsubsection{Deqlab,Deqref {\em etc.\/}}
+% % \label{texsty.Dmisc.Deqlab}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     式, 図, 表, 節, 章にラベルをつける.
+%     また, それらに見合った参照文字列を出力する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Deqlab{!{\em label\/}\verb!}!  \ {\em etc.} \\
+%        \verb!\Deqref{!{\em label\/}\verb!}!  \ {\em etc.}
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%      {\em label\/} & ラベル識別子の文字列
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%    \begin{enumerate}
+%     \item 次の様なものがある.
+%           ラベル識別子には各々に対応した接頭子が付与される.
+%
+% \iffalse
+%    \begin{tabular}{l|p{2cm}|p{2cm}|p{2cm}}
+%     コマンド     & ラベル識別子接頭子 
+%			& 参照文字列 & 同英語選択時 \\ \hline
+%     \verb!\Deqlab, \Deqref! & {\tt eq:}    & (1)  & (1) \\
+%     \verb!\Dfiglab, \Dfigref! & {\tt fig:} & 図1  & Fig.1 \\
+%     \verb!          \DFigref! & {\tt fig:} & 図1  & Figure 1 \\
+%     \verb!\Dtablab, \Dtabref! & {\tt tab:} & 表1  & Table 1 \\
+%     \verb!\Dseclab, \Dsecref! & {\tt sec:} & 第1節 & Section 1 \\
+%     \verb!\Dchaplab, \Dchapref! & {\tt chap:} & 第1章 & Chapter 1 
+%     \end{tabular}
+% \fi
+% 
+%     英語選択時とは,
+%     {\tt Dselect.sty}を使用し,
+%     \verb!\Dnewselect{J}!, \verb!\DoffJ!,
+%     としたときである.
+%     ({\tt dennou.sty}では,
+%     {\tt jarticle}等を用いたときには日本語に,
+%     {\tt article}等を用いたときには英語に自動的に設定される.)
+%    \end{enumerate}
+% \end{enumerate}
+%
+%
+%
+%
+%
+% \StopEventually{}
+%
+% \iffalse
+%<*D6misc-code>
+% \fi
+%
+% \subsection{D6misc.sty コード}
+%
+% \begin{macro}{D6misc.sty}
+% 本節では {\tt D6misc.sty} に含まれるマクロのコードを解説する.
+% \end{macro}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{macro}{\Dparindent}
+% \begin{macro}{\Dnoparindent}
+% 	dennou スタイルで使用する段落先頭のインデント(字下げ)値を定義する.
+% 	新しいグルー |\D@parindent| を宣言. 
+%    \begin{macrocode}
+\newlength{\D@parindent}
+%    \end{macrocode}
+%	使用するクラスにおける|\parindent| のデフォルト値を保持するために
+% 	|\D@parindent|の値を |\parindent| の値にせよ.
+%    \begin{macrocode}
+\setlength{\D@parindent}{\parindent}
+%    \end{macrocode}
+%	|\Dparindent|は |\parindent| の値を |\D@parindent| の値
+%	(つまり使用クラスでのデフォルト値)に変更するよう定義せよ.
+%    \begin{macrocode}
+\def\Dparindent{\setlength{\parindent}{\D@parindent}}
+%    \end{macrocode}
+%	|\Dnoparindent|は |\parindent| の値を 0pt 
+%	に変更するよう定義せよ.
+%    \begin{macrocode}
+\def\Dnoparindent{\setlength{\parindent}{0pt}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{macro}{\Dparskip}
+% 	段落間の縦方向スペース(|\parskip|)を 3ex とせよ.
+%    \begin{macrocode}
+\def\Dparskip{\setlength{\parskip}{3ex}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dnoparskip}
+% 	段落間の縦方向スペース(|\parskip|)を 0ex とせよ.
+%    \begin{macrocode}
+\def\Dnoparskip{\setlength{\parskip}{0ex}}
+%    \end{macrocode}
+% \end{macro}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % 未解読
+% \begin{macro}{\Dsethead}
+%    \begin{macrocode}
+\def\Dsethead{\let\firstmark\botmark}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{macro}{\Dsethead}
+%    \begin{macrocode}
+\@ifundefined{DselJ}{\gdef\DselJ#1#2{#1}}{}
+\def\@chapapp#1#2{\DselJ{第#1章}{Chapter#1#2}}
+%\def\@chapapp#1#2{\DselJ{第#2章}{Chapter#1#2}}
+\def\fnum@figure{\DselJ{図}{Figure} \thefigure}
+\def\fnum@table{\DselJ{表}{Table} \thetable}  % modified by S.Takehiro
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\Dreference}
+%
+%    \begin{macrocode}
+\def\D@refapp{\DselJ{文献}{References}}
+\def\Dreference{\@ifundefined{chapter}%
+                {\section*{\D@refapp\@mkboth{\D@refapp}{\D@refapp}}}
+                {\chapter*{\D@refapp\@mkboth{\D@refapp}{\D@refapp}}}
+                \list{}{\labelwidth\z@ \itemindent-\leftmargin
+                \let\makelabel\descriptionlabel}}
+\let\endDreference\endlist
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dtoday}
+%
+%    \begin{macrocode}
+\newcount\D@year
+\def\Dtoday{\D@year=\year\advance\D@year -0  %
+            \ \number\D@year /\nobreak%
+            \ifnum\month<10 0\fi%
+            \number\month /\nobreak%
+            \ifnum\day<10 0\fi%
+            \number\day}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\def\Dentry#1{\label{#1}\index{#1}}
+%
+%%\@ifundefined{Dlabel}{\let\Dlabel\label}{}
+\@ifundefined{Dlabel}{\def\Dlabel#1{\label{#1}}}{}
+\def\Deqlab#1{\Dlabel{eq:#1}}
+\def\Dfiglab#1{\Dlabel{fig:#1}}
+\def\Dtablab#1{\Dlabel{tab:#1}}
+\def\Dseclab#1{\Dlabel{sec:#1}}
+\def\Dchaplab#1{\Dlabel{chap:#1}}
+%
+\def\Deqref#1{(\ref{eq:#1})}
+\def\Dfigref#1{\DselJ{図}{Fig.}\ref{fig:#1}}
+\def\DFigref#1{\DselJ{図}{Figure }\ref{fig:#1}}
+\def\Dtabref#1{\DselJ{表}{Table }\ref{tab:#1}}
+\def\Dsecref#1{\DselJ{第\ref{sec:#1}節}{Section \ref{sec:#1}}}
+\def\Dchapref#1{\DselJ{第\ref{chap:#1}章}{Chapter \ref{chap:#1}}}
+%\def\Dchapref#1{\DselJ{第\ref{chap:#1}章}{Chapter \ref{chap:#1}}}
+%
+\def\Dappendix{\par
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{\DselJ{補遺}{Appendix}}
+ \def\thechapter{\Alph{chapter}}}      % modified by S.Takehiro
+%
+\def\Dsmallquote{\begingroup\small\quote}
+\def\endDsmallquote{\endquote\endgroup}
+%
+\def\Dnitemize{\vskip -1ex
+   \list{$\bullet$}{\itemsep=0.0pt \parsep=0.0pt}}
+\def\endDnitemize{\endlist\vskip -1ex}
+%
+\def\Dsidenote#1{\marginpar{\scriptsize #1}}
+%
+\def\Dlistlabel#1{\mbox{\bf #1}\hfil}
+\def\Dlistlabelsep{1em}
+\def\Dlisttemplate{XXXXXXXX}
+\def\Dlist{\@ifnextchar[{\D@list} %]
+                {\D@list[\Dlisttemplate]}}
+\def\D@list[#1]{%
+  \list{}{\let\makelabel\Dlistlabel
+  \settowidth{\labelwidth}{#1}
+  \leftmargin=\labelwidth 
+  \addtolength{\leftmargin}{\Dlistlabelsep}}}
+\let\endDlist\endlist
+%
+%  re-definition of \listoffigures and  \listoftables.
+%         appended by S.Takehiro 96.5.17
+%
+\def\listoffigures{\section*{\DselJ{図 目 次}{List of Figures}}\markboth
+ {\DselJ{図 目 次}{List of Figures}}
+ {\DselJ{図 目 次}{List of Figures}}\@starttoc{lof}}
+\let\l@table\l@figure
+\def\listoftables{\section*{\DselJ{表 目 次}{List of Tables}}\markboth
+ {\DselJ{表 目 次}{List of Tables}}
+ {\DselJ{表 目 次}{List of Tables}}\@starttoc{lot}}
+\let\l@table\l@figure
+%    \end{macrocode}
+%
+% \iffalse
+%</D6misc-code>
+% \fi

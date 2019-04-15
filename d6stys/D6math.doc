@@ -1,0 +1,417 @@
+% \iffalse
+%%
+%%	D6math.doc	ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6math.doc,v 1.4 2004/12/07 20:58:33 mym Exp $
+%%
+%%   D2math.sty で定義している数式マクロは以下の通り.
+%%
+%%      \DD[n]{A}{x}
+%%      \DP[n][y]{A}{x}
+%%      \Dvect{v}
+%%      \Dinv{A}
+%%      \Dgrad{A}
+%%      \Ddiv{A}
+%%      \Drot{A}
+%%      \Dboldvect
+%%      \Darrowvect
+%%      \Dnablagrad
+%%      \Dchargrad
+%%      \Dinv
+%%      \Dd
+%%      \Ddint
+%%      \Dtint
+%%      \Dsqrt
+%%      \Ddsty
+%%	
+% \fi
+%
+%
+% \changes{dennou6 v0.0}{2001/01/20}{Documentation added for doc by Manabu YAMADA}
+% \changes{v0.1}{2001/02/10}
+%	{Doc ファイルに整形. Dsqrt を定義. DD, DP のスペース調整}
+% \MakeShortVerb{\|}
+%
+%
+% \section{D6math.sty}
+%
+% \subsection{概要}
+% \DescribeMacro{D6math.sty}
+%	{\tt Dmath.sty} は, 数式を出力するためのいくつかの
+%	便利なマクロを提供する.
+%
+% \subsection{マクロの説明}
+%
+% \subsubsection{DD,DP}
+% \label{texsty.Dmath.DD}
+%\begin{enumerate}
+%  \item 機能
+%   \DescribeMacro{\DD}\DescribeMacro{\DP}
+%  \begin{quote}
+%    全微分, 偏微分
+%  \end{quote}
+%  \item 使用方法
+%   \begin{quote}
+%    \begin{tabular}{ll}
+%      \verb!\DD{A}{x}!      & $\Ddsty \DD{A}{x}$    \\ \\
+%      \verb!\DD[2]{A}{x}!   & $\Ddsty \DD[2]{A}{x}$  \\ \\
+%      \verb!\DD{}{x}!       & $\Ddsty \DD{}{x}$  \\ \\
+%      \verb!\DP{A}{x}!      & $\Ddsty \DP{A}{x}$  \\ \\
+%      \verb!\DP[2]{A}{x}!   & $\Ddsty \DP[2]{A}{x}$ \\ \\
+%      \verb!\DP[][y]{A}{x}! & $\Ddsty \DP[][y]{A}{x}$ \\ \\
+%      \verb!\DP[2][y]{A}{x}! & $\Ddsty \DP[2][y]{A}{x}$ \\ \\
+%    \end{tabular}
+%  \end{quote}
+%\end{enumerate}
+%
+%
+% \subsubsection{Dvect,Dlapla,Ddiv {\em etc.\/}}
+% \label{texsty.Dmath.Dvect}
+%\begin{enumerate}
+%  \item 機能
+%   \DescribeMacro{\Dvect} 
+%   \DescribeMacro{\Dlapla} 
+%   \DescribeMacro{\Dgrad}
+%   \DescribeMacro{\Ddiv}
+%   \DescribeMacro{\Drot}
+%  \begin{quote}
+%    ベクトル表記
+%  \end{quote}
+%  \item 使用方法 \\
+%   \begin{quote}
+%    \begin{tabular}{lcc}
+%          & \verb!\Dboldvect! 指定時 
+%          & \verb!\Darrowvect! 指定時   \\
+%      \verb!\Dvect{v}!       
+%          & \Dboldvect $\Ddsty \Dvect{v}$
+%          & \Darrowvect $\Ddsty \Dvect{v}$    \\ \\
+%    \end{tabular}\\
+%    \begin{tabular}{ll}
+%      %\Dboldvect \\
+%      \verb!\Dlapla A!       & $\Ddsty \Dlapla A$  \\ \\
+%      \verb!\Dlapla[4] A!    & $\Ddsty \Dlapla[4] A$  \\ \\
+%    \end{tabular}
+%   \end{quote}
+%   \begin{quote}
+%    \begin{tabular}{lcc}
+%          &\verb!\Dnablagrad! 指定時 
+%          & \verb!\Dchargrad! 指定時  \\
+%      \verb!\Dgrad A!        
+%          & \Dnablagrad $\Ddsty \Dgrad A$
+%          & \Dchargrad $\Ddsty \Dgrad A$  \\ \\
+%      \verb!\Ddiv \Dvect{v}! 
+%          & \Dnablagrad $\Ddsty \Ddiv \Dvect{v}$ 
+%          & \Dchargrad $\Ddsty \Ddiv \Dvect{v}$ \\ \\
+%      \verb!\Drot \Dvect{v}! 
+%          & \Dnablagrad $\Ddsty \Drot \Dvect{v}$ 
+%          & \Dchargrad $\Ddsty \Drot \Dvect{v}$ \\ \\
+%    \end{tabular}
+%   \end{quote}
+%  \item 備考
+%  \begin{enumerate}
+%    \item \verb!\Dvect!のスタイルは
+%           \verb!\Dboldvect! (デフォルト),
+%           \verb!\Darrowvect!コマンドによって切り替えることができる. 
+%    \item \verb!\Dgrad,\Ddiv,\Drot!のスタイルは
+%          \verb!\Dnablagrad!(デフォルト),
+%          \verb!\Dchargrad!コマンドによって切り替えることができる.
+%  \end{enumerate}
+%\end{enumerate}
+%
+%
+%
+%\subsubsection{Dinv, Dd, Ddint, Dtint, Dsqrt}
+%  \label{texsty.Dmath.Dinv}
+%\begin{enumerate}
+%  \item 機能
+%   \DescribeMacro{\Dinv}
+%   \DescribeMacro{\Dd}
+%   \DescribeMacro{\Ddint}
+%   \DescribeMacro{\Dtint}
+%   \DescribeMacro{\Dsqrt}
+%  \begin{quote}
+%    積分などその他の数式表記
+%  \end{quote}
+%  \item 使用方法
+%   \begin{quote}
+%    \begin{tabular}{ll}
+%      \verb!\Dinv{2}!               & $\Ddsty \Dinv{2}$    \\ \\
+%      \verb!\int A \Dd x!           & $\Ddsty \int A \Dd x$ \\ \\
+%      \verb!\Ddint A \Dd x \Dd y!    & $\Ddsty \Ddint A \Dd x \Dd y$  \\ \\
+%      \verb!\Dtint A \Dd x \Dd y \Dd z!    &
+%          $\Ddsty \Dtint A \Dd x \Dd y \Dd z$  \\ \\
+%      \verb!\Dsqrt{g}+\Dsqrt{h}!  &   $\Dsqrt{g}+\Dsqrt{h}$ \\ \\
+%    \end{tabular}
+%   \end{quote}
+%  \item 備考
+%  \begin{enumerate}
+%    \item \verb!\Dd,\Ddint,\Dtint!では, スペースの調整が行なわれている.
+%    \item \verb!\Dsqrt!では, ルートの高さ調整が行なわれている.
+%  \end{enumerate}
+% \end{enumerate}
+%
+%
+%\subsubsection{Ddsty}
+%  \label{texsty.Dmath.Ddsty}
+%\begin{enumerate}
+%  \item 機能
+%   \DescribeMacro{\Ddsty}
+%  \begin{quote}
+%    \verb!\displaystyle!の略記法
+%  \end{quote}
+%  \item 使用方法
+%   \begin{quote}
+%    \verb!\Ddsty!
+%  \end{quote}
+%\end{enumerate}
+%
+%
+% \StopEventually{}
+%
+% \iffalse
+%<*D6math-code>
+% \fi
+%
+% \subsection{D6math.sty コード}
+%
+% 本節では {\tt D6math.sty} に含まれるマクロのコードを解説する.
+%
+%
+% \subsubsection{DD}
+% 全微分を表示するマクロの定義は以下の通り 
+% \begin{macro}{\DD}
+%	もし次に来る文字が 1) |[| ではじまる場合,
+%       全微分を表記するためのマクロ |\D@D| を呼び出せ.
+%	また微小記号とのスペース調整 |\D@space| を |\!| とせよ.
+%	2) |[|で無い場合 |\D@D[]| として呼び出せ.
+%	また微小記号とのスペース調整 |\D@space| はゼロとせよ.
+%
+%    \begin{macrocode}
+\newcommand{\DD}{\@ifnextchar [{\def\D@space{\!}\D@D}{\def\D@space{}\D@D[]}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\D@D}
+%	デリミターとして |[|, |]| を使い, 3つの引数をとれ.
+%	第 2 引数を第 3 引数偏微分したものを表示せよ.
+%	ただし第 1 引数次とする.
+%
+%    \begin{macrocode}
+\def\D@D[#1]#2#3{\frac{d^{#1}\D@space #2}{d #3{}^{#1}}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection{DP}
+% 偏微分を表示するマクロの定義は以下の通り 
+% \begin{macro}{\DP}
+%	もし次に来る文字が 1) |[| ではじまる場合,
+%       |\D@P| を呼び出せ.
+%	また微小記号とのスペース調整 |\D@space| を |\!| とせよ.
+%	2) |[| で無い場合 |\D@P[]| として呼び出せ.
+%	また微小記号とのスペース調整 |\D@space| はゼロとせよ.
+%    \begin{macrocode}
+\newcommand{\DP}{\@ifnextchar [{\def\D@space{\!}\D@P}{\def\D@space{}\D@P[]}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\D@P}
+%	デリミターとして |[|, |]| を使い, 1つの引数をとれ.
+%	もし引数の次に来る文字が 1) |[| ではじまる場合,
+%	|\D@Pi| を呼び出せ. この際, 引数を|[|, |]| で囲み再度引き渡せ.
+%	2) |[| で無い場合  引数を|[|, |]| で囲み|\D@PD|に引き渡せ.
+%    \begin{macrocode}
+\def\D@P[#1]{\@ifnextchar [{\D@Pi[#1]}{\D@PD[#1]}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\D@PD}
+%	デリミターとして |[|, |]| を使い, 3つの引数をとれ.
+%	第 2 引数を第 3 引数偏微分したものを表示せよ.
+%	ただし第 1 引数次とする.
+%    \begin{macrocode}
+\def\D@PD[#1]#2#3{\frac{\partial^{#1}\D@space #2}{\partial #3{}^{#1}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\D@PD}
+%	デリミターとして |[|, |]| を使い, 4つの引数をとれ.
+%	第 3 引数を第 4 引数偏微分したものを表示せよ.
+%	ただし第 1 引数次で, 第 2 引数を固定したものとする.
+%    \begin{macrocode}
+\def\D@Pi[#1][#2]#3#4{\left( 
+                            \frac{\partial^{#1}\D@space #3}{\partial #4{}^{#1}}
+                      \right)_{#2}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection{Dvect}
+% \begin{macro}{\Dvect}
+%	ベクトル表記用のマクロ |\Dvect| は
+%	|\Dboldvect|あるいは|\Darrowvect|をによって定義される.
+%	|\Dboldvect|を指定すると, ボールド体のベクトル表記
+%	|\Darrowvect|を指定すると, 矢印を用いたベクトル表記となる.
+% \end{macro}
+%
+% \begin{macro}{\Dboldvect}
+%	|\Dvect| を |\D@bvect| とせよ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dboldvect}{\let\Dvect\D@bvect}   % 95/12/15 (takepiro)
+%    \end{macrocode}
+%
+% \begin{macro}{\D@bvect}
+%	引数をボールド数式フォントで出力せよ.	
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\D@bvect}[1]{%
+\ensuremath{\mathchoice%
+{\mbox{\boldmath${#1}$}}%
+{\mbox{\boldmath${#1}$}}%
+{\mbox{\boldmath$\scriptstyle{#1}$}}%
+{\mbox{\boldmath$\scriptscriptstyle{#1}$}}%
+}}
+%    \end{macrocode}
+%
+% \begin{macro}{\Darrowvect}
+%	|\Dvect| を |\D@avect| とせよ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Darrowvect}{\let\Dvect\D@avect}            % 95/12/15 (takepiro)
+%    \end{macrocode}
+%
+% \begin{macro}{\D@avect}
+%	引数に矢印のベクトル記号を付け出力せよ.	
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\D@avect}[1]{\mbox{$\vec{#1}$}}   
+%    \end{macrocode}
+%
+%
+% \subsubsection{Dlapla}
+% \begin{macro}{\Dlapla}
+%	もし次に来る文字が 1) |[| ではじまる場合,
+%       |\D@lapla| を呼び出せ.
+%	2) |[| で無い場合 |\D@lapla[2]| として呼び出せ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dlapla}{\@ifnextchar [{\D@lapla}{\D@lapla[2]}}
+%    \end{macrocode}
+%
+% \begin{macro}{\D@lapla}
+%	デリミターとして |[|, |]| を使い, 引数を1つとれ.
+% 	|\nabla| 記号の引数乗を表示せよ.
+% \end{macro}
+%    \begin{macrocode}
+\def\D@lapla[#1]{\nabla^{#1}}
+%    \end{macrocode}
+%
+% \subsubsection{Dgrad, Ddiv, Drot}
+%	勾配, 発散, 回転を表示する |Dgrad|, |Ddiv|, |Drot| は
+%	|\Dnablagrad| あるいは |\Dchargrad| によって定義される.
+%	|\Dnablagrad| はナブラ演算子を用いた表記で定義し, 
+%	|\Dchargrad|  は文字を用いた表記で定義する.
+%
+% \begin{macro}{\Dnablagrad}
+%	|Dgrad|, |Ddiv|, |Drot| をそれぞれ
+%	|D@ngrad|, |D@ndiv|, |D@nrot| とせよ.
+% \end{macro}
+% \begin{macro}{\D@ngrad}
+% \begin{macro}{\D@ndiv}
+% \begin{macro}{\D@nrot}
+%	|D@ngrad|, |D@ndiv|, |D@nrot| をナブラ演算子で表現せよ.
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dnablagrad}{\let\Dgrad\D@ngrad \let\Ddiv\D@ndiv \let\Drot\D@nrot}
+\newcommand{\D@ngrad}{\mbox{$\nabla$}}
+\newcommand{\D@ndiv}{\mbox{$\nabla \cdot$}}
+\newcommand{\D@nrot}{\mbox{$\nabla \times$}}
+%    \end{macrocode}
+%
+% \begin{macro}{\Dchargrad}
+%	|Dgrad|, |Ddiv|, |Drot| をそれぞれ
+%	|D@cgrad|, |D@cdiv|, |D@crot| とせよ.
+% \end{macro}
+% \begin{macro}{\D@ngrad}
+% \begin{macro}{\D@ndiv}
+% \begin{macro}{\D@nrot}
+%	|D@cgrad|, |D@cdiv|, |D@crot| を文字(grad, div, rot)で表現せよ.
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dchargrad}{\let\Dgrad\D@cgrad \let\Ddiv\D@cdiv \let\Drot\D@crot}
+\newcommand{\D@cgrad}{\mbox{$\mathrm{grad}$}}
+\newcommand{\D@cdiv}{\mbox{$\mathrm{div}$}}
+\newcommand{\D@crot}{\mbox{$\mathrm{rot}$}}
+%    \end{macrocode}
+%
+% \subsubsection{Ddint, Dtint}
+%	重積分, 三重積分の際, 積分記号間のスペースを調整.
+% \begin{macro}{\Dintkern}
+%	数式のスタイルに応じたスペース調整を定義する.	
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dintkern}{\mathchoice{\!\!\!}{\!\!}{\!\!}{\!\!}}
+%    \end{macrocode}
+% \begin{macro}{\Ddint}
+% \begin{macro}{\Dtint}
+% 	連続した積分記号間に |\Dintkern| をいれることで
+%	スペースを調整し, 重積分および三重積分を表示せよ.
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Ddint}{\int\Dintkern\int}
+\newcommand{\Dtint}{\int\Dintkern\int\Dintkern\int}
+%    \end{macrocode}
+%
+% \subsubsection{Dinv, Dd, Dsqrt}
+% \begin{macro}{\Dinv}
+%	引数分の 1 を表示せよ. 
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dinv}[1]{\frac{1}{#1}}
+%    \end{macrocode}
+%
+% \begin{macro}{\Dd}
+%	 小さなスペースの後に |d| を表示せよ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dd}{\,d}
+%    \end{macrocode}
+%
+% \begin{macro}{\Dsqrt}
+%	引数の平方根を表示せよ.
+%	ただし平方根記号は一定の高さと深さを持つ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dsqrt}[1]{\sqrt{\mathstrut #1}}
+%    \end{macrocode}
+%
+% \begin{macro}{\Ddsty}
+% 	|\displaystyle| にせよ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Ddsty}{\displaystyle}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\Dboldvect}
+% \begin{macro}{\Dnablagrad}
+%	ベクトル表記のデフォルトを |\Dboldvect|,
+%	微分演算子表記のデフォルトを |\Dnablagrad| とせよ.
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\Dboldvect
+\Dnablagrad
+%    \end{macrocode}
+%
+% \iffalse
+%</D6math-code>
+% \fi

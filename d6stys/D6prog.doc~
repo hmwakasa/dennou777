@@ -1,0 +1,352 @@
+% \iffalse
+%%
+%%       D6prog.doc      ver 0.0
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%% $Id: D6prog.doc,v 1.1.1.1 2001/03/13 19:10:07 mym Exp $
+%%
+%%   D6prog.sty で定義している環境, コマンド, カウンタは以下の通り.
+%%
+%%  <環境>
+%%  \begin{Dprogram}  \end{Dprogram}
+%%  \begin{Dprogram*}  \end{Dprogram*}
+%%
+%%  <コマンド>
+%%
+%%  \Dproginput{file_name}
+%%  \Dproginput*{file_name}
+%%  \Dproglineoff
+%%  \Dproglineon
+%%  \Dproglinestart
+%%
+%%  <カウンタ>
+%%
+%%  \Dprogsize
+%%  \Dprogskip
+%%  \Dprogline#1
+%%  \Dproglinewidth
+%%  \Dproglinesep
+%%
+%%
+% \fi
+% \changes{dennou6 v0.0}{2001/02/13}
+%       {D6prog:Doc ファイルに整形. Dprogram* Dproginput* を定義. 
+%	 マクロ内の同一部分を統合(D@progset)}
+% \MakeShortVerb{\|}
+%
+% \section{D6prog.sty}
+%
+% \subsection{概要}
+% \DescribeMacro{D6prog.sty} 
+%
+% {\tt Dprog.sty}は, プログラム等のリストを出力するための
+% 環境とコマンドを定義する.
+% プログラムリストの形式は,
+% {\tt verbatim}環境に似たものであるが,
+% フォントおよび行間隔が異なり, 行番号がつけられる.
+%
+%
+% \subsection{マクロの説明}
+%
+% \subsubsection{Dproginput, Dproginput*}
+% \begin{enumerate}
+%   \item 機能
+%    \DescribeMacro{\Dproginput}
+%    \DescribeMacro{\Dproginput*}
+%   \begin{quote}
+%     ファイルの内容をプログラムリスト形式で出力する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%      \verb!\Dproginput{!{\em file\/}\verb!}!\\
+%      \verb!\Dproginput*{!{\em file\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em file\/} & 出力するファイル名
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item \verb!\Dproglineoff!を指定,
+%           または\verb!\Dprogline!を変更しないかぎり
+%           行番号がつけられる.
+%     \item |\Dproginput*| は空白を "\verb*| |" と出力する.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsubsection{Dprogram, Dprogram* 環境}
+%  %\label{texsty.Dprog.Dprogram}
+% \begin{enumerate}
+%   \item 機能
+%    \DescribeEnv{Dprogram}
+%    \DescribeEnv{Dprogram*}
+%   \begin{quote}
+%     環境内のテキストをプログラムリスト形式で出力する
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%      \verb!\begin{Dprogram}! \ \ldots \ \verb!\end{Dprogram}!\\
+%      \verb!\begin{Dprogram*}! \ \ldots \ \verb!\end{Dprogram*}!
+%   \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item \verb!\Dproglineoff!を指定,
+%           または\verb!\Dprogline!を変更しないかぎり
+%           行番号がつけられる.
+%     \item |Dprogram*|環境は空白を "\verb*| |" と出力する.
+%   \end{enumerate}
+% \end{enumerate}
+%
+% \subsubsection{Dproglineoff, Dproglineon, Dproglinestart}
+% \begin{enumerate}
+%   \item 機能
+%    \DescribeMacro{\Dproglineoff}
+%    \DescribeMacro{\Dproglineon}
+%    \DescribeMacro{\Dproglinestart}
+%   \begin{quote}
+%     行番号出力を制御する.
+%     \verb!\Dproglineoff! でオフ,
+%     \verb!\Dproglineon! でオン,
+%     \verb!\Dproglinestart! で開始行番号を設定する
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%      \verb!\Dproglineoff! \\
+%      \verb!\Dproglineon! \\
+%      \verb!\Dproglinestart{!{\em start-num\/}\verb!}!
+%   \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em start-num\/} & 開始行番号(デフォルトは1)
+%     \end{tabular}
+%   \end{quote}
+% \end{enumerate}
+%
+% 
+% \subsubsection{Dproginput, Dprogramのパラメータ}
+%
+% 以下のコマンドは\verb!\Dproginput!, 
+% {\tt Dprogram}環境のパラメータであり,
+%    \DescribeMacro{\Dprogsize}
+%    \DescribeMacro{\Dprogskip}
+%    \DescribeMacro{\Dprogline}
+%    \DescribeMacro{\Dproglinewidth}
+%    \DescribeMacro{\Dproglinesep}
+% \verb!\renewcommand!または\verb!\def!で設定する.
+% \begin{quote}
+% \begin{tabular}{lp{11cm}}
+%   \verb!Dprogsize!  & 文字の大きさ(デフォルトは\verb!\small!) \\
+%   \verb!\Dprogskip! & 行間隔(デフォルトは{\tt 2ex}) \\
+%   \verb!\Dprogline! & 行番号のフォーマット
+%			(デフォルトは\verb!\scriptsize\it #1!) \\
+%   \verb!\Dproglinewidth! & 行番号の欄幅(デフォルトは{\tt 3em}) \\
+%   \verb!\Dproglinesep!   & 行番号欄と本文の間の空白幅
+% 		 		(デフォルトは{\tt 1em})
+% \end{tabular}
+% \end{quote}
+%
+%
+% \StopEventually{}
+%
+% \iffalse
+%<*D6prog-code>
+% \fi
+%
+% \subsection{D6prog.sty コード}
+%
+% \begin{macro}{D6prog.sty}
+% 本節では {\tt D6prog.sty} に含まれるマクロのコードを解説する.
+% \end{macro}
+%
+% 先ず初めに共通パラメータを定義する.
+% \begin{macro}{\Dprogsize}
+% フォントサイズのデフォルト値を設定.
+% |\small| とせよ.
+%    \begin{macrocode}
+\newcommand{\Dprogsize}{\small}                  % font size
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dprogskip}
+%  行間隔として使う値のデフォルト値を設定.
+%  |2ex| とせよ.
+%    \begin{macrocode}
+\newcommand{\Dprogskip}{2ex}                     % vertical skip
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dprogline}
+%  行番号出力のデフォルト値を設定.
+%  大きさは |\scriptsize|, フォントはイタリック (|\it|) とせよ.
+%    \begin{macrocode}
+\newcommand{\Dprogline}[1]{\scriptsize\it #1}     % line number font
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dproglinewidth}
+%  行番号の欄幅のデフォルト値を設定.
+%  |3em| とせよ.
+%    \begin{macrocode}
+\newcommand{\Dproglinewidth}{3em}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dproglinesep}
+%  行番号と本文の間にいれる空白幅のデフォルト値を設定.
+%  |1em| とせよ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dproglinesep}{1em}
+%    \end{macrocode}
+%
+% 次に各コマンド, 環境を定義する.
+% \begin{macro}{\Dproginput}
+% \begin{macro}{\Dproginput*}
+%	アスタリスク |*| の有無を調べよ.
+%	もし |*| がある場合, |\D@proginput| を呼び出し,
+%	ない場合, |\D@@proginput| を呼び出せ.
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Dproginput}{\@ifstar{\D@@proginput}{\D@proginput}}
+%    \end{macrocode}
+%
+% \begin{macro}{\D@proginput}
+%	プログラムリスト形式で出力するための準備マクロ
+%	|\D@progset|を呼び出せ.
+%	空白文字記号 \verb*| |を出力するな.
+%	引数として与えられたファイルを出力せよ.
+%    \begin{macrocode}
+\newcommand{\D@proginput}[1]{\begingroup\D@progset\@vobeyspaces\input#1\endgroup}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\D@@proginput}
+%	プログラムリスト形式で出力するための準備マクロ
+%	|\D@progset|を呼び出せ.
+%	引数として与えられたファイルを出力せよ.
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\D@@proginput}[1]{\begingroup\D@progset\input#1\endgroup}
+%    \end{macrocode}
+%
+% \begin{macro}{\Dprogram}
+%	プログラムリスト形式で出力するための準備マクロ
+%	|\D@progset|を呼び出せ.
+%	空白文字記号 \verb*| |を出力するな.
+%	|@xDprogram| を呼び出し, 環境内の文字を出力せよ.
+%    \begin{macrocode}
+\def\Dprogram{\D@progset\@vobeyspaces\@xDprogram}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dprogram*}
+%	プログラムリスト形式で出力するための準備マクロ
+%	|\D@progset|を呼び出せ.
+%	|@xDprogram| を呼び出し, 環境内の文字を出力せよ.
+% \end{macro}
+%    \begin{macrocode}
+\@namedef{Dprogram*}{\D@progset\@xxDprogram}
+%    \end{macrocode}
+%
+% \begin{macro}{\D@progset}
+%	段落を始め, 適当な行間をあけよ. インデントは無し.
+%    \begin{macrocode}
+\def\D@progset{
+  \par\bigskip\noindent\endgraf
+%    \end{macrocode}
+%	文字の大きさ |\Dptogsize| とし, 
+%       行間隔を |\Dprogskip| とせよ.
+%	行番号の値保持するカウンタ |D@proglineno| に 
+%	|\D@proglinestart| の値を代入せよ.
+%    \begin{macrocode}
+  \Dprogsize \baselineskip=\Dprogskip 
+  \setcounter{D@proglineno}{\D@proglinestart}
+%    \end{macrocode}
+%	
+% 	空白は一定の大きさで出力せよ. 
+% 	フォントはタイプライター体を使え.
+%	 各行の終りに |\par|  を出力せよ.
+%    \begin{macrocode}
+  \frenchspacing \ttfamily \obeylines
+%    \end{macrocode}
+%	おまじない... 各行にカウンター値を出力せよ.
+%    \begin{macrocode}
+  \uncatcodespecials
+  \def\par{\leavevmode\endgraf}
+  \everypar{\Dproglinebox\stepcounter{D@proglineno}}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dproglineon}
+%	|\D@progline| を |\Dprogline| と同定義とせよ.
+%    \begin{macrocode}
+\def\Dproglineon{\let\D@progline\Dprogline}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dproglineoff}
+%	|\D@progline| を引数をとるだけのマクロと定義せよ.
+%    \begin{macrocode}
+\def\Dproglineoff{\def\D@progline##1{}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Dproglinestart}
+% |\D@proglinestart|  を 引数 |#1| を与えるものと定義せよ.
+%    \begin{macrocode}
+\def\Dproglinestart#1{\def\D@proglinestart{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+%  各行の先頭に配置するボックスを定義.
+%  このボックスに行番号を配置するものとする.
+% \begin{macro}{\Dproglinbox}
+%
+%    \begin{macrocode}
+\newcounter{D@proglineno}
+\def\Dproglinebox{%
+   \makebox[\Dproglinewidth][r]{\D@progline{\theD@proglineno}}
+   \hskip\Dproglinesep}
+\Dproglineon \Dproglinestart{1}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@xDprogram}
+% \begin{macro}{\@xxDprogram}
+%
+%    \begin{macrocode}
+\begingroup
+  \catcode `|=0 \catcode `[= 1 \catcode`]=2 
+  \catcode `\{=12 \catcode `\}=12  \catcode`\\=12 
+  |gdef|@xDprogram#1\end{Dprogram}[|@gobble#1|end[Dprogram]]
+  |gdef|@xxDprogram#1\end{Dprogram*}[|@gobble#1|end[Dprogram*]]
+|endgroup
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\uncatcodespecials}
+%    \begin{macrocode}
+\def\uncatcodespecials{\def\do##1{\catcode`##1=12 }\dospecials}
+%
+% %\def\endDprogram{\endtrivlist}
+% %@namedef{endDprogram*}{\endtrivlist}
+%
+%    \end{macrocode}
+% \end{macro}
+%
+% \iffalse
+%</D6prog-code>
+% \fi
+

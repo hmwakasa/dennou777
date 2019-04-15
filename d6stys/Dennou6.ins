@@ -1,0 +1,43 @@
+%
+%
+%	$Id: Dennou6.ins,v 1.4 2001/04/03 13:49:13 mym Exp $
+%
+\def\batchfile{Dennou6.ins}
+\input docstrip.tex
+\preamble
+	Dennou6 スタイルファイル.
+\endpreamble
+%\def\STYDIR{./STY/}
+\def\STYDIR{}
+		%※メモ:オプションにアンダーバーを使ってはならない.
+\generateFile{\STYDIR Dennou.drv}{f}{\from{./Dennou-drv.doc}{dennou-drv}}
+\generateFile{\STYDIR Dennou-dev.drv}
+				 {f}{\from{./Dennou-drv.doc}{dennou-drv-dev}}
+\generateFile{\STYDIR Dennou6.sty}{f}{\from{./Dennou6.doc}{Dennou6-code}}
+\generateFile{\STYDIR D6style.sty}{f}{\from{./D6style.doc}{D6style-code}}
+\generateFile{\STYDIR D6misc.sty}{f}{\from{./D6misc.doc}{D6misc-code}}
+\generateFile{\STYDIR D6version.sty}{f}{\from{./D6version.doc}{D6version-code}}
+\generateFile{\STYDIR D6math.sty}{f}{\from{./D6math.doc}{D6math-code}}
+\generateFile{\STYDIR D6float.sty}{f}{\from{./D6float.doc}{D6float-code}}
+\generateFile{\STYDIR D6prog.sty}{f}{\from{./D6prog.doc}{D6prog-code}}
+\generateFile{\STYDIR D6select.sty}{f}{\from{./D6select.doc}{D6select-code}}
+\generateFile{\STYDIR D6graphicx.sty}{f}{\from{./D6graphicx.doc}{D6graphicx-code}}
+\generateFile{\STYDIR D6comment.sty}{f}{\from{./D6comment.doc}{D6comment-code}}
+\Msg{************************************************************}
+\Msg{ I'm now trying to generate following files ...}
+\Msg{}
+\Msg{   Dennou.drv}
+\Msg{   Dennoudev.drv}
+\Msg{}
+\Msg{	Dennou6.sty}
+\Msg{	D6style.sty}
+\Msg{	D6misc.sty}
+\Msg{	D6version.sty}
+\Msg{	D6math.sty}
+\Msg{	D6float.sty}
+\Msg{	D6prog.sty}
+\Msg{	D6select.sty}
+\Msg{	D6graphicx.sty}
+\Msg{	D6comment.sty}
+\Msg{************************************************************}
+

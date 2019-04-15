@@ -1,0 +1,624 @@
+% \iffalse
+%%
+%%	$Id: D6style.doc,v 1.8 2001/05/22 16:12:44 odakker Exp $
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%%
+%%   D6prog.sty で定義しているコマンド, パラメタは以下の通り.
+%%
+%%
+%%      dstyle.sty
+%%
+%% <コマンド>
+%%   \pagestyle{Dheadings}
+%%  \pagestyle{DAheadings} 
+%%  \pagestyle{Dmyheadings}
+%%  \pagestyle{DAmyheadings} 
+%%  \pagestyle{Dtop}
+%%  \Dchapter[index-name]{chapter-name}
+%%  \Dchapter*[index-name]{chapter-name}
+%%  \Dchapterhead
+%%  \Dinclude{file-name}
+%%  \Dinput{file-name}
+%%  \Dtitle[header-title]{title}
+%%  \Dauthor[footer-author]{author}
+%%  \Ddate[footer-date]{date}
+%%  \Dpath{path-name}
+%%  \Dfile{file-name}
+%%  \Dfinp{input-file-name}
+%%
+%%  <パラメタ>
+%%
+%%  \Dtitlesty
+%%  \Dauthorsty
+%%  \Ddatesty
+%%
+%%  \pagestyle{Dheadings}    \pagestyle{DAheadings} 
+%%  \pagestyle{Dmyheadings}  \pagestyle{DAmyheadings} 
+%%
+% \fi
+% \changes{dennou5 v1.0}{1992/04/21}{Dstyle}
+% \changes{dennou6 v0.0}{2001/02/14}{D6style:doc 化 M. Yamada}
+%
+% \section{D6style.sty}
+% \label{texsty.D6style}
+%
+% \subsection{概要}
+%
+%
+%
+% \begin{Dlist}[{\tt DAmyheadings}]
+%  \item[{\tt Dheadings}]    電脳標準スタイル.
+%                          章のタイトル等がヘッダーに入る.
+%  \item[{\tt Dmyheadings}]  ヘッダーの情報をマニュアルで指定する形式.
+%  \item[{\tt DAheadings}]   {\tt Dheadings}と同様だが,
+%                          章のはじめのページにもヘッダー・フッターを入れる.
+%  \item[{\tt DAmyheadings}] {\tt Dheadings}と同様だが,
+%                           章のはじめのページにもヘッダー・フッターを入れる.
+%  \item[{\tt Dtop}]         ページ番号をヘッダーに入れたシンプルな書式.
+% \end{Dlist}
+% 電脳標準ページスタイルの形式は,
+% 
+% \begin{enumerate}
+%  \item 片面印刷処理の場合, もしくは両面印刷処理の場合の右ページ
+%      \footnote{スタイルオプションとして{\tt twopage}を
+%                指定した場合は両面印刷処理となる.
+%                また, {\tt jbook}スタイルを選択した場合は
+%                デフォルトで両面印刷処理である.}
+%
+% \begin{verbatim}
+%      タイトル                                右サブタイトル  ページ
+%      ______________________________________________________________
+%
+%                                 内容
+%      ______________________________________________________________
+%
+%      パス名 ファイル名 ( 取り込みファイル名 )         日付 ( 著者 )
+% \end{verbatim}
+%
+% \item 両面印刷処理の場合の左ページ
+%
+% \begin{verbatim}
+%       ページ  左サブタイトル                               タイトル
+%      ______________________________________________________________
+%
+%                                 内容
+%      ______________________________________________________________
+% 
+%       日付 ( 著者 )         パス名 ファイル名 ( 取り込みファイル名 )
+% \end{verbatim}
+% \end{enumerate}
+% \vspace{1em}
+%
+% これらのヘッダー, フッターに入れる情報は,
+% \verb!\Dtitle!, \verb!\Dauthor!, \verb!\Ddate!,
+% \verb!\Dpath!, \verb!\Dfile!, \verb!\Dfinc!
+% で指定する.
+% \vspace{1em}
+%
+% さらに, {\tt Dmyheadings}, {\tt DAmyheadings}では,
+% \verb!\markright!, \verb!\markboth!コマンドが有効となる.
+% また,  {\tt Dheadings}, {\tt DAheadings}では,
+% 章, 節の名前がヘッダーのサブタイトルに設定される.
+% \vspace{1em}
+%
+% \verb!\Dinclude!, \verb!\Dinput!を用いると,
+% それぞれ, \verb!\include!, \verb!\input!による
+% ファイルの取り込みがなされ,
+% 各々フッターのファイル名, 取り込みファイル名が設定される.
+%
+%
+% \subsection{Dheadingsページスタイル}
+% % \label{texsty.Dstyle.Dheadings}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     電脳標準ページスタイルを指定する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\pagestyle{Dheadings}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item 左右のサブタイトルは用いるスタイルにしたがって
+%           次の様に設定される. \\
+%           \begin{tabular}{lll} \hline
+%                                 & (j)book, (j)report & (j)article \\ \hline
+%            片面の右サブタイトル & 章見出し & セクション見出し \\ \hline
+%            両面の左サブタイトル & 章見出し & セクション見出し \\ \hline
+%            両面の右サブタイトル & セクション見出し &
+%                                          サブセクション見出し \\ \hline
+%           \end{tabular}
+%     \item 章のタイトルなどのページにも
+%           ヘッダーを出すには, \verb!\pagestyle{DAheadings}!
+%           を用いる.
+%   \end{enumerate}
+% \end{enumerate}
+%
+% 
+% \subsection{Dmyheadingsページスタイル}
+% % \label{texsty.Dstyle.Dmyheadings}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%    電脳標準ページスタイルを指定する.
+%    サブタイトルはマニュアルで設定する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\pagestyle{Dmyheadings}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%      なし.
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%     \item 左右のサブタイトルは,
+%           \verb!\markboth!, \verb!\markright! によって指定できる.
+%           \begin{verbatim}
+%           \markboth{左サブタイトル}{右サブタイトル}
+%           \markright{右サブタイトル}
+%           \end{verbatim}
+%           これらの引数は動く引数であるので注意が必要である.
+%     \item 章のタイトルなどのページにも
+%           ヘッダーを出すには \verb!\pagestyle{DAmyheadings}!
+%           を用いる.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsection{Dtopページスタイル}
+% % \label{texsty.Dstyle.Dtop}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     ページ番号を上に打つ簡単なページスタイルを指定する.
+%  \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\pagestyle{Dtop}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     なし.
+%   \end{quote}
+% \end{enumerate}
+%
+% \subsection{Dtitle}
+% % \label{texsty.Dstyle.Dtitle}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     ヘッダに表示するタイトルを指定する.
+%     あわせて, \verb!\maketitle!で書かれるタイトルも指定する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dtitle{!{\em title\/}\verb!}! \\
+%        \verb!\Dtitle[!{\em header-title\/}\verb!]{!{\em title\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%    \begin{tabular}{lp{11cm}}
+%       {\em header-title\/}   & ヘッダに表示するタイトル.
+%            省略された場合, {\em title\/}が使われる. \\
+%       {\em title\/}          & \verb!\maketitle! で使われるタイトル.
+%     \end{tabular}
+%   \end{quote}
+% \end{enumerate}
+%
+%
+% \subsection{Dauthor}
+% % \label{texsty.Dstyle.Dauthor}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     フッタに表示する著者名を指定する.
+%     あわせて, \verb!\maketitle!で書かれる著者名も指定する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dauthor{!{\em author\/}\verb!}! \\
+%        \verb!\Dauthor[!{\em header-author\/}\verb!]{!{\em author\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em header-author\/}   & フッタに表示する著者名.
+%            省略された場合, {\em author\/}が使われる. \\
+%       {\em author\/}          & \verb!\maketitle! で使われる著者名.
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%   \item フッタに表示するべき著者名が空の場合(初期設定)には
+%         その周りの括弧は書かれない.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsection{Ddate}
+% % \label{texsty.Dstyle.Ddate}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     フッタに表示する日付を指定する.
+%     あわせて, \verb!\maketitle!で書かれる日付も指定する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Ddate{!{\em date\/}\verb!}! \\
+%        \verb!\Ddate[!{\em header-date\/}\verb!]{!{\em date\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em header-date\/}   & フッタに表示する日付.
+%            省略された場合, {\em date\/}が使われる. \\
+%       {\em date\/}          & \verb!\maketitle! で使われる日付.
+%     \end{tabular}
+%   \end{quote}
+% \end{enumerate}
+%
+%
+% \subsection{Dpath, Dfile, Dfinp}
+% % \label{texsty.Dstyle.Dpath}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     フッタに表示するパス名, ファイル名, 取り込みファイル名
+%     を指定する.
+%  \end{quote}
+%  \item 使用方法
+%   \begin{quote}
+%        \verb!\Dpath{!{\em path-neme\/}\verb!}! \\
+%       \verb!\Dfile{!{\em file-neme\/}\verb!}! \\
+%       \verb!\Dfinp{!{\em input-file-neme\/}\verb!}!
+%   \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%      {\em path-name\/}   & フッターに表示するパス名 \\
+%      {\em file-name\/}   & フッターに表示するファイル名 \\
+%      {\em input-file-name\/} & フッターに表示する取り込みファイル名 \\
+%    \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%   \item ファイル名は\verb!\Dinclude!,
+%         取り込みファイル名は\verb!\Dinput! によってもセットされる.
+%   \item 取り込みファイル名が空の場合(初期設定)には
+%         その周りの括弧は書かれない.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsection{Dinclude, Dinput}
+% % \label{texsty.Dinclude}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     各々, フッタに表示するファイル名, 取り込みファイル名を設定し,
+%     \verb!\include!, \verb!\input! によるファイルの取り込みを行う.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dinclude{!{\em file-name\/}\verb!}! \\
+%        \verb!\Dinput{!{\em input-file-name\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em file-name\/}   & \verb!\inlude!で取り込むファイル名 \\
+%       {\em input-file-name\/} & \verb!\input!で取り込む取り込みファイル名 \\
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%   \item \verb!\Dinclude!(\verb!\include!)では,
+%         改ページが行われる.
+%         また, 通常の\verb!\include!と同様,
+%         \verb!\includeonly!による部分コンパイルが可能である.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsection{Dchapter}
+% % \label{texsty.Dchapter}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     章の見出し, 番号等を記憶する.
+%   \end{quote}
+%   \item 使用方法
+%    \begin{quote}
+%        \verb!\Dchapter{!{\em heading\/}\verb!}! \\
+%        \verb!\Dchapter[!{\em toc-entry\/}\verb!]{!{\em heading\/}\verb!}!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     \begin{tabular}{lp{11cm}}
+%       {\em heading\/}   & 章の見出しに使用される文字列 \\
+%       {\em toc-entry\/} & 目次の項目, ページヘッダーの柱として使用する
+%                           文字列. 省略時は {\em heading\/}引数で代用する.
+%     \end{tabular}
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%   \item 章番号の無い章を作成するには,
+%         \verb!\Dchapter*! コマンドを用いる.
+%         \verb!\chapter*! と違って,
+%         柱の変更と目次の項目作成が行われる.
+%   \item 章の見出しの出力は次の\verb!\Dchapterhead! コマンドによって
+%         行われる.
+%   \item {\tt (j)article}スタイルでは無視される.
+%   \item \verb!\Dchapter!, \verb!\Dchapterhead! は, 主として
+%         分割したファイルを\verb!\Dinclude! によって読み込む
+%         場合の便宜のために用いられる.
+% 
+%         ある章(あるいはその一部)を構成するファイルを取り込む時,
+%          主ファイルを,
+%
+%         \begin{verbatim}
+%         \Dchapter{はじめに}
+%         \Dinclude{intro}
+%         \Dinclude{intro2}
+%         \Dchapter{おつぎに}
+%         \Dinclude{future}
+%         \end{verbatim}
+%
+%         のようにして, 取り込まれるファイル(この場合{\tt intro.tex})を
+% 
+%         \begin{verbatim}
+%         \Dchapterhead
+%         \end{verbatim}
+%
+%         ではじめておくと, 通常のように処理できる.
+%         こうしておくと, 章の構成が主ファイルから明瞭となり,
+%         しかも\verb!\includeonly! 機能を用いて
+%         {\tt intro.tex}をコンパイルしない設定にした場合でも
+%         不都合が起こらない.
+%
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+% \subsection{Dchapterhead}
+% % \label{texsty.Dchapterhead}
+% \begin{enumerate}
+%   \item 機能
+%   \begin{quote}
+%     章の見出しを出力する.
+%   \end{quote}
+%   \item 使用方法
+%   \begin{quote}
+%        \verb!\Dchapterhead!
+%    \end{quote}
+%   \item 引数
+%   \begin{quote}
+%     なし.
+%   \end{quote}
+%   \item 備考
+%   \begin{enumerate}
+%   \item あらかじめ, \verb!\Dchapter! コマンドで
+%         章の見出し名が設定されている必要がある.
+%   \item {\tt jarticle}スタイルでは無視される.
+%   \end{enumerate}
+% \end{enumerate}
+%
+%
+%
+% \StopEventually{}
+%
+% \iffalse
+%<*D6style-code>
+% \fi
+%
+% \subsection{D6style.sty コード}
+%
+%
+%    \begin{macrocode} 
+\newdimen\Dheadrulewidth
+\newdimen\Dfootrulewidth
+\newdimen\Dheadwidth
+%
+\newif\ifDfoot \Dfoottrue
+\def\Dnofoot{\Dfootfalse}
+\def\Dfoot{\Dfoottrue}
+%
+\def\@Dfhead#1#2#3#4#5{
+\hbox{#1}\hbox to\Dheadwidth{\vbox{
+\hbox{\rlap{\makebox[\Dheadwidth][l]{\hbox{#2}\strut}}\hfill
+\makebox[\Dheadwidth]{\hbox{#3}\strut}\hfill
+\llap{\makebox[\Dheadwidth][r]{\hbox{#4}\strut}}}\Dheadrule}}\hbox{#5}}%
+%
+\def\@Dffoot#1#2#3#4#5{\ifDfoot
+\hbox{#1}\hbox to\Dheadwidth{\vbox{\Dfootrule
+\hbox{\rlap{\makebox[\Dheadwidth][l]{\hbox{#2}\strut}}\hfill
+\makebox[\Dheadwidth]{\hbox{#3}\strut}\hfill
+\llap{\makebox[\Dheadwidth][r]{\hbox{#4}\strut}}}}}\hbox{#5}
+\fi}
+%
+%
+\def\Dheadrule{\hrule\@height\Dheadrulewidth\@width\Dheadwidth 
+\vskip-\Dheadrulewidth}
+%
+%
+\def\Dfootrule{\vskip-\Dfootrulewidth
+\hrule\@width\Dheadwidth\@height\Dfootrulewidth}
+%
+\def\ps@Dheadings{\ps@Dhead  \let\@mkboth\markboth}
+\def\ps@DAheadings{\ps@Dhead \let\ps@jpl@in\ps@Dhead
+                             \let\@mkboth\markboth}
+%
+\def\ps@Dhead{\ps@Dmyhead %
+  \@ifundefined{chapter}%
+  {\def\sectionmark##1{%
+       \markboth{\ifnum \c@secnumdepth >\@ne 
+                 \thesection\hskip 1em \fi##1}
+                {\ifnum \c@secnumdepth >\@ne 
+                 \thesection\hskip 1em \fi##1}}
+  \let\firstmark\botmark}
+  {\if@twoside
+   \def\chaptermark##1{%
+        {\markboth{\ifnum \c@secnumdepth >\m@ne 
+                \@chapapp\thechapter{} \hskip 1em \fi##1}{}}}
+   \def\sectionmark##1{%
+   \markright{\ifnum \c@secnumdepth >\@ne 
+               \thesection\hskip 1em \fi##1}}
+   \else
+   \def\chaptermark##1{%
+        \markright{\ifnum \c@secnumdepth >\m@ne 
+                \@chapapp\thechapter{} \hskip 1em \fi##1}{}}
+   \fi
+   \let\firstmark\botmark}}
+%
+\def\ps@Dmyheadings{\ps@Dmyhead  \let\@mkboth\@gobbletwo}
+\def\ps@DAmyheadings{\ps@Dmyhead \let\ps@jpl@in\ps@Dmyhead
+                                 \let\@mkboth\@gobbletwo}
+\def\ps@Dmyhead{%
+   \def\@oddhead{\@Dfhead{\relax}{\bf\D@title}{}
+                         {\bf\rightmark\hskip 2em \hfill\thepage}{\hss}}
+   \def\@oddfoot{\@Dffoot{\relax}{\footnotesize\D@path\D@file%
+                          \ifx\D@finp\@empty\else (\D@finp)\fi}{}
+                         {\footnotesize\D@date
+                          \ifx\D@author\@empty\else (\D@author)\fi}{\hss}}
+   \def\@evenhead{\@Dfhead{\hss}{\bf\thepage \hskip 2em \D@title}{}
+                          {\bf\leftmark}{\relax}}
+   \def\@evenfoot{\@Dffoot{\hss}{\footnotesize\D@date
+                          \ifx\D@author\@empty\else (\D@author)\fi}{}
+                          {\footnotesize\D@path\D@file%
+                          \ifx\D@finp\@empty\else (\D@finp)\fi}{\relax}}
+   \def\sectionmark##1{}
+   \def\chaptermark##1{}}
+%
+%  \pagestyle{Dtop}
+%
+\def\ps@Dtop{\let\@mkboth\@gobbletwo%
+     \def\@oddhead{\rm\hfil--\ \thepage\ --\hfil}\def\@oddfoot{}%
+     \let\@evenhead\@oddhead\def\@evenfoot{}}
+%
+%     replacement section defs of jarticle
+%
+\def\section{\@startsection {section}{1}{\z@}
+  {3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}{\Large\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}
+  {3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}{\large\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}
+  {3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+% 
+\def\DchapterS#1{\chapter*{#1}\@mkboth{#1}{#1}%
+                 \addcontentsline{toc}{chapter}{#1}}
+%
+\newif\ifD@chapnum
+%
+\def\Dchapter{%
+ \clearpage \thispagestyle{plain} \global\@topnum\z@
+ \@afterindenttrue
+ \@ifstar{\@dblarg{\D@schapter}}{\@dblarg{\D@hchapter}}}
+%
+\def\D@hchapter[#1]#2{%
+\ifnum \c@secnumdepth >\m@ne
+  \refstepcounter{chapter}
+  \typeout{\@chapapp\thechapter{}.}
+\fi
+\D@chapnumtrue\chaptermark{#1}
+\def\D@chapterltitle{#1}\def\D@chaptertitle{#2}}
+%
+\def\D@schapter[#1]#2{%
+\D@chapnumfalse\@mkboth{#1}{#1}
+\def\D@chapterltitle{#1}\def\D@chaptertitle{#2}}
+%
+\def\D@chaptertitle{}
+\def\D@chapterltitle{}
+%
+\def\Dchapterhead{
+\@ifundefined{chapter}
+{\typeout{Sorry, you cannot use 'Dchapterhead in article style'}}
+{\ifD@chapnum\D@hchapterhead\else\D@schapterhead\fi}}
+%
+\def\D@hchapterhead{%
+\ifnum \c@secnumdepth >\m@ne
+  \addcontentsline{toc}{chapter}
+    {\protect\numberline{\thechapter}\D@chapterltitle}
+\else \addcontentsline{toc}{chapter}{\D@chapterltitle} \fi
+\addtocontents{lof}{\protect\addvspace{10pt}}
+\addtocontents{lot}{\protect\addvspace{10pt}}
+\if@twocolumn
+  \@topnewpage[\@makechapterhead{\D@chaptertitle}] 
+%\else \@makechapterhead{\D@chaptertitle}
+\else \D@makechapterhead{\D@chaptertitle}
+  \@afterheading 
+\fi} 
+%
+\def\D@schapterhead{%
+ \addcontentsline{toc}{chapter}{\D@chapterltitle}
+ \if@twocolumn \@topnewpage[\@makeschapterhead{\D@chaptertitle}]
+ \else \@makeschapterhead{\D@chaptertitle} 
+ \@afterheading\fi}
+%
+%
+\newcommand{\D@chapapp}{\prechaptername}
+\newcommand{\D@chappos}{\postchaptername}
+%
+\def\D@makechapterhead#1{\hbox{}%
+  \vskip2\Cvs
+  {\parindent\z@
+   \raggedright
+   \reset@font\huge\bfseries
+   \ifnum \c@secnumdepth >\m@ne
+     \setlength\@tempdima{\linewidth}%
+     \setbox\z@\hbox{\D@chapapp\thechapter\D@chappos\hskip1zw}%
+     \addtolength\@tempdima{-\wd\z@}%
+     \unhbox\z@\nobreak
+     \vtop{\hsize\@tempdima#1}%
+   \fi}\vskip3\Cvs}
+%
+%   include file  \Dinclude{file-name}, \Dinput{file-name}
+%
+\def\Dinclude#1{\gdef\D@file{#1.tex} \gdef\D@finp{} \include{#1}}
+\def\Dinput#1{\gdef\D@finp{#1.tex} \input{#1}}
+%
+%   titles        
+%
+\def\Dtitlesty{\Huge\bf}
+\def\Dauthorsty{\Large\bf}
+\def\Ddatesty{\LARGE\bf}
+%
+\def\Dtitle{\@dblarg{\@Dtitle}}
+\def\Dauthor{\@dblarg{\@Dauthor}}
+\def\Ddate{\@dblarg{\@Ddate}}
+\def\@Dtitle[#1]#2{\gdef\D@title{#1}\gdef\@title{\Dtitlesty #2}}
+\def\@Dauthor[#1]#2{\gdef\D@author{#1}\gdef\@author{\Dauthorsty #2}}
+\def\@Ddate[#1]#2{\gdef\D@date{#1}\gdef\@date{\Ddatesty #2}}
+\def\Dpath#1{\gdef\D@path{#1}}
+\def\Dfile#1{\gdef\D@file{#1}}
+\def\Dfinp#1{\gdef\D@finp{#1}}
+\def\D@title{}
+\def\D@author{}
+\@ifundefined{Dtoday}{\def\Dtoday{\today}}{}
+\def\D@date{\Dtoday}
+\def\D@path{}
+\def\D@file{\jobname .tex}
+\def\D@finp{}
+%
+%  style length
+%
+\setlength{\Dheadrulewidth}{0.4pt}
+\setlength{\Dfootrulewidth}{0.4pt}
+\setlength{\Dheadwidth}{\textwidth}
+\addtolength{\Dheadwidth}{-3pt}
+%
+\addtolength{\headheight}{1ex}
+\addtolength{\topmargin}{-1ex}
+%    \end{macrocode} 
+% \iffalse
+%</D6style-code>
+% \fi

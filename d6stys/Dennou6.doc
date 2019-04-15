@@ -1,0 +1,197 @@
+% \iffalse
+%%       Dennou6.doc 
+%%       Doc-Source file to use with LaTeX2e
+%%       Copyright (c) 2001 Manabu YAMADA, all rights reserved.
+%%
+%%	$Id: Dennou6.doc,v 1.14 2001/04/03 09:50:31 mym Exp $
+%%
+%%
+% \fi
+%
+% \MakeShortVerb{\|}
+%
+%               
+% \section{Dennou6.sty}
+%
+% \subsection{概要}
+%
+% Dennou6 \LaTeX スタイルは,
+% \LaTeX を用いた, マニュアル, 論文等の作成に便利な,
+% マクロ定義スタイルファイル集である
+% \footnote{なお, 開発に使用した \TeX のバージョンは 3.14159,  
+%	p\LaTeX2e は{\tt 1999/08/09} 版である.}
+% 電脳ライブラリのマニュアルもこのマクロを用いて書かれている.
+%
+%
+% \subsection{構成}
+% \label{Dennou6-const}
+%
+% Dennou6 \LaTeX は, 以下に挙げるマクロ群を提供する.
+%
+% \begin{Dlist}
+%  \item[]  ページスタイル等の指定
+%  \DescribeMacro{D6style.sty} 
+%
+%  \item[]   ラベル参照, いくつかの便利な環境
+%  \DescribeMacro{D6misc.sty} 
+%
+%  \item[]   数式表現マクロ
+%  \DescribeMacro{D6math.sty}
+%
+%  \item[]  図表環境パラメータの再定義
+%  \DescribeMacro{D6float.sty}
+%
+%  \item[]   プログラムリストの挿入
+%  \DescribeMacro{D6prog.sty} 
+%
+%  \item[] 部分選択してフォーマットする
+%  \DescribeMacro{D6select.sty}
+%
+%  \item[]   PSファイルを取り込むための環境を提供
+%  \DescribeMacro{D6graphicx.sty} 
+%
+%  \item[] ヘッダフッタをなくしてページ全体を本文に使う
+%  \DescribeMacro{D6fulpage.sty}
+%
+%  \item[] ファイルの一部をコメントとして扱う
+%  \DescribeMacro{D6comment.sty}
+%  \end{Dlist}
+%
+% \DescribeMacro{Dennou6.sty}
+% また, 以上のうちで, {\tt D6style.sty}から{\tt D6epsf.sty}までを
+% まとめたものとして,
+% {\tt Dennou6.sty}を用いることができる.
+% {\tt Dennou6.sty}では, さらに
+% \verb!\Dnoparindent!が実行される({\tt D6misc.sty}を参照)
+% また,  \verb!\Dnewselect{J}!が実行され,
+% {\tt jarticle}等の指定がある場合には
+% \verb!\DonJ!が,
+% {\tt article}等場合には
+% \verb!\DoffJ!が実行される({\tt D6select.sty}を参照).
+%
+%
+%\subsection{使用法}
+%
+% {\tt Dennou6.ins} を \LaTeX で処理すると
+% {\tt doc} ファイルからスタイルファイル(\verb!*.sty!)が生成される.
+% これらスタイルファイル群を \LaTeX の標準スタイルファイルを置くディレクトリ
+% または環境変数{\tt TEXINPUTS}の示すディレクトリに入れる
+% \footnote{{\tt Makefile} 中の {\tt TEXMF\_DIR} で指定し
+% {\tt make install}すればよい}.
+%
+% {\tt D6graphicx.sty}は \LaTeX の標準拡張パッケージである
+% {\tt graphicx} パッケージを利用している.
+% このパッケージが無い場合 CTAN (The Comprehensive TeX Archive Network) 
+% \footnote{日本国内では{\tt ftp.lab.kdd.co.jp, ftp.jaist.ac.jp,
+%	     ftp.riken.go.jp,ftp.u-aizu.ac.jp}}
+% {\tt :macros/latex/packages/graphics}等から入手すること
+% \footnote{{\tt graphicx} パッケージは {\tt graphics}パッケージの一部である.}.
+%
+%
+% 使用に際しては,
+% \begin{verbatim}
+%   \documentclass[a4paper]{jreport}
+%   \usepackage{Dennou6}
+% \end{verbatim}
+% あるいは
+% \begin{verbatim}
+%   \documentclass[a4paper]{jreport}
+%   \usepackage{D6math,D6graphicx}
+%   \Depsconfig
+% \end{verbatim}
+% のように, 用いるスタイルファイル名({\tt .sty}を除いたもの)を
+% |\usepackage{}| を用いて取り込めばよい. 
+% {\tt graphicx} パッケージを呼び出す際に指定するデフォルトの
+% デバイスドライバば {\tt dvips} である.
+% 他のデバイスドライバを使用したい場合は
+%  |\usepackage[dvipdf]{Dennou6}| あるいは  |\usepackage[dvipdf]{D6graphicx}|
+% とオプション指定すれば良い.
+%
+%
+% \StopEventually{}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \iffalse
+%<*Dennou6-code>
+% \fi
+%
+% \subsection{Dennou6.sty コード}
+%
+%
+% \begin{macro}{Dennou6.sty}
+% 本節では Dennou6.sty のコードを解説する.
+% 先ず, \ref{Dennou6-const}節に挙げた
+% {\tt D6style.sty}から{\tt D6epsf.sty}までの
+% 各スタイルファイルを取り込む.
+% \end{macro}
+%    \begin{macrocode} 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Dennou6}[2001/04/03 地球流体電脳倶楽部 LaTeX2e 用マクロ集 var.6]
+
+\usepackage{D6style}
+\usepackage{D6misc}
+\usepackage{D6version}
+\usepackage{D6math}
+\usepackage{D6float}
+\usepackage{D6prog}
+\usepackage{D6select}
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{D6graphicx}} 
+\ProcessOptions\relax
+\usepackage{D6graphicx}
+%    \end{macrocode} 
+%
+% \iffalse
+% 以下 DOCSTRIP で削除されないよう, 1スペースを開けておくこと.
+% \fi
+%
+% 以下は必要に応じ, コメントアウトすべき行.
+%    \begin{macrocode} 
+ %\input{Depspic.sty} % not implemented in standard
+ %\input{Dwrite.sty}
+ %\input{Dfigs.sty}
+%    \end{macrocode} 
+%
+% ページスタイルを |DAheadings| とする.
+%    \begin{macrocode} 
+\pagestyle{DAheadings}
+%    \end{macrocode} 
+% 段落開始時のインデントは無しとする.
+%    \begin{macrocode} 
+\Dnoparindent
+%    \end{macrocode} 
+%
+% 日本語/英語選択切替え用コマンドを定義.
+%    \begin{macrocode} 
+\Dnewselect{J}
+%    \end{macrocode} 
+%
+% \begin{macro}{Depsconfig}
+%  |\Depsconfig| を宣言し, デフォルトで PostScript ファイルを
+%  張り込めるようにする.
+% \end{macro}
+%    \begin{macrocode} 
+
+%\Depsconfig[dvips]
+
+%    \end{macrocode} 
+%
+% |\西暦| なるコントロール・シーケンスが定義されていない場合
+% |\DoffJ| を実行し, 定義されている場合 |\DonJ| と |\西暦| を実行し,
+% タイトル出力時の日付を「YYYY年MM月DD日」にする
+% 
+%    \begin{macrocode} 
+\@ifundefined{西暦}{\DoffJ}{\DonJ}
+%    \end{macrocode} 
+%
+% \iffalse
+% \@ifundefined{西暦}{\DoffJ}{\DonJ \西暦} がオリジナル. 
+% しかし .drv ファイルコンパイル時にエラーが出てしまうので一時しのぎ :-p
+%</Dennou6-code>
+% \fi
+
+
+
+
+
+
