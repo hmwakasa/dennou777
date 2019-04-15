@@ -1,4 +1,4 @@
-\documentclass[report,]{dennou777}
+\documentclass[book,]{dennou777}
 %\documentclass[report,]{jlreq}
 
 %%% テスト文書で使うパッケージ
@@ -13,15 +13,16 @@
 %%% ドキュメントクラスを切り替えながらデバクするために
 \makeatletter
 \ifx t\dsss@dsss@loaded
-	\Dtitle{ワークノート}{}
-	\Dauthor{ひとみ}{}
+	\Dtitle{dennou777.cls テスト文書}
+	\Dauthor{ひとみ}
 	\Ddate{\today}
-	\markright{ベンフォードの法則}
 \fi
 \makeatother
 
 %%% 以下テスト文書本体
 \begin{document}
+
+\maketitle
 
 この文書は、dennou777.cls のテスト文書である。
 
@@ -87,7 +88,7 @@ $k$は一様分布なので、$d=n$となる確率$\Pr[d=n]$は、
 $n\leq100$の範囲で、導かれた式と、実際の頻度とを比較する
 （表\ref{table}と図\ref{fig}）。
 
-\begin{table}
+\begin{table}[b]
 \caption{最上位の数字の頻度\label{table}}
 \centering
 \begin{tabular}{c|rr}
@@ -107,7 +108,7 @@ $9$&$5$&$4$\\
 \end{tabular}
 \end{table}
 
-\begin{figure}
+\begin{figure}[b]
 \centering
 \begin{tikzpicture}[x=.08\textwidth,y=.05\textwidth,yscale=20,domain=0:10]
 \draw[->](-1,0)--(10,0)node[right]{$x$};\draw(5,-0.05)node[below]{最上位に出現する数字};
@@ -128,6 +129,7 @@ $9$&$5$&$4$\\
 
 \section{Benford's law}
 今までの議論は自然界に出現する数値でも、経験則的に成り立つ。
+
 \begin{tcolorbox}[title={Benfordの法則}]
 自然界に出現する数値で、最上位に$n$が現れる確率は
 \[\log_{10}\left[\frac{n+1}{n}\right]\]

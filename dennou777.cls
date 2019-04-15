@@ -14,13 +14,37 @@
 \let\dsss@dsss@loaded=t
 
 %: d777helper
+% \dsss@helper@guessengine を読み込む。
+% 暗黙の空白トークン \dsss@space を作る。
 \RequirePackage{d777helper}
 
+%: \dsss@engine にエンジンの種別を格納
+%% オプションで指定された場合
+\DeclareOption{uplatex}{\let\dsss@engine=u}
+\DeclareOption{platex}{\let\dsss@engine=p}
+\DeclareOption{lualatex}{\let\dsss@engine=l}
+\ProcessOptions\relax
+%% 指定されなかった場合
+\ifx\dsss@engine\@undefined\relax
+	\dsss@helper@guessengine
+	\let\dsss@engine\dsss@result
+\fi
 
 %: jlreq を読み込む
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{jlreq}}
 \ProcessOptions\relax
 \LoadClassWithOptions{jlreq}
+
+%: \dsss@document@class にスタイルの種別を格納
+%% オプションで指定された場合
+\DeclareOption{book}{\let\dsss@document@class=b}
+\DeclareOption{report}{\let\dsss@document@class=r}
+\ProcessOptions\relax
+%% 指定されなかった場合
+\ifx\dsss@document@class\@undefined\relax
+	\let\dsss@document@class=a % article
+\fi
+
 
 %: dennou777 styles を読み込む
 \let\bf\bfseries % アカン（あかん）
@@ -31,7 +55,7 @@
 \DeclareOption{no_graphicx}{\let\dsss@option@no@graphicx=t}
 \ProcessOptions\relax
 \ifx\dsss@option@no@graphicx\@undefined\relax
-	\ifx l\jlreq@engine
+	\ifx l\dsss@engine
 	\else
 		\PassOptionsToPackage{dvipdfmx}{graphicx}
 		\PassOptionsToPackage{dvipdfmx}{xcolor}
@@ -39,23 +63,91 @@
 	\RequirePackage{graphicx,xcolor}
 \fi
 
+%: jlreq 依存なので、D6style 相当の機能はここに。
 
 %: 改ページしない \chapter
+% 本来の \chapter は \chapterwithpagebreak で利用可能。
 \ifx\chapter\@undefined\relax
 \else
 	\SaveHeading{chapter}{\chapterwithpagebreak}
 	\ModifyHeading{chapter}{pagebreak=nariyuki}
 \fi
 
-
 %: 章番号など
 \renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
 \renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
 \renewcommand{\theequation}{{\arabic{chapter}.\arabic{equation}}}
 \renewcommand{\thepage}{{\arabic{page}}} % 数字
-\renewcommand{\thepage}{{\roman{page}}} % ローマ数字
 \renewcommand{\thetable}{{\arabic{chapter}.\arabic{section}.\arabic{table}}}
 \renewcommand{\thefootnote}{{\arabic{footnote} )}}
 \renewcommand{\thefigure}{{\arabic{chapter}.\arabic{section}.\arabic{figure}}}
+% roman_nombre オプションで、ローマ数字のノンブル
+\DeclareOption{roman_nonbre}{\renewcommand{\thepage}{{\roman{page}}}}
+\ProcessOptions\relax
 
+%: ヘッダー、フッターのスタイル
+\let\dsss@style@title\relax
+\newcommand{\Dtitle}[1]{
+	\def\dsss@style@title{#1}
+	\title{#1}
+}
+\let\dsss@style@author\relax
+\newcommand{\Dauthor}[1]{
+	\def\dsss@style@author{#1}
+	\author{#1}
+}
+\let\dsss@style@date\today
+\let\dsss@style@date@bracketed\relax
+\newcommand{\Ddate}[1]{
+	\def\dsss@style@date{#1}
+	\def\dsss@style@date@bracketed{（#1）}
+	\date{#1}
+}
+\let\dsss@style@path\relax
+\newcommand{\Dpath}[1]{\def\dsss@style@path{#1}}
+\def\dsss@style@file{\jobname.tex}
+\newcommand{\Dfile}[1]{\def\dsss@style@file{#1}}
+\let\dsss@style@finp\relax \let\dsss@style@finp@bracketed\relax
+\newcommand{\Dfinp}[1]{\def\dsss@style@finp{#1}\def\dsss@style@date@bracketed{(#1)}}
+%: DAheadings
+\NewPageStyle{DAheadings}{
+	mark_format={_chapter={#1},_section={#1},_subsection={#1}},
+	odd_running_head={\dsss@style@title},
+	even_running_head={\dsss@style@title},
+	running_head_position=top-left,
+	nombre_position=top-right,
+	running_head_ii_position=top-right,
+	odd_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
+	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
+	running_head_iii_position=bottom-right,
+	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
+	nombre_ii_position=bottom-left,
+}
+% 文書クラスによって右サブタイトル、左サブタイトルを変える。
+\ifx a\dsss@document@class
+	\ModifyPageStyle{DAheadings}{
+		odd_running_head_ii=_section,
+		even_running_head_ii=_subsection,
+	}
+\else
+	\ModifyPageStyle{DAheadings}{
+		odd_running_head_ii=_chapter,
+		even_running_head_ii=_section,
+	}
+\fi
+%: Dmyheadings
+\NewPageStyle{Dmyheadings}{
+	mark_format={_chapter={#1},_section={#1},_subsection={#1}},
+	odd_running_head={\dsss@style@title},
+	even_running_head={\dsss@style@title},
+	running_head_position=top-left,
+	nombre_position=top-right,
+	running_head_ii_position=top-right,
+	odd_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
+	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
+	running_head_iii_position=bottom-right,
+	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
+	nombre_ii_position=bottom-left,
+}
 
+\pagestyle{DAheadings}

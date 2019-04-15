@@ -1,0 +1,130 @@
+﻿\documentclass[report,]{dennou777}
+\usepackage{amsmath}
+\usepackage{ascmac}
+\usepackage{times}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{graphicx}
+\pagestyle{Dmyheadings}
+
+\setlength{\parskip}{2ex}
+
+\setcounter{chapter}{1}
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{page}{1}
+\setcounter{equation}{0}
+
+
+\Dtitle{GFD ワークノート}{}
+\Dauthor{関口　太郎}{}
+\Ddate{2018/05/10}
+\markright{誤差の定義と蓄積}
+
+
+\begin{document}
+このノートは伊理正夫・藤野和建著「数値計算の常識」(以下, 伊理テキスト) の
+第 1 章を主に参考にしている. 
+
+\chapter*{誤差の定義と蓄積}
+\section{誤差の定義}
+量$x$ の測定を行う状況を想定する. $x$ の真の値 $a$ に見込まれる誤差が $\Delta a \ (>0)$ 
+であるというときには,
+% \begin{equation}
+%   x \in [a - \Delta a, a + \Delta a]
+% \end{equation}
+% すなわち,
+\begin{equation*}
+  a - \Delta a < x < a + \Delta a
+\end{equation*}
+であることを意味し,
+\begin{equation}
+  x = a \pm \Delta a
+\end{equation}
+と表記する
+\footnote{
+  開区間と閉区間の表記法は以下のとおりである. 
+  \begin{description}
+    \item [開区間] $(a,b)= \{ x | a < x < b \}$
+    \item [閉区間] $[a,b]= \{ x | a \le x \le b \}$
+    \item [左閉右開区間, 左閉半開区間] $[a,b)= \{ x | a \le x < b \}$
+    \item [左開右閉区間, 右閉半開区間] $(a,b]= \{ x | a < x \le b \}$
+  \end{description}
+}
+\footnote{
+	閉区間でも問題ないと考えられるが、伊理テキストに倣って開区間で表記している．
+}. この$\Delta a$を$x$の絶対誤差という. 
+ $x,y$ の関数として計算される量 $z = f(x,y)$ を
+考える. $y,z$ の真の値をそれぞれ $b,c$, 絶対誤差
+をそれぞれ $\Delta b, \Delta c$ と
+すると, 
+\begin{equation}
+  y = b \pm \Delta b \\
+  z = c \pm \Delta c 
+\end{equation}
+と表せる. ここで,
+\begin{equation}
+  c = f(a,b) 
+\end{equation}
+であり, $\Delta c$ の取りうる最大値は
+\begin{align}
+	(\text{誤差の大きさ})
+	&= \lvert f(a\pm \Delta a, b\pm \Delta b) - f(a,b) \rvert \notag\\
+	&= \left| \left( f(a,b) \pm \DP[][x=a,y=b]{f(x,y)}{x}\Delta a 
+	\pm \DP[][x=a,y=b]{f(x,y)}{y}\Delta b 
+	+ \cdots \right) - f(a,b) \right| \notag\\
+	&= \left| \pm \DP[][x=a,y=b]{f(x,y)}{x}\Delta a 
+	\pm \DP[][x=a,y=b]{f(x,y)}{y}\Delta b 
+	+ \cdots \right| \notag\\
+	&\simeq \left| \pm \DP[][x=a,y=b]{f(x,y)}{x}\Delta a 
+	\pm \DP[][x=a,y=b]{f(x,y)}{y}\Delta b \right| \notag\\
+	&\le \left| \DP[][x=a,y=b]{f(x,y)}{x} \right| \Delta a 
+	+ \left| \DP[][x=a,y=b]{f(x,y)}{y} \right| \Delta b \notag \\
+	\Deqlab{gosa}
+\end{align}
+と表すことができる
+\footnote{
+	この式は$2$次以上の項を考えると変数の符号などによって不等号が成り立たないこともある. 
+	しかし, $z$ の誤差は大体大雑把でいいので$4$行目程度に
+	見積もっている.
+}
+. ただし, $\Delta a, \Delta b, \Delta c$ はあまり
+大きくないと想定している
+\footnote{
+	$1$より小さい値.
+}. 
+
+\section*{誤差の蓄積}
+
+足し算と掛け算では誤差の蓄積の仕方が異なる. 
+$z = x + y$ または$z = x - y$ のとき, $z$ の誤差の最大値 $\Delta c$ は
+\begin{align}
+  \Delta c &= \left| \DP[][x=a,y=b]{f(x,y)}{x} \right|  \Delta a 
+  + \left| \DP[][x=a,y=b]{f(x,y)}{y} \right| \Delta b \notag \\
+  &= \Delta a + \Delta b
+\end{align}
+となる. つまり, 絶対誤差 $\Delta c$ は $x,y$ の
+絶対誤差 $\Delta a, \Delta b$ の和となる. 
+また, $z = xy$ のとき,
+\begin{align*}
+  \Delta c &= \left| \DP[][x=a,y=b]{f(x,y)}{x} \right| \Delta a 
+  + \left| \DP[][x=a,y=b]{f(x,y)}{y} \right| \Delta b \\
+  &= b \Delta a + a \Delta b 
+\end{align*}
+すなわち,
+\begin{equation}
+  \frac{\Delta c}{c} = \frac{\Delta a}{a} + \frac{\Delta b}{b}
+\end{equation}
+となり, $z$ の相対誤差
+\footnote{
+	相対誤差は測定値に対する絶対誤差の比である. 
+} 
+$\displaystyle\frac{\Delta c}{c}$ は $x,y$ の相対誤差 
+$\displaystyle\frac{\Delta a}{a}$, 
+$\displaystyle\frac{\Delta b}{b}$ の和となっていることがわかる. 
+
+\section*{参考文献}
+伊理正夫・藤野和建, 1985: 数値計算の常識, 共立出版
+\end{document}

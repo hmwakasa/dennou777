@@ -24,12 +24,12 @@
 
 \newcommand*{\dsss@helper@guessengine}{%
   \dsss@ifprimitive\directlua{%
-    \let\jlreq@result=l%
+    \let\dsss@result=l%
   }{%
     \dsss@ifprimitive\ucs{%
-      \let\jlreq@result=u%
+      \let\dsss@result=u%
     }{%
-      \let\jlreq@result=p%
+      \let\dsss@result=p%
     }%
   }%
 }
