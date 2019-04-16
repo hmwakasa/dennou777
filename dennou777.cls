@@ -106,9 +106,9 @@
 \let\dsss@style@date@bracketed\relax
 \newcommand{\Ddate}[1]{
 	\def\dsss@style@date{#1}
-	\def\dsss@style@date@bracketed{（#1）}
 	\date{#1}
 }
+\def\dsss@style@date@bracketed{（\dsss@style@date）}
 \let\dsss@style@path\relax
 \newcommand{\Dpath}[1]{\def\dsss@style@path{#1}}
 \def\dsss@style@file{\jobname.tex}
@@ -119,7 +119,7 @@
 \NewPageStyle{DAheadings}{
 	odd_running_head={\dsss@style@title},
 	even_running_head={\dsss@style@title},
-	running_head_font=\sffamily,
+	running_head_font=\footnotesize\gtfamily\sffamily,
 	running_head_position=top-left,
 	nombre_font=\bfseries,
 	nombre_position=top-right,
@@ -128,7 +128,7 @@
 	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
 	running_head_iii_position=bottom-right,
 	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
-	nombre_ii_font=\ttfamily,
+	nombre_ii_font=\footnotesize\ttfamily\mdseries,
 	nombre_ii_position=bottom-left,
 }
 % 文書クラスによって右サブタイトル、左サブタイトルを変える。
@@ -162,7 +162,7 @@
 		},
 	odd_running_head={\dsss@style@title},
 	even_running_head={\dsss@style@title},
-	running_head_font=\sffamily,
+	running_head_font=\footnotesize\gtfamily\sffamily,
 	running_head_position=top-left,
 	nombre_font=\bfseries,
 	nombre_position=top-right,
@@ -171,7 +171,7 @@
 	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
 	running_head_iii_position=bottom-right,
 	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
-	nombre_ii_font=\ttfamily\mdseries ,
+	nombre_ii_font=\footnotesize\ttfamily\mdseries,
 	nombre_ii_position=bottom-left,
 }
 % 文書クラスによって右サブタイトル、左サブタイトルを変える。
@@ -192,6 +192,7 @@
 		},
 	}
 \fi
+
 
 \pagestyle{DAheadings}
 

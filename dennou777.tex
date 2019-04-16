@@ -6,12 +6,143 @@
 %%       Auther: Hitomi-san (a.k.a. Carele Smith)
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[report]{dennou777}
+\documentclass[report,]{dennou777}
 
-\Dtitle{地球流体電脳倶楽部 \LaTeXe 用クラス version 7 (Nicole)\\dennou777.cls}
-\Dauthor{ひとみ}
+\usepackage{shortvrb,bxtexlogo}
+\usepackage[hidelinks,unicode=true]{hyperref}
+\usepackage{classico,newpxtext,newpxmath,beramono,listings}
+\MakeShortVerb{\|}
+\usepackage[jfm_yoko=jlreq,jfm_tate=jlreqv,hiragino-pron]{luatexja-preset}
+\renewcommand{\thefootnote}{\textasteriskcentered\arabic{footnote}}
+\lstset{
+	basicstyle=\ttfamily,
+	numbers=left,
+	breaklines=true,
+	breakatwhitespace=false,
+	frame=leftline,
+	backgroundcolor={\color[gray]{.85}},
+	numberstyle=\ttfamily\small,
+}
+
+\newcommand{\vseven}{Nicole}
+\newcommand{\textcode}[1]{{\ttfamily\mdseries #1}}
+
+\Dtitle{地球流体電脳倶楽部 \LaTeXe 用クラス version 7 (Nicole)\\|dennou777.cls|}
+\Dauthor{ひとみさん}
 \Ddate{\today}
 
 \begin{document}
+
 \maketitle
+
+{\noindent\hfill\bfseries\sffamily Dennou6.sty のマニュアルより\hfill}
+
+{\small Dennou6 \LaTeX スタイルは, \LaTeX を用いた, マニュアル, 論文等の作成に便利な,
+マクロ定義 スタイルファイル集である.}
+
+\hrulefill
+
+|dennou777.cls| version 7.0 (Nicole) は開発版であり、\emph{未完成です}。
+それゆえ、このドキュメントも未完成です。開発の協力は常に歓迎しています。
+GitHub リポジトリは、\url{https://github.com/Hitomi-San/dennou777} です。
+
+\tableofcontents
+
+\chapter{Dennou6.sty との相違点}
+
+はずはじめに、前身である |Dennnou6.sty| （以下 Version 6）との相違点を述べる。
+これは、|dennou777.cls| version 7.0 (Nicole) （以下\vseven）が開発段階であるため、
+\emph{|dennou6.sty| の利用者に積極的に利用してもらい}、不具合を取り除いたり、
+機能を追加したりするのを、迅速に行いたいためである。
+
+\vseven は、 Version 6 で提供されていた主なマクロがそのまま
+使えるように配慮されている（開発者から見て、使用が推奨できないマクロは除く）。
+したがって、以下に示すとおりにプリアンブルを書き換えるだけで、以前の \TeX ソース
+をコンパイルできるようになるはずである。
+
+不具合を発見したり、機能改修の要望があれば、是非 GitHub に issue として
+投げて頂きたい。
+
+\section{クラスファイルとして提供されるようになった}
+
+\vseven はクラスファイル (.cls) として提供される。これは、Version 6 の
+マクロ集が、全てスタイルファイル (.sty) として提供されていたことと対称的である。
+
+クラスファイルとして提供されるので、Version 6 を使っていた文書で
+\vseven を読み込むためには、|\documentclass| で |dennou777| を読み込み
+（必要に応じてクラスオプションも書き換え\footnote{\ref{classoption}節を参照すること。}）、
+|\usepackage{Dennou6}| を削除するだけで、基本的に動くはずである
+\footnote{従来プリアンブルに書かれていた、「章を変えるときに改ページをしない」ための
+コードなどがあると、エラーが発生する。なお、章見出しは成り行きで表示されるように、
+クラスファイル内で再定義してある}。
+
+|dennou777.cls| は jlreq \footnote{\url{https://github.com/abenori/jlreq}}
+をベースに開発している。したがって、\emph{以前の jreport.cls を読み込んで、
+|dennou6.sty| を読み込む方法とは、組版の結果が変わる}。
+
+\begin{figure}[t]
+\begin{lstlisting}[caption={最小のソース}]
+\documentclass{dennou777}
+\begin{document}
+Happy, \TeX ing は猫である。
+\end{document}
+\end{lstlisting}
+\end{figure}
+
+\subsection{クラスオプション\label{classoption}}
+
+先述の通り、jlreq をベースに開発しているので、jlreq に渡すことの
+できるオプションはすべて受け付ける。すなわち、jlreq のドキュメント
+\footnote{ターミナル上で |texdoc jlreq| を実行すると読むことができる。}
+を読んでもらいたいのだが、Version 6 から\vseven に移行するにあたって、
+特に必要そうなオプションを以下に挙げる。
+
+\begin{description}
+\item[paper]
+	|paper=a4| で紙面のサイズが A4 版になる。a4 以外にも、a0 から a10、
+	b0 から b10 などが指定できる。
+\item[jafontsize]
+	|jafontsize=12pt| で和文のフォントサイズが 12 pt になる。
+\item[report]
+	jreport 相当のクラスとなる。
+\item[book]
+	jbook 相当のクラスとなる。
+\end{description}
+
+すなわち、
+\[\mbox{\ttfamily \textbackslash documentclass[a4j,12pt]\{jreport\}}\]
+という宣言があるファイルは、その宣言を
+\[\mbox{\ttfamily \textbackslash documentclass[paper=a4,jfontsize=12pt,report]\{dennou777\}}\]
+と書き換えることによって（そして |\usepackage{Dennou6}| を削除すると）、
+\vseven を適用させることができる。
+
+\subsection{\LuaLaTeX や\upLaTeX に対応した}
+
+jlreq が\LuaLaTeX や\upLaTeX に対応しているように、
+\vseven は\LuaLaTeX や\upLaTeX に対応している。
+.tex ソースを一切書き換えることなく、\pLaTeX、\upLaTeX、\LuaLaTeX のいずれでも
+処理ができる文書を作ることができる。なお、\pLaTeX や\upLaTeX で処理をする場合、
+dvi ウェアにはdvipdfmx を用いる前提となっている。
+
+\section{graphicx と xcolor の自動読み込み}
+
+ソースを書き換えずに3つのエンジンで処理が可能になるようにするため、\vseven は処理を
+するエンジンを自動判定して、\pLaTeX か\upLaTeX で処理をしていると判断した場合、
+dvipdfmx オプションをつけて graphicx パッケージと xcolor パッケージを読み込む。
+したがって、\vseven のオプションには（例え dvi ウェアに dvipdfmx を使用すると
+しても）、\emph{|dvipdfmx| オプションをつける必要はない}\footnote{むしろ、|dvipdfmx|
+オプションをつけると、その文書を\LuaLaTeX で処理すると（当然だが）正常に処理ができない。}。
+
+\section{削除した機能}
+
+Version 6 が提供していた機能のうち、outdated な機能は削除した。
+
+\subsection{D6graphicx}
+
+今どき PostScript ファイルを直接埋め込む需要がないだろうし、内部で graphicx を
+（変なオプションをつけて）読み込んでいるので、すべて削除した。
+
+D6graphicx に相当する機能は、graphicx のマクロを直接利用したり、\TikZ を利用する
+などして扱うべきである。
+
 \end{document}
