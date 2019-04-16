@@ -26,7 +26,6 @@
 \ProcessOptions\relax
 %% 指定されなかった場合
 \ifx\dsss@engine\@undefined\relax
-	\dsss@helper@guessengine
 	\let\dsss@engine\dsss@result
 \fi
 
@@ -45,13 +44,15 @@
 	\let\dsss@document@class=a % article
 \fi
 
-
 %: dennou777 styles を読み込む
 \let\bf\bfseries % アカン（あかん）
 \RequirePackage{dennou777}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %: LuaLaTeX 以外なら graphicx と colorx に dvipdfmx オプションを投げる。
 %  no_graphicx オプションがあれば、何も処理をしない。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \DeclareOption{no_graphicx}{\let\dsss@option@no@graphicx=t}
 \ProcessOptions\relax
 \ifx\dsss@option@no@graphicx\@undefined\relax
@@ -63,29 +64,34 @@
 	\RequirePackage{graphicx,xcolor}
 \fi
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %: jlreq 依存なので、D6style 相当の機能はここに。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%: 改ページしない \chapter
-% 本来の \chapter は \chapterwithpagebreak で利用可能。
-\ifx\chapter\@undefined\relax
-\else
+%: article 以外で変更。
+\ifx a\dsss@document@class\else
+	%: 改ページしない \chapter
+	% 本来の \chapter は \chapterwithpagebreak で利用可能。
 	\SaveHeading{chapter}{\chapterwithpagebreak}
 	\ModifyHeading{chapter}{pagebreak=nariyuki}
+	%: 章番号など（article クラスでないときにのみ変更）
+	\renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
+	\renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
+	\renewcommand{\theequation}{{\arabic{chapter}.\arabic{equation}}}
+	\renewcommand{\thetable}{{\arabic{chapter}.\arabic{section}.\arabic{table}}}
+	\renewcommand{\thefigure}{{\arabic{chapter}.\arabic{section}.\arabic{figure}}}
 \fi
 
-%: 章番号など
-\renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
-\renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
-\renewcommand{\theequation}{{\arabic{chapter}.\arabic{equation}}}
+\renewcommand{\thefootnote}{{\arabic{footnote})}}
 \renewcommand{\thepage}{{\arabic{page}}} % 数字
-\renewcommand{\thetable}{{\arabic{chapter}.\arabic{section}.\arabic{table}}}
-\renewcommand{\thefootnote}{{\arabic{footnote} )}}
-\renewcommand{\thefigure}{{\arabic{chapter}.\arabic{section}.\arabic{figure}}}
 % roman_nombre オプションで、ローマ数字のノンブル
 \DeclareOption{roman_nonbre}{\renewcommand{\thepage}{{\roman{page}}}}
 \ProcessOptions\relax
 
-%: ヘッダー、フッターのスタイル
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%: ヘッダー、フッターのスタイル 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \let\dsss@style@title\relax
 \newcommand{\Dtitle}[1]{
 	\def\dsss@style@title{#1}
@@ -111,43 +117,82 @@
 \newcommand{\Dfinp}[1]{\def\dsss@style@finp{#1}\def\dsss@style@date@bracketed{(#1)}}
 %: DAheadings
 \NewPageStyle{DAheadings}{
-	mark_format={_chapter={#1},_section={#1},_subsection={#1}},
 	odd_running_head={\dsss@style@title},
 	even_running_head={\dsss@style@title},
+	running_head_font=\sffamily,
 	running_head_position=top-left,
+	nombre_font=\bfseries,
 	nombre_position=top-right,
 	running_head_ii_position=top-right,
 	odd_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
 	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
 	running_head_iii_position=bottom-right,
 	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
+	nombre_ii_font=\ttfamily,
 	nombre_ii_position=bottom-left,
 }
 % 文書クラスによって右サブタイトル、左サブタイトルを変える。
+% mark_format も変える。
 \ifx a\dsss@document@class
 	\ModifyPageStyle{DAheadings}{
+		mark_format={
+			_section={\thesection\ #1},
+			_subsection={\thesubsection\ #1}
+		},
 		odd_running_head_ii=_section,
 		even_running_head_ii=_subsection,
 	}
 \else
 	\ModifyPageStyle{DAheadings}{
+		mark_format={
+			_chapter={第\thechapter 章\quad #1},
+			_section={\thesection\ #1},
+			_subsection={\thesubsection\ #1}
+		},
 		odd_running_head_ii=_chapter,
 		even_running_head_ii=_section,
 	}
 \fi
 %: Dmyheadings
 \NewPageStyle{Dmyheadings}{
-	mark_format={_chapter={#1},_section={#1},_subsection={#1}},
+	mark_format={
+			_chapter={第\thechapter 章\quad #1},
+			_section={\thesection\ #1},
+			_subsection={\thesubsection\ #1}
+		},
 	odd_running_head={\dsss@style@title},
 	even_running_head={\dsss@style@title},
+	running_head_font=\sffamily,
 	running_head_position=top-left,
+	nombre_font=\bfseries,
 	nombre_position=top-right,
 	running_head_ii_position=top-right,
 	odd_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
 	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
 	running_head_iii_position=bottom-right,
 	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
+	nombre_ii_font=\ttfamily\mdseries ,
 	nombre_ii_position=bottom-left,
 }
+% 文書クラスによって右サブタイトル、左サブタイトルを変える。
+% mark_format も変える。
+\ifx a\dsss@document@class
+	\ModifyPageStyle{DAheadings}{
+		mark_format={
+			_section={\thesection\ #1},
+			_subsection={\thesubsection\ #1}
+		},
+	}
+\else
+	\ModifyPageStyle{DAheadings}{
+		mark_format={
+			_chapter={第\thechapter 章\quad #1},
+			_section={\thesection\ #1},
+			_subsection={\thesubsection\ #1}
+		},
+	}
+\fi
 
 \pagestyle{DAheadings}
+
+
