@@ -13,6 +13,9 @@
 %: dennou777 を読み込んでいることのフラグ
 \let\dsss@dsss@loaded=t
 
+%: xparse （マクロ定義）
+\RequirePackage{xparse}
+
 %: d777helper
 % \dsss@helper@guessengine を読み込む。
 % 暗黙の空白トークン \dsss@space を作る。
@@ -93,14 +96,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \let\dsss@style@title\relax
-\newcommand{\Dtitle}[1]{
-	\def\dsss@style@title{#1}
-	\title{#1}
+\NewDocumentCommand\Dtitle{o m}{
+	\IfValueTF{#1}
+		{\def\dsss@style@title{#1}}
+		{\def\dsss@style@title{#2}}
+	\title{#2}
 }
 \let\dsss@style@author\relax
-\newcommand{\Dauthor}[1]{
-	\def\dsss@style@author{#1}
-	\author{#1}
+\NewDocumentCommand\Dauthor{o m}{
+	\IfValueTF{#1}
+		{\def\dsss@style@author{#1}}
+		{\def\dsss@style@author{#2}}
+	\author{#2}
 }
 \let\dsss@style@date\today
 \let\dsss@style@date@bracketed\relax
