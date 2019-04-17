@@ -53,7 +53,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %: LuaLaTeX 以外なら graphicx と colorx に dvipdfmx オプションを投げる
-%  no_graphicx オプションがあれば、何も処理をしない。
+%  no_graphicx オプションがあれば、何も処理をしない
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareOption{no_graphicx}{\let\dsss@option@no@graphicx=t}
@@ -139,8 +139,8 @@
 	nombre_ii_font=\footnotesize\ttfamily\mdseries,
 	nombre_ii_position=bottom-left,
 }
-% 文書クラスによって右サブタイトル、左サブタイトルを変える。
-% mark_format も変える。
+% 文書クラスによって右サブタイトル、左サブタイトルを変える
+% mark_format も変える
 \ifx a\dsss@document@class
 	\ModifyPageStyle{DAheadings}{
 		mark_format={
@@ -181,8 +181,8 @@
 	nombre_ii_font=\footnotesize\ttfamily\mdseries,
 	nombre_ii_position=bottom-left,
 }
-% 文書クラスによって右サブタイトル、左サブタイトルを変える。
-% mark_format も変える。
+% 文書クラスによって右サブタイトル、左サブタイトルを変える
+% mark_format も変える
 \ifx a\dsss@document@class
 	\ModifyPageStyle{DAheadings}{
 		mark_format={
@@ -200,6 +200,11 @@
 	}
 \fi
 
+%%: 罫線を入れるために fancyhdr.sty を使う
+%   本当は使いたくない。
+\RequirePackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
 
 \pagestyle{DAheadings}
 
