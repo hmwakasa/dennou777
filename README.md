@@ -13,8 +13,11 @@ dennou777.cls を開発する上での覚書である。パッケージのドキ
 
 ## インストール方法
 
-dennou777.cls, d777helper.sty, Dennnou6.sty に付属するファイル（d6styles の配下にある）
+dennou777.cls, d777helper.sty, d6styles 配下にある Dennnou6.sty の付属ファイル
 一式（とこのドキュメント）を「TeX から見える位置」に配置することで、インストールは完了する。
+
+Dennou6.sty 利用者は、dennou777.cls と d777helper.sty のみインストールすれば
+使えるようになる。
 
 
 ## ファイル群
