@@ -13,7 +13,7 @@
 %: dennou777 を読み込んでいることのフラグ
 \let\dsss@dsss@loaded=t
 
-%: xparse （マクロ定義）
+%: xparse を読み込む（マクロ定義）
 \RequirePackage{xparse}
 
 %: d777helper
@@ -52,7 +52,7 @@
 \RequirePackage{dennou777}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%: LuaLaTeX 以外なら graphicx と colorx に dvipdfmx オプションを投げる。
+%: LuaLaTeX 以外なら graphicx と colorx に dvipdfmx オプションを投げる
 %  no_graphicx オプションがあれば、何も処理をしない。
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -71,13 +71,13 @@
 %: jlreq 依存なので、D6style 相当の機能はここに。
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%: article 以外で変更。
+%%: article 以外で変更
 \ifx a\dsss@document@class\else
-	%: 改ページしない \chapter
+	% 改ページしない \chapter
 	% 本来の \chapter は \chapterwithpagebreak で利用可能。
 	\SaveHeading{chapter}{\chapterwithpagebreak}
 	\ModifyHeading{chapter}{pagebreak=nariyuki}
-	%: 章番号など（article クラスでないときにのみ変更）
+	% 章番号など（article クラスでないときにのみ変更）
 	\renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
 	\renewcommand{\thesection}{{\arabic{chapter}.\arabic{section}}}
 	\renewcommand{\theequation}{{\arabic{chapter}.\arabic{equation}}}
@@ -87,7 +87,7 @@
 
 \renewcommand{\thefootnote}{{\arabic{footnote})}}
 \renewcommand{\thepage}{{\arabic{page}}} % 数字
-% roman_nombre オプションで、ローマ数字のノンブル
+%%: roman_nombre オプションで、ローマ数字のノンブル
 \DeclareOption{roman_nonbre}{\renewcommand{\thepage}{{\roman{page}}}}
 \ProcessOptions\relax
 
@@ -95,6 +95,7 @@
 %: ヘッダー、フッターのスタイル 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%: Dﾅﾝﾄｶ の定義
 \let\dsss@style@title\relax
 \NewDocumentCommand\Dtitle{o m}{
 	\IfValueTF{#1}
@@ -122,7 +123,7 @@
 \newcommand{\Dfile}[1]{\def\dsss@style@file{#1}}
 \let\dsss@style@finp\relax \let\dsss@style@finp@bracketed\relax
 \newcommand{\Dfinp}[1]{\def\dsss@style@finp{#1}\def\dsss@style@date@bracketed{(#1)}}
-%: DAheadings
+%%: DAheadings
 \NewPageStyle{DAheadings}{
 	odd_running_head={\dsss@style@title},
 	even_running_head={\dsss@style@title},
@@ -144,7 +145,7 @@
 	\ModifyPageStyle{DAheadings}{
 		mark_format={
 			_section={\thesection\ #1},
-			_subsection={\thesubsection\ #1}
+			_subsection={\thesubsection\ #1},
 		},
 		odd_running_head_ii=_section,
 		even_running_head_ii=_subsection,
@@ -154,13 +155,12 @@
 		mark_format={
 			_chapter={第\thechapter 章\quad #1},
 			_section={\thesection\ #1},
-			_subsection={\thesubsection\ #1}
 		},
 		odd_running_head_ii=_chapter,
 		even_running_head_ii=_section,
 	}
 \fi
-%: Dmyheadings
+%%: Dmyheadings
 \NewPageStyle{Dmyheadings}{
 	mark_format={
 			_chapter={第\thechapter 章\quad #1},
