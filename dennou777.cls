@@ -123,6 +123,13 @@
 \newcommand{\Dfile}[1]{\def\dsss@style@file{#1}}
 \let\dsss@style@finp\relax \let\dsss@style@finp@bracketed\relax
 \newcommand{\Dfinp}[1]{\def\dsss@style@finp{#1}\def\dsss@style@date@bracketed{(#1)}}
+
+%%: 罫線を入れるために fancyhdr.sty を使う
+% %   本当は使いたくない。
+% \RequirePackage{fancyhdr}
+% \renewcommand{\headrulewidth}{1pt}
+% \renewcommand{\footrulewidth}{1pt}
+
 %%: DAheadings
 \NewPageStyle{DAheadings}{
 	odd_running_head={\dsss@style@title},
@@ -160,6 +167,7 @@
 		even_running_head_ii=_section,
 	}
 \fi
+
 %%: Dmyheadings
 \NewPageStyle{Dmyheadings}{
 	mark_format={
@@ -199,12 +207,6 @@
 		},
 	}
 \fi
-
-%%: 罫線を入れるために fancyhdr.sty を使う
-%   本当は使いたくない。
-\RequirePackage{fancyhdr}
-\renewcommand{\headrulewidth}{1pt}
-\renewcommand{\footrulewidth}{1pt}
 
 \pagestyle{DAheadings}
 
