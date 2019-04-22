@@ -104,12 +104,14 @@
 	\title{#2}
 }
 \let\dsss@style@author\relax
+\let\dsss@style@author@bracketed\relax
 \NewDocumentCommand\Dauthor{o m}{
 	\IfValueTF{#1}
 		{\def\dsss@style@author{#1}}
 		{\def\dsss@style@author{#2}}
 	\author{#2}
 }
+\def\dsss@style@author@bracketed{（\dsss@style@author）}
 \let\dsss@style@date\today
 \let\dsss@style@date@bracketed\relax
 \newcommand{\Ddate}[1]{
@@ -124,14 +126,25 @@
 \let\dsss@style@finp\relax \let\dsss@style@finp@bracketed\relax
 \newcommand{\Dfinp}[1]{\def\dsss@style@finp{#1}\def\dsss@style@date@bracketed{(#1)}}
 
-%%: 罫線を入れるために fancyhdr.sty を使う
-% %   本当は使いたくない。
-% \RequirePackage{fancyhdr}
-% \renewcommand{\headrulewidth}{1pt}
-% \renewcommand{\footrulewidth}{1pt}
+%: 罫線を入れるために fancyhdr.sty を使う
+%  本当は使いたくない。
+\RequirePackage{fancyhdr}
+\NewPageStyle{DAheadings}{}
+\fancypagestyle{DAheadings}{%
+	\renewcommand{\headrulewidth}{1pt}%
+	\renewcommand{\footrulewidth}{1pt}%
+	\lhead{\dsss@style@title}
+	\rhead
+}
+\NewPageStyle{Dmyheadings}{}
+\fancypagestyle{Dheadings}{%
+	\renewcommand{\headrulewidth}{1pt}%
+	\renewcommand{\footrulewidth}{1pt}%
+}
 
+%%%% jlreq でヘッダーを実装するのは酷そう。
 %%: DAheadings
-\NewPageStyle{DAheadings}{
+\ModifyPageStyle{DAheadings}{
 	odd_running_head={\dsss@style@title},
 	even_running_head={\dsss@style@title},
 	running_head_font=\footnotesize\gtfamily\sffamily,
@@ -139,8 +152,8 @@
 	nombre_font=\bfseries,
 	nombre_position=top-right,
 	running_head_ii_position=top-right,
-	odd_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
-	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
+	odd_running_head_iii={\dsss@style@date\dsss@style@author@bracketed},
+	even_running_head_iii={\dsss@style@date\dsss@style@author@bracketed},
 	running_head_iii_position=bottom-right,
 	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
 	nombre_ii_font=\footnotesize\ttfamily\mdseries,
@@ -169,12 +182,7 @@
 \fi
 
 %%: Dmyheadings
-\NewPageStyle{Dmyheadings}{
-	mark_format={
-			_chapter={第\thechapter 章\quad #1},
-			_section={\thesection\ #1},
-			_subsection={\thesubsection\ #1}
-		},
+\ModifyPageStyle{Dmyheadings}{
 	odd_running_head={\dsss@style@title},
 	even_running_head={\dsss@style@title},
 	running_head_font=\footnotesize\gtfamily\sffamily,
@@ -182,8 +190,8 @@
 	nombre_font=\bfseries,
 	nombre_position=top-right,
 	running_head_ii_position=top-right,
-	odd_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
-	even_running_head_iii={\dsss@style@author\dsss@style@date@bracketed},
+	odd_running_head_iii={\dsss@style@date\dsss@style@author@bracketed},
+	even_running_head_iii={\dsss@style@date\dsss@style@author@bracketed},
 	running_head_iii_position=bottom-right,
 	nombre_ii={\dsss@style@path\ \dsss@style@file\ \dsss@style@finp@bracketed},
 	nombre_ii_font=\footnotesize\ttfamily\mdseries,
@@ -197,6 +205,8 @@
 			_section={\thesection\ #1},
 			_subsection={\thesubsection\ #1}
 		},
+		odd_running_head_ii=_section,
+		even_running_head_ii=_subsection,
 	}
 \else
 	\ModifyPageStyle{DAheadings}{
@@ -205,9 +215,9 @@
 			_section={\thesection\ #1},
 			_subsection={\thesubsection\ #1}
 		},
+		odd_running_head_ii=_chapter,
+		even_running_head_ii=_section,
 	}
 \fi
 
 \pagestyle{DAheadings}
-
-

@@ -6,13 +6,17 @@
 %%       Auther: Hitomi-san (a.k.a. Carele Smith)
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[report,]{dennou777}
+\documentclass[report,notitlepage]{dennou777}
 
-\usepackage{shortvrb,bxtexlogo}
+\usepackage{shortvrb,bxtexlogo,classico,newpxtext,newpxmath,listings}
 \usepackage[hidelinks,unicode=true]{hyperref}
-\usepackage{classico,newpxtext,newpxmath,beramono,listings}
+\usepackage[scaled]{beramono}
 \MakeShortVerb{\|}
-\usepackage[jfm_yoko=jlreq,jfm_tate=jlreqv,hiragino-pron]{luatexja-preset}
+\makeatletter\ifx\dsss@engine l\relax
+		\usepackage[jfm_yoko=jlreq,jfm_tate=jlreqv,hiragino-pron,]{luatexja-preset}
+	\else
+		\usepackage{otf}
+\fi\makeatother
 \renewcommand{\thefootnote}{\textasteriskcentered\arabic{footnote}}
 \lstset{
 	basicstyle=\ttfamily,
@@ -35,6 +39,7 @@
 \begin{document}
 
 \maketitle
+\thispagestyle{DAheadings}
 
 {\noindent\hfill\bfseries\sffamily Dennou6.sty のマニュアルより\hfill}
 

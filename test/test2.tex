@@ -6,6 +6,8 @@
 % Option clash チャレンジ
 %\usepackage[x11names]{xcolor}
 
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{amsmath,tikz,tcolorbox}
 \usetikzlibrary{plotmarks}
 
@@ -119,9 +121,9 @@ $9$&$5$&$4$\\
 \draw(0,0) node[below left]{$\mathrm{O}$};
 \draw(0.5,0.4) node[above right]{$\displaystyle y=\log_{10}\left[\frac{x+1}{x}\right]$};
 \draw [domain=0.4:10,samples=100,smooth] plot(\x,{ln((\x+1)/\x)/ln(10)});
-\draw[color=red,thick,mark=text,text mark={\tiny\scalebox{1}[0.05]{●}}] plot file{./test/2pown.tbl};
+\draw[color=red,thick,mark=text,text mark={\tiny\scalebox{1}[0.05]{●}}] plot file{./2pown.tbl};
 \draw[color=red](3,0.3)node[above]{$2^n$};
-\draw[color=blue,thick,mark=text,text mark={\tiny\scalebox{1}[0.05]{◆}}] plot file{./test/fn.tbl};
+\draw[color=blue,thick,mark=text,text mark={\tiny\scalebox{1}[0.05]{◆}}] plot file{./fn.tbl};
 \draw[color=blue](3,0.3)node[below]{$F_n$};
 \end{tikzpicture}
 \caption{最上位の数字の頻度\label{fig}}
