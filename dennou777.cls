@@ -127,7 +127,7 @@
 \newcommand{\Dfinp}[1]{\def\dsss@style@finp{#1}\def\dsss@style@date@bracketed{(#1)}}
 
 %: 罫線を入れるために fancyhdr.sty を使う
-%  本当は使いたくない。
+%  本当は使いたくない。そもそも失敗してる。
 \RequirePackage{fancyhdr}
 \NewPageStyle{DAheadings}{}
 \fancypagestyle{DAheadings}{%
