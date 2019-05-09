@@ -65,11 +65,7 @@ LuaLaTeX のいずれにも対応するパッケージとすることを目指�
 	- D6style 相当の機能は、ほとんど jlreq の機能を用いて再現した。
 + (u)pLaTeX で処理されたときに、自動で dvipdfmx のオプションを付加して graphicx と
 	xcolor を読み込むようにした。
-	- 両パッケージを、オプションをつけて読み込んだとき、Option clash するので、どうにかして
-		対処する（対処できなさそう）。
-	- そもそも、多分うまく行ってない。
-		* ~~BXdvidriver という選択肢があるよう。~~
-		* BXdvidriver を使うことにします。
+	- BXdvidriver を利用。
 + D6graphicx は削除した。
 	- 今どき PostScript を埋め込まなければならないなんて、ありえないでしょ（）。
 	- 同等の機能は欲しい場合は、graphicx の機能を使うか、TikZ を利用してください。

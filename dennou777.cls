@@ -10,6 +10,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{dennou777}[2019-04-00 version 7.0.0 (Nicole)]
 
+%: BXdvidriver
+%  no_driver_detective オプションで BXdvidriver を無効化。
+\DeclareOption{no_driver_detective}{\let\dsss@option@no@driver@detective=t}
+\ProcessOptions\relax
+\ifx\dsss@option@no@driver@detective\@undefined\relax
+	\RequirePackage[dvipdfmx]{bxdvidriver}
+\fi
+
 %: dennou777 を読み込んでいることのフラグ
 \let\dsss@dsss@loaded=t
 
@@ -50,6 +58,14 @@
 %: dennou777 styles を読み込む
 \let\bf\bfseries % アカン（あかん）
 \RequirePackage{dennou777}
+
+%: d777autoload.sty
+%  no_auto_load_packages オプションで d777autoload.sty を無効化。
+\DeclareOption{no_auto_load_packages}{\let\dsss@option@no@auto@load@packages=t}
+\ProcessOptions\relax
+\ifx\dsss@option@no@auto@load@packages\@undefined\relax
+	\RequirePackage{d777autoload}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %: LuaLaTeX 以外なら graphicx と colorx に dvipdfmx オプションを投げる
