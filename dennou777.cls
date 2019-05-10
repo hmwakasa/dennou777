@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dennou777}[2019-04-00 version 7.0.0 (Nicole)]
+\ProvidesClass{dennou777}[2019-05-10 version 7.1.0 (Nicole)]
 
 %: BXdvidriver
 %  no_driver_detective オプションで BXdvidriver を無効化。
