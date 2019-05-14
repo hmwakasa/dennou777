@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dennou777}[2019-05-10 version 7.1.0 (Nicole)]
+\ProvidesClass{dennou777}[2019-05-14 version 7.0.2 (Nicole)]
 
 %: BXdvidriver
 %  no_driver_detective オプションで BXdvidriver を無効化。
@@ -67,21 +67,10 @@
 	\RequirePackage{d777autoload}
 \fi
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%: LuaLaTeX 以外なら graphicx と colorx に dvipdfmx オプションを投げる
-%  no_graphicx オプションがあれば、何も処理をしない
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\DeclareOption{no_graphicx}{\let\dsss@option@no@graphicx=t}
-\ProcessOptions\relax
-\ifx\dsss@option@no@graphicx\@undefined\relax
-	\ifx l\dsss@engine
-	\else
-		\PassOptionsToPackage{dvipdfmx}{graphicx}
-		\PassOptionsToPackage{dvipdfmx}{xcolor}
-	\fi
-	\RequirePackage{graphicx,xcolor}
-\fi
+%: jlreq のセットアップ
+\jlreqsetup{
+	
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %: jlreq 依存なので、D6style 相当の機能はここに。
