@@ -8,15 +8,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[report,notitlepage]{dennou777}
 
-\usepackage{shortvrb,bxtexlogo,tgheros,newpxtext,newpxmath,listings}
-\usepackage[hidelinks,unicode=true]{hyperref}
-\usepackage[scaled]{beramono}
-\MakeShortVerb{\|}
 \makeatletter\ifx\dsss@engine l\relax
 		\usepackage[jfm_yoko=jlreq,jfm_tate=jlreqv,hiragino-pron,]{luatexja-preset}
 	\else
 		\usepackage{otf}
 \fi\makeatother
+\usepackage{shortvrb,bxtexlogo,tgheros,newpxtext,newpxmath,listings}
+\usepackage[hidelinks,unicode=true]{hyperref}
+\usepackage[scaled]{beramono}
+\MakeShortVerb{\|}
 \renewcommand{\thefootnote}{\textasteriskcentered\arabic{footnote}}
 \lstset{
 	basicstyle=\ttfamily,
