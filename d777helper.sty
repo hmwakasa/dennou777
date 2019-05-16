@@ -8,30 +8,30 @@
 % ドライバ非依存のマクロ集
  
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{d777helper}[2019-04-15 v7]
+\ProvidesPackage{d777helper}[2019-05-16 v7.1]
 \RequirePackage{xkeyval,etoolbox}
 
 %: jlreq-helpers.sty 由来のエンジン自動判定機
 % \jlreq@ifprimitive#1#2#3: #1がprimitiveならば#2を，そうでなければ#3を実行する
 % （\if(pdf)primitiveを避けるようにしている．）
 \newcommand*{\dsss@ifprimitive}[1]{%
-  \begingroup
-    \edef\@tempa{\string#1}%
-    \edef\@tempb{\meaning#1}%
-  \expandafter\endgroup
-  \ifx\@tempa\@tempb\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
+	\begingroup
+		\edef\@tempa{\string#1}%
+		\edef\@tempb{\meaning#1}%
+	\expandafter\endgroup
+	\ifx\@tempa\@tempb\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
 }
 
 \newcommand*{\dsss@helper@guessengine}{%
-  \dsss@ifprimitive\directlua{%
-    \let\dsss@result=l%
-  }{%
-    \dsss@ifprimitive\ucs{%
-      \let\dsss@result=u%
-    }{%
-      \let\dsss@result=p%
-    }%
-  }%
+	\dsss@ifprimitive\directlua{%
+		\let\dsss@result=l%
+	}{%
+		\dsss@ifprimitive\ucs{%
+			\let\dsss@result=u%
+		}{%
+			\let\dsss@result=p%
+		}%
+	}%
 }
 \dsss@helper@guessengine
 

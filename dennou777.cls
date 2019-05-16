@@ -8,7 +8,10 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dennou777}[2019-05-14 version 7.0.2 (Nicole)]
+\ProvidesClass{dennou777}[2019-05-14 version 7.0.3 (Nicole)]
+
+%: dennou777 を読み込んでいることのフラグ
+\let\dsss@dsss@loaded=t
 
 %: BXdvidriver
 %  no_driver_detective オプションで BXdvidriver を無効化。
@@ -17,9 +20,6 @@
 \ifx\dsss@option@no@driver@detective\@undefined\relax
 	\RequirePackage[dvipdfmx]{bxdvidriver}
 \fi
-
-%: dennou777 を読み込んでいることのフラグ
-\let\dsss@dsss@loaded=t
 
 %: xparse を読み込む（マクロ定義）
 \RequirePackage{xparse}
@@ -56,8 +56,8 @@
 \fi
 
 %: dennou777 styles を読み込む
-\let\bf\bfseries % アカン（あかん）
-\RequirePackage{dennou777}
+{\let\bf\bfseries % アカン（あかん）
+\RequirePackage{dennou777}}
 
 %: d777autoload.sty
 %  no_auto_load_packages オプションで d777autoload.sty を無効化。

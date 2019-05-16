@@ -7,9 +7,8 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dennou777}[2019-04-00 version 7.0.0 (Nicole)]
+\ProvidesPackage{dennou777}[2019-05-16 version 7.0.3 (Nicole)]
 
-% \usepackage{D6style} % 副作用が多いので、jlreq の設定で実現を試みる
 \usepackage{D6misc}
 \usepackage{D6version}
 \usepackage{D6math}
@@ -17,11 +16,8 @@
 \usepackage{D6prog}
 \usepackage{D6select}
 
-% \usepackage{D6graphicx} % PS なんぞ使わないだろうから、削除します。
-
-% \pagestyle{DAheadings}
-% \Dnoparindent
-% \Dnewselect{J}
-
+%%% 旧来のパッケージの現状
+% \usepackage{D6style} → dennnou7.cls 本体で実装
+% \usepackage{D6graphicx} → 削除
 
 \@ifundefined{西暦}{\DoffJ}{\DonJ}
