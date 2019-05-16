@@ -144,7 +144,7 @@ dvi ウェアにはdvipdfmx を用いる前提となっている。
 
 ソースを書き換えずに3つのエンジンで処理が可能になるようにするため、\vseven は処理を
 するエンジンを自動判定して、\pLaTeX か\upLaTeX で処理をしていると判断した場合、
-dvipdfmx オプションをつけて graphicx パッケージと xcolor パッケージを読み込む。
+dvipdfmx オプションをグローバルオプションに追加する\footnote{BXdvidriver パッケージを利用している}。
 したがって、\vseven のオプションには（例え dvi ウェアに dvipdfmx を使用すると
 しても）、\emph{|dvipdfmx| オプションをつける必要はない}\footnote{むしろ、|dvipdfmx|
 オプションをつけると、その文書を\LuaLaTeX で処理すると（当然だが）正常に処理ができない。}。
@@ -235,8 +235,9 @@ Version 6 で定義されていた、電脳標準スタイルを模したペー�
 
 This package is distributed under the Revised BSD License.
 
-\hspace{1cm}\dotfill\hspace{1cm}
+\noindent\hspace{1cm}\dotfill\hspace{1cm}
 
+{\small
 \textbf{Copyright (c) 2019, dennou777 Developing Team (Hitomi-san)
 All rights reserved.}
 
@@ -263,5 +264,13 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+}
+
+\section{Change log}
+
+\begin{description}
+\item[{[2019-05-15 ver.~7.0.2]}] ライセンスを明記。
+\end{description}
+
 
 \end{document}
