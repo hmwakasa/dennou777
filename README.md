@@ -122,6 +122,7 @@ This package is distributed under the Revised BSD License.
 
 ## 開発状況（主な更新箇所）
 
+- [2019-05-16] Version 7.0.3
 - [2019-05-15] ライセンスを明記。
 - [2019-05-14] Version 7.0.2 （Version 7.1.0 は誤りです）
 - [2019-05-09] ドキュメントを充実させた。
