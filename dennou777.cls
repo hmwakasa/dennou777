@@ -10,9 +10,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{dennou777}[2019-05-14 version 7.0.3 (Nicole)]
 
-%: dennou777 を読み込んでいることのフラグ
-\let\dsss@dsss@loaded=t
-
 %: BXdvidriver
 %  no_driver_detective オプションで BXdvidriver を無効化。
 \DeclareOption{no_driver_detective}{\let\dsss@option@no@driver@detective=t}
@@ -21,8 +18,22 @@
 	\RequirePackage[dvipdfmx]{bxdvidriver}
 \fi
 
+%: dennou777 を読み込んでいることのフラグ
+\let\dsss@dsss@loaded=t
+
 %: xparse を読み込む（マクロ定義）
 \RequirePackage{xparse}
+
+%: \dsss@document@class にスタイルの種別を格納
+%% オプションで指定された場合
+\DeclareOption{book}{\let\dsss@document@class=b}
+\DeclareOption{report}{\let\dsss@document@class=r}
+\DeclareOption{article}{\let\dsss@document@class=a}
+\ProcessOptions\relax
+%% 指定されなかった場合
+\ifx\dsss@document@class\@undefined\relax
+	\let\dsss@document@class=a % article
+\fi
 
 %: d777helper
 % \dsss@helper@guessengine を読み込む。
@@ -45,19 +56,9 @@
 \ProcessOptions\relax
 \LoadClassWithOptions{jlreq}
 
-%: \dsss@document@class にスタイルの種別を格納
-%% オプションで指定された場合
-\DeclareOption{book}{\let\dsss@document@class=b}
-\DeclareOption{report}{\let\dsss@document@class=r}
-\ProcessOptions\relax
-%% 指定されなかった場合
-\ifx\dsss@document@class\@undefined\relax
-	\let\dsss@document@class=a % article
-\fi
-
 %: dennou777 styles を読み込む
 {\let\bf\bfseries % アカン（あかん）
-\RequirePackage{dennou777}}
+\RequirePackage{d777packages}}
 
 %: d777autoload.sty
 %  no_auto_load_packages オプションで d777autoload.sty を無効化。
@@ -75,6 +76,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %: jlreq 依存なので、D6style 相当の機能はここに。
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%: fancyhdr でヘッダー・フッターを実装
+\RequirePackage{fancyhdr}
 
 %%: article 以外で変更
 \ifx a\dsss@document@class\else
@@ -92,15 +95,12 @@
 
 \renewcommand{\thefootnote}{{\arabic{footnote})}}
 \renewcommand{\thepage}{{\arabic{page}}} % 数字
+
 %%: roman_nombre オプションで、ローマ数字のノンブル
 \DeclareOption{roman_nonbre}{\renewcommand{\thepage}{{\roman{page}}}}
 \ProcessOptions\relax
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%: ヘッダー、フッターのスタイル 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%: Dﾅﾝﾄｶ の定義
+%: Dtitle など
 \let\dsss@style@title\relax
 \NewDocumentCommand\Dtitle{o m}{
 	\IfValueTF{#1}
@@ -131,23 +131,10 @@
 \let\dsss@style@finp\relax \let\dsss@style@finp@bracketed\relax
 \newcommand{\Dfinp}[1]{\def\dsss@style@finp{#1}\def\dsss@style@date@bracketed{(#1)}}
 
-%: 罫線を入れるために fancyhdr.sty を使う
-%  本当は使いたくない。そもそも失敗してる。
-\RequirePackage{fancyhdr}
+%%: ページスタイルの定義
 \NewPageStyle{DAheadings}{}
-\fancypagestyle{DAheadings}{%
-	\renewcommand{\headrulewidth}{1pt}%
-	\renewcommand{\footrulewidth}{1pt}%
-	\lhead{\dsss@style@title}
-	\rhead
-}
 \NewPageStyle{Dmyheadings}{}
-\fancypagestyle{Dheadings}{%
-	\renewcommand{\headrulewidth}{1pt}%
-	\renewcommand{\footrulewidth}{1pt}%
-}
 
-%%%% jlreq でヘッダーを実装するのは酷そう。
 %%: DAheadings
 \ModifyPageStyle{DAheadings}{
 	odd_running_head={\dsss@style@title},
@@ -210,8 +197,8 @@
 			_section={\thesection\ #1},
 			_subsection={\thesubsection\ #1}
 		},
-		odd_running_head_ii=_section,
-		even_running_head_ii=_subsection,
+		odd_running_head_ii=_subsection,
+		even_running_head_ii=_section,
 	}
 \else
 	\ModifyPageStyle{DAheadings}{
@@ -220,8 +207,8 @@
 			_section={\thesection\ #1},
 			_subsection={\thesubsection\ #1}
 		},
-		odd_running_head_ii=_chapter,
-		even_running_head_ii=_section,
+		odd_running_head_ii=_section,
+		even_running_head_ii=_chapter,
 	}
 \fi
 

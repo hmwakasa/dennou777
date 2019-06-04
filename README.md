@@ -95,6 +95,17 @@ LuaLaTeX のいずれにも対応するパッケージとすることを目指�
 + Version 6 のページスタイルを模倣したが、罫線がないので、そこを直す。
 + 柱に chapter が表示されない。
 
+#### Version 6 をそのまま利用しているもの
+
++ 以下のパッケージは、まだ手を付けておらず、そのままの形で利用している。
+	- D6misc
+	- D6version
+	- D6math
+	- D6float
+	- D6prog
+	- D6select
+
+
 ## FAQ
 
 <dl>
@@ -122,6 +133,8 @@ This package is distributed under the Revised BSD License.
 
 ## 開発状況（主な更新箇所）
 
+- [2019-06-04] Version 7.0.4
+- [2019-06-04] ヘッダーに章や節が表示されない不具合を修正。
 - [2019-05-16] Version 7.0.3
 - [2019-05-15] ライセンスを明記。
 - [2019-05-14] Version 7.0.2 （Version 7.1.0 は誤りです）
