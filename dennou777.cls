@@ -159,8 +159,8 @@
 			_section={\thesection\ #1},
 			_subsection={\thesubsection\ #1},
 		},
-		odd_running_head_ii=_section,
-		even_running_head_ii=_subsection,
+		odd_running_head_ii=_subsection,
+		even_running_head_ii=_section,
 	}
 \else
 	\ModifyPageStyle{DAheadings}{
@@ -168,8 +168,8 @@
 			_chapter={第\thechapter 章\quad #1},
 			_section={\thesection\ #1},
 		},
-		odd_running_head_ii=_chapter,
-		even_running_head_ii=_section,
+		odd_running_head_ii=_section,
+		even_running_head_ii=_chapter,
 	}
 \fi
 
@@ -192,7 +192,7 @@
 % 文書クラスによって右サブタイトル、左サブタイトルを変える
 % mark_format も変える
 \ifx a\dsss@document@class
-	\ModifyPageStyle{DAheadings}{
+	\ModifyPageStyle{Dmyheadings}{
 		mark_format={
 			_section={\thesection\ #1},
 			_subsection={\thesubsection\ #1}
@@ -201,7 +201,7 @@
 		even_running_head_ii=_section,
 	}
 \else
-	\ModifyPageStyle{DAheadings}{
+	\ModifyPageStyle{Dmyheadings}{
 		mark_format={
 			_chapter={第\thechapter 章\quad #1},
 			_section={\thesection\ #1},

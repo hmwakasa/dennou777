@@ -29,7 +29,7 @@
 	numberstyle=\ttfamily\small,
 }
 
-\newcommand{\vseven}{Nicole}\newcommand{\dversion}{version 7.0.3 }
+\newcommand{\vseven}{Nicole}\newcommand{\dversion}{version 7.0.5b }
 \newcommand{\vsevenfull}{地球流体電脳倶楽部 \LaTeXe 用クラス \dversion (\vseven)}
 \newcommand{\textcode}[1]{{\ttfamily\mdseries #1}}
 
@@ -222,7 +222,7 @@ version 6 に実装されていた機能なので、そのまま実装した}。
 |\Dfile| でファイル名を指定しなかった場合、コンパイルしたファイル名のベース名に .tex
 を付け加えたものがフッターに表示される。
 
-\subsection{DAheadings ページスタイル}
+\subsection{DAheadings ページスタイル\label{DAheadings}}
 
 Version 6 で定義されていた、電脳標準スタイルを模したページスタイルである。
 
@@ -254,6 +254,28 @@ Version 6 で定義されていた、電脳標準スタイルを模したペー�
 \item graphicx
 \item xcolor
 \end{itemize}
+
+\chapter{不具合}
+
+以下に、現在確認されている不具合を示す。マニュアルに記してある、すべての機能を
+試したわけではないので、以下に挙げられているもの以外にも不具合があると思われる。
+不具合を発見した場合は、\url{https://github.com/Hitomi-San/dennou777} から連絡
+してもらいたい。
+
+\section{ヘッダー・フッターの罫線が表示されない}
+
+\ref{DAheadings} 節で述べたとおり、DAheadings ページスタイルを用いた時、
+ヘッダーとフッターに罫線が表示されない。
+
+これは、\vseven の元になっている、jlreq クラスに、ヘッダーとフッターの罫線を
+表示する機能がないことに起因しているので、修正は困難であると予想される。
+fandyhdr パッケージを用いることも検討したが、そうすると jlreq の機能を用いて
+実装したヘッダーとフッターが表示されなくなるという問題がある。
+
+\section{\textbackslash maketitle が壊れる}
+
+クラスオプションに |book| と |notitlepage| を渡すと、|\maketitle| が壊れる。
+原因は不明。
 
 \pagebreak
 \appendix
@@ -297,6 +319,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \chapter{Change log}
 
 \begin{description}
+\item[{[2019-06-06 Version 7.0.5b]}] マニュアルに追記。
+\item[{[2019-06-04 Version 7.0.5]}] マニュアルに追記。
 \item[{[2019-06-04 Version 7.0.4]}] ヘッダー・フッターの不具合を修正。
 \item[{[2019-05-16 Version 7.0.3]}] 全体的に表記を修正。
 \item[{[2019-05-16 Version 7.0.3]}] ドキュメントに、改修していない Version 6 のパッケージを明記。
