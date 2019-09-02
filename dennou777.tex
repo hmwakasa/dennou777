@@ -29,7 +29,7 @@
 	numberstyle=\ttfamily\small,
 }
 
-\newcommand{\vseven}{Nicole}\newcommand{\dversion}{version 7.0.5b }
+\newcommand{\vseven}{Nicole}\newcommand{\dversion}{version 7.0.6 }
 \newcommand{\vsevenfull}{地球流体電脳倶楽部 \LaTeXe 用クラス \dversion (\vseven)}
 \newcommand{\textcode}[1]{{\ttfamily\mdseries #1}}
 
@@ -115,15 +115,15 @@ Happy, \TeX ing は猫である。
 特に必要そうなオプションを以下に挙げる。
 
 \begin{description}
-\item[paper]
-	|paper=a4| で紙面のサイズが A4 版になる。a4 以外にも、a0 から a10、
-	b0 から b10 などが指定できる。
-\item[jafontsize]
-	|jafontsize=12pt| で和文のフォントサイズが 12 pt になる。
-\item[report]
-	jreport 相当のクラスとなる。
-\item[book]
-	jbook 相当のクラスとなる。
+	\item[paper]
+		|paper=a4| で紙面のサイズが A4 版になる。a4 以外にも、a0 から a10、
+		b0 から b10 などが指定できる。
+	\item[jafontsize]
+		|jafontsize=12pt| で和文のフォントサイズが 12 pt になる。
+	\item[report]
+		jreport 相当のクラスとなる。
+	\item[book]
+		jbook 相当のクラスとなる。
 \end{description}
 
 すなわち、
@@ -168,12 +168,12 @@ Version 6 が提供していたパッケージのうち、以下のものは（�
 いないので）、改修せず、そのままの形で利用している。
 
 \begin{itemize}
-\item D6misc
-\item D6version
-\item D6math
-\item D6float
-\item D6prog
-\item D6select
+	\item D6misc
+	\item D6version
+	\item D6math
+	\item D6float
+	\item D6prog
+	\item D6select
 \end{itemize}
 
 
@@ -251,8 +251,8 @@ Version 6 で定義されていた、電脳標準スタイルを模したペー�
 |d777autoload.sty| が自動で読み込むパッケージは以下の通り。
 
 \begin{itemize}
-\item graphicx
-\item xcolor
+	\item graphicx
+	\item xcolor
 \end{itemize}
 
 \chapter{不具合}
@@ -277,6 +277,12 @@ fandyhdr パッケージを用いることも検討したが、そうすると j
 クラスオプションに |book| と |notitlepage| を渡すと、|\maketitle| が壊れる。
 原因は不明。
 
+\section{フッターのファイル名のフォントがおかしくなる}
+
+DAheadings ページスタイル利用時に、フッターに表示されるファイル名のフォントが
+おかしくなる場合がある（フォントエンコーディングの指定がうまく行かない?）。
+詳細は未検証。\vseven の不具合でない可能性は大いにある。
+
 \pagebreak
 \appendix
 \chapter{ライセンス}
@@ -294,14 +300,14 @@ All rights reserved.}
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 \begin{itemize}
-\item Redistributions of source code must retain the above copyright notice, 
-	this list of conditions and the follssh owing disclaimer.
-\item Redistributions in binary form must reproduce the above copyright notice, 
-	this list of conditions and the following disclaimer in the documentation 
-	and/or other materials provided with the distribution.
-\item Neither the name of the dennou777 Developing Team nor the names of its contributors 
-	may be used to endorse or promote products derived from this software 
-	without specific prior written permission.
+	\item Redistributions of source code must retain the above copyright notice, 
+		this list of conditions and the following disclaimer.
+	\item Redistributions in binary form must reproduce the above copyright notice, 
+		this list of conditions and the following disclaimer in the documentation 
+		and/or other materials provided with the distribution.
+	\item Neither the name of the dennou777 Developing Team nor the names of its contributors 
+		may be used to endorse or promote products derived from this software 
+		without specific prior written permission.
 \end{itemize}
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
@@ -319,12 +325,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \chapter{Change log}
 
 \begin{description}
-\item[{[2019-06-06 Version 7.0.5b]}] マニュアルに追記。
-\item[{[2019-06-04 Version 7.0.5]}] マニュアルに追記。
-\item[{[2019-06-04 Version 7.0.4]}] ヘッダー・フッターの不具合を修正。
-\item[{[2019-05-16 Version 7.0.3]}] 全体的に表記を修正。
-\item[{[2019-05-16 Version 7.0.3]}] ドキュメントに、改修していない Version 6 のパッケージを明記。
-\item[{[2019-05-15 Version 7.0.2]}] ライセンスを明記。
+	\item[{[2019-06-06 Version 7.0.6]}] |d777autoload.sty| に |\ProvidePackage{d777packages}|
+		とあったのを修正。
+	\item[{[2019-06-06 Version 7.0.6]}] マニュアルに、フッターファイル名のフォントがおかしくなる
+		場合があることについて追記。
+	\item[{[2019-06-06 Version 7.0.5b]}] マニュアルに追記。
+	\item[{[2019-06-04 Version 7.0.5]}] マニュアルに追記。
+	\item[{[2019-06-04 Version 7.0.4]}] ヘッダー・フッターの不具合を修正。
+	\item[{[2019-05-16 Version 7.0.3]}] 全体的に表記を修正。
+	\item[{[2019-05-16 Version 7.0.3]}] ドキュメントに、改修していない Version 6 のパッケージを明記。
+	\item[{[2019-05-15 Version 7.0.2]}] ライセンスを明記。
 \end{description}
 
 
