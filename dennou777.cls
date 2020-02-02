@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dennou777}[2019-05-14 version 7.0.3 (Nicole)]
+\ProvidesClass{dennou777}[2020-02-01 version 7.0.7 (Nicole)]
 
 %: BXdvidriver
 %  no_driver_detective オプションで BXdvidriver を無効化。
@@ -134,6 +134,7 @@
 %%: ページスタイルの定義
 \NewPageStyle{DAheadings}{}
 \NewPageStyle{Dmyheadings}{}
+\NewPageStyle{Dnofoot}{}
 
 %%: DAheadings
 \ModifyPageStyle{DAheadings}{
@@ -202,6 +203,39 @@
 	}
 \else
 	\ModifyPageStyle{Dmyheadings}{
+		mark_format={
+			_chapter={第\thechapter 章\quad #1},
+			_section={\thesection\ #1},
+			_subsection={\thesubsection\ #1}
+		},
+		odd_running_head_ii=_section,
+		even_running_head_ii=_chapter,
+	}
+\fi
+
+%%: Dnofoot
+\ModifyPageStyle{Dnofoot}{
+	odd_running_head={\dsss@style@title},
+	even_running_head={\dsss@style@title},
+	running_head_font=\footnotesize\gtfamily\sffamily,
+	running_head_position=top-left,
+	nombre_font=\bfseries,
+	nombre_position=top-right,
+	running_head_ii_position=top-right,
+}
+% 文書クラスによって右サブタイトル、左サブタイトルを変える
+% mark_format も変える
+\ifx a\dsss@document@class
+	\ModifyPageStyle{Dnofoot}{
+		mark_format={
+			_section={\thesection\ #1},
+			_subsection={\thesubsection\ #1}
+		},
+		odd_running_head_ii=_subsection,
+		even_running_head_ii=_section,
+	}
+\else
+	\ModifyPageStyle{Dnofoot}{
 		mark_format={
 			_chapter={第\thechapter 章\quad #1},
 			_section={\thesection\ #1},

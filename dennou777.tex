@@ -29,14 +29,14 @@
 	numberstyle=\ttfamily\small,
 }
 
-\newcommand{\vseven}{Nicole}\newcommand{\dversion}{version 7.0.6 }
+\newcommand{\vseven}{Nicole}\newcommand{\dversion}{version 7.0.7 }
 \newcommand{\vsevenfull}{地球流体電脳倶楽部 \LaTeXe 用クラス \dversion (\vseven)}
 \newcommand{\textcode}[1]{{\ttfamily\mdseries #1}}
 
 \Dtitle[地球流体電脳倶楽部 \LaTeXe 用クラス \dversion (\vseven)]
 	{地球流体電脳倶楽部 \LaTeXe 用クラス\\ \dversion (\vseven)\\ |dennou777.cls|}
 \Dauthor[dennou777 Developing Team]
-	{dennou777 Developing Team\\（ひとみさん）}
+	{dennou777 Developing Team\\(Shoma HITOMI )}
 \Ddate{\today}
 
 \begin{document}
@@ -191,7 +191,7 @@ Version 6 が提供していたパッケージのうち、以下のものは（�
 
 \subsection{chapter 命令}
 
-|\||chapter| 命令は、改ページがなされないように書き換えられている。
+|\chapter| 命令は、改ページがなされないように書き換えられている。
 改ページを伴う章番号は、|\chapterwhithbreak| で利用することができる。
 
 \subsection{ノンブルのスタイル}
@@ -230,6 +230,11 @@ Version 6 で定義されていた、電脳標準スタイルを模したペー�
 してページスタイルを作っていることに起因している。jlreq の機能を利用して、DAheadings を
 作成しているのだが、jlreq ではヘッダーやフッターに罫線が入ったページスタイルを作成
 ができないためである。
+
+\subsection{Dnofoot ページスタイル\label{Dnofoot}}
+
+DAheadings ページスタイルから、フッターを取り除いたページスタイルである。
+
 
 \section{d777helper.sty}
 
@@ -325,6 +330,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \chapter{Change log}
 
 \begin{description}
+	\item[{[2019-06-06 Version 7.0.7]}] Dnofoot ページスタイルを追加。
 	\item[{[2019-09-03 Version 7.0.6]}] |d777autoload.sty| に |\ProvidePackage{d777packages}|
 		とあったのを修正。
 	\item[{[2019-09-03 Version 7.0.6]}] マニュアルに、フッターファイル名のフォントがおかしくなる
